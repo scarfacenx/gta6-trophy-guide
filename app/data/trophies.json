@@ -8,385 +8,778 @@
    "name": "Vice Got a Price!",
    "description": "Congratulations! You're a Leonida Legend.",
    "grade": "platinum",
-   "guide": "Earn the other 54 trophies."
+   "guide": "Unlock every other trophy in the list. Work through the story, side content, collectibles, challenges and free-roam activities, then come back to this one after the other 54 have popped. The platinum is automatic once the rest of the list is complete, so use the trophy list to find the last few stragglers.",
+   "kind": "misc",
+   "missable": false,
+   "tips": [
+    "Treat the platinum as a final checklist, not a separate activity.",
+    "Check the trophy list after every cleanup session to see what is left."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 2,
    "name": "Just Like Paradise",
    "description": "Complete Gone Fishing.",
    "grade": "bronze",
-   "guide": "Finish the opening mission, Gone Fishing."
+   "guide": "Work through the story until Gone Fishing becomes available, then complete its objectives. It is a named mission, so the trophy is tied to finishing that job rather than to any optional activity. Follow the story marker and stay in the mission until the completion screen appears.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Follow the story marker instead of wandering into side content.",
+    "If the mission is not on your map yet, advance the main campaign."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 3,
    "name": "Paradise Lost",
    "description": "Complete Chapter 1.",
    "grade": "bronze",
-   "guide": "Finish Chapter 1."
+   "guide": "Complete the main story missions that make up Chapter 1. The trophy pops as soon as the chapter's final mission is finished, so it is part of normal campaign progress and cannot be skipped by ignoring side content. Follow the story markers whenever you want to move the plot forward.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Play the chapter from start to finish without jumping between saves.",
+    "Use the pause menu to confirm which story objective is next."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 4,
    "name": "T**s Ass Drug Money",
    "description": "Complete Chapter 2.",
    "grade": "bronze",
-   "guide": "Finish Chapter 2."
+   "guide": "Push the main campaign through Chapter 2 and finish its closing mission. This is a story milestone, so the trophy arrives through normal progression rather than a hidden objective. Keep following the campaign markers after Chapter 1 and the chapter completion should register automatically.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Finish each story mission before spending time on side activities.",
+    "Keep a manual save at the start of the chapter if you like replaying missions."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 5,
    "name": "Vice City, Baby!",
    "description": "Complete Chapter 3.",
    "grade": "bronze",
-   "guide": "Finish Chapter 3."
+   "guide": "Play the Chapter 3 story missions in order and complete the chapter's final job. The trophy is a campaign checkpoint, so it should unlock without any special performance requirement. If you have been sidetracked, return to the story markers and continue the main plot.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Do not restart from an old save unless you intend to replay the chapter.",
+    "Check the chapter progress before starting a long free-roam session."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 6,
    "name": "Top Of The World, Ma",
    "description": "Complete Chapter 4.",
    "grade": "bronze",
-   "guide": "Finish Chapter 4."
+   "guide": "Finish the Chapter 4 story missions and complete the final mission of the chapter. This is another main-campaign milestone, so the trophy is awarded for progression rather than for a side objective or collectible. Keep the story moving until the chapter-end mission is done.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Save before the chapter finale if you want to replay its action sequences.",
+    "Follow the story markers rather than searching for extra jobs first."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 7,
    "name": "You Gotta Know When to Get Off",
    "description": "Complete the final mission.",
    "grade": "gold",
-   "guide": "Finish the final mission (gold)."
+   "guide": "Play the campaign through to its final mission and complete it. The trophy is gold and marks the end of the main story, so it arrives only after the last story job is finished. Keep a manual save before the finale if you want to revisit the ending or clean up afterwards.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Bring full health, armor and ammunition before starting the finale.",
+    "Keep a save from before the final mission for ending-related cleanup."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 8,
    "name": "Trust",
    "description": "Complete Breakfast Run.",
    "grade": "bronze",
-   "guide": "Finish the mission Breakfast Run."
+   "guide": "When Breakfast Run appears in the story, play it through to the end. The trophy unlocks on mission completion, so there is no separate challenge or collectible to worry about. If it is not on your map yet, keep advancing the main campaign.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Finish the mission objectives in one run rather than leaving midway.",
+    "Check the story marker if you cannot find the next mission."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 9,
    "name": "Break the Bank",
    "description": "Complete The Cartel Heist.",
    "grade": "bronze",
-   "guide": "Finish the mission The Cartel Heist."
+   "guide": "Progress the campaign until The Cartel Heist is offered, then finish the heist. The trophy is awarded for completing the mission, not for a specific approach or bonus objective. Follow the mission prompts and keep a save before starting if you like to replay heists.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Read the mission prompts before committing to an approach.",
+    "Do not restart the heist for bonus cash until the trophy has popped."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 10,
    "name": "Family Matters",
    "description": "Complete Child's Play.",
    "grade": "bronze",
-   "guide": "Finish the mission Child's Play."
+   "guide": "Complete the named story mission Child's Play when it becomes available. The trophy is tied to finishing the mission, so follow the objectives and stay in the mission until it ends. There is no need to hunt for extra collectibles during it.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Let the mission's dialogue and prompts guide you to the next objective.",
+    "Keep a save before the mission if you want to replay it later."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 11,
    "name": "DWNFALL",
    "description": "Complete Headliners.",
    "grade": "bronze",
-   "guide": "Finish the mission Headliners."
+   "guide": "Play through the story mission Headliners and finish all of its objectives. This is a straightforward mission-completion trophy; the game awards it when the job ends, not when you first accept it. Continue the campaign if Headliners has not appeared yet.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Stay with the mission until the results screen appears.",
+    "Check your story progress if the mission seems to be missing."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 12,
    "name": "Hi-Jacked",
    "description": "Complete VCIA Takedown.",
    "grade": "bronze",
-   "guide": "Finish the mission VCIA Takedown."
+   "guide": "Advance the story until VCIA Takedown is available and complete it. The trophy unlocks at the end of that mission and is separate from the free-roam VCIA airport trophy. Follow the story marker and finish the mission objectives.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Do not confuse this story mission with the free-roam airport stunt.",
+    "Finish the mission in one sitting to avoid losing progress."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 13,
    "name": "Snow Storm",
    "description": "Complete Operation Savage Glory.",
    "grade": "bronze",
-   "guide": "Finish the mission Operation Savage Glory."
+   "guide": "Play through the campaign until Operation Savage Glory appears, then complete the operation. The trophy is awarded for finishing the mission, so follow the objectives to the end. Keep a save before the mission if you want to replay it later.",
+   "kind": "story",
+   "missable": false,
+   "tips": [
+    "Stock up on health and armor before starting the operation.",
+    "Follow the objective prompts instead of exploring during the mission."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 14,
    "name": "A Long Road",
    "description": "Attain 100% Completion.",
    "grade": "gold",
-   "guide": "Reach 100% completion (gold)."
+   "guide": "Reach 100% completion across the whole game, not just the story. Use the in-game completion checklist to see which categories are outstanding, then work through missions, activities, collectibles and challenges until every requirement is marked done. This is the longest trophy on the list, so save it for the endgame and clean up one category at a time.",
+   "kind": "challenge",
+   "missable": false,
+   "tips": [
+    "Finish the story first so every activity and area is available.",
+    "Use the in-game completion checklist to avoid redoing finished categories.",
+    "Clean up one category at a time instead of jumping between them."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 15,
    "name": "Cunning Stunts",
    "description": "Complete 250 Stunts.",
    "grade": "silver",
-   "guide": "Pull off 250 stunts (silver)."
+   "guide": "Complete 250 stunts. The counter is cumulative, so keep an eye on trophy progress and work stunts into normal travel rather than saving them all for one grinding session. If you are unsure what counts, try a jump or trick and check whether the stunt counter increases.",
+   "kind": "challenge",
+   "missable": false,
+   "tips": [
+    "Use open roads and stunt-friendly terrain while travelling between jobs.",
+    "Check trophy progress periodically so you know how many remain."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 16,
    "name": "Master of None",
    "description": "Try each type of activity once.",
    "grade": "bronze",
-   "guide": "Try all 9 activity types once."
+   "guide": "Try each type of activity once. Open the pause-menu map and look for the different activity icons, then sample one of each category rather than repeating the same activity. You do not need to win or gold them for this trophy; simply completing one attempt of each type is enough, based on the official description.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Use the map's activity icons to spot categories you have not tried.",
+    "A quick attempt counts, so do not grind gold medals for this one."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 17,
    "name": "The Shootist",
    "description": "Earn a gold medal in all Shooting Range challenges.",
    "grade": "silver",
-   "guide": "Gold all 42 Shooting Range challenges (silver)."
+   "guide": "Earn a gold medal in every Shooting Range challenge. Find the Shooting Range activity on the map, then replay each challenge until you hit the gold threshold. The challenges are score-based, so follow the scoring rules shown on screen and focus on beating the gold requirement rather than just finishing.",
+   "kind": "challenge",
+   "missable": false,
+   "tips": [
+    "Learn each challenge's scoring rule before spending time on repeat runs.",
+    "Replay a challenge immediately after a poor run while the layout is fresh."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 18,
    "name": "Top Fun",
    "description": "Win a Top Fun Drone Race at every location.",
    "grade": "bronze",
-   "guide": "Win a Top Fun drone race at all 14 locations."
+   "guide": "Win a Top Fun Drone Race at every location where it is offered. Use the pause-menu map to find the drone-race markers, then win each one; second place does not count. Check the activity list after each win so you know which locations are still outstanding.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Win each location once and mark it off before moving on.",
+    "Practice the route after a loss so the next attempt is cleaner."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 19,
    "name": "Earn Cash, Not Kudos",
    "description": "Win 20 different races.",
    "grade": "bronze",
-   "guide": "Win 20 different races."
+   "guide": "Win 20 different races, not the same race 20 times. Enter races from the map or activity markers and keep track of which tracks you have already won. If a race is difficult, retry it with a vehicle suited to the event and learn the route before pushing for first.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Keep a written or in-game list of the races you have already won.",
+    "Use a vehicle that fits the race type instead of a random pickup."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 20,
    "name": "Baited My Tackle",
    "description": "Beat Cal in a fishing challenge.",
    "grade": "bronze",
-   "guide": "Beat Cal in a fishing challenge."
+   "guide": "Beat Cal in a fishing challenge when the opportunity appears. Accept the challenge, then focus on landing the better catch or score before the contest ends; the trophy is for the win, not just for participating. If you lose, check whether the challenge can be retried from the activity marker.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Watch the challenge's scoring rule before you start casting.",
+    "If the first attempt goes badly, retry rather than waiting for a new opportunity."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 21,
    "name": "Stick Fiddler",
    "description": "Complete an arcade game.",
    "grade": "bronze",
-   "guide": "Finish one arcade game."
+   "guide": "Complete any one arcade game. Find an arcade machine in free roam, start a game and play it through to the end; the trophy should pop when the game's completion screen appears. You do not need to finish every arcade game, only one.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Pick the shortest or easiest arcade game you can find.",
+    "Do not leave the machine until the game's completion screen appears."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 22,
    "name": "Road to Rehabilitation",
    "description": "Complete the final mission for Andy.",
    "grade": "bronze",
-   "guide": "Finish Andy's last mission."
+   "guide": "Finish the last mission in Andy's mission strand. Work through Andy's earlier jobs first, then complete the final one when it appears; the trophy is tied to the end of that storyline. Check the pause-menu map for the relevant side-mission marker if you cannot find the next job.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Finish Andy's earlier jobs before starting other long side strands.",
+    "Check the map for a side-mission marker if the strand seems to stall."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 23,
    "name": "This Was No Boat Accident",
    "description": "Complete the final mission for Kenton.",
    "grade": "bronze",
-   "guide": "Finish Kenton's last mission."
+   "guide": "Complete the final mission in Kenton's mission strand. Do Kenton's earlier jobs as they become available, then finish the last one to trigger the trophy. If the strand seems to stall, open the map and check for a side-mission marker rather than assuming it is gone.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Work through Kenton's jobs in order instead of skipping ahead.",
+    "Use the map's side-mission markers to find the next job."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 24,
    "name": "The Lone Rider",
    "description": "Complete the final mission for Billy.",
    "grade": "bronze",
-   "guide": "Finish Billy's last mission."
+   "guide": "Finish the final mission in Billy's mission strand. Complete Billy's earlier jobs first, then see the storyline through to its last mission; the trophy unlocks at the end of that strand. If you lose track of Billy's jobs, scan the pause-menu map for the next side-mission marker.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Do not start the final job until you are ready to finish the strand.",
+    "Check the map for a side-mission marker if Billy's jobs stop appearing."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 25,
    "name": "Strangers & Freaks",
    "description": "Complete 8 mission strands for strangers across the state of Leonida.",
    "grade": "silver",
-   "guide": "Finish 8 stranger strands (silver)."
+   "guide": "Complete eight different stranger mission strands across Leonida. These are the side stories you pick up from characters in free roam, so work through each strand's missions until its final job is done. Keep a list of the strands you have finished and check the map for any stranger icons you have not touched yet.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Track completed strands so you do not repeat the same one.",
+    "Sweep the map for stranger icons after the story opens up more of Leonida."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 26,
    "name": "Supply & Demand",
    "description": "Complete the final mission for Randy.",
    "grade": "bronze",
-   "guide": "Finish Randy's last mission."
+   "guide": "Complete the final mission in Randy's mission strand. Do Randy's earlier jobs first, then finish the last mission in the strand to unlock the trophy. If the next job is not showing, open the pause-menu map and look for the relevant side-mission marker.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Finish Randy's earlier jobs before moving to another strand.",
+    "Check the map for the next marker if the strand appears to stop."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 27,
    "name": "Spin On This!",
    "description": "Complete the final mission for Tyrone.",
    "grade": "bronze",
-   "guide": "Finish Tyrone's last mission."
+   "guide": "Finish the final mission in Tyrone's mission strand. Work through Tyrone's earlier jobs, then complete the last one to close out the storyline and earn the trophy. Use the pause-menu map to find the next side-mission marker if you cannot locate it.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Complete Tyrone's jobs in sequence rather than jumping around.",
+    "Check the map for a side-mission marker if the next job is missing."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 28,
    "name": "Positive Mental Attitude",
    "description": "Meditate at every spot across Leonida.",
    "grade": "bronze",
-   "guide": "Meditate at all 18 spots."
+   "guide": "Meditate at every meditation spot in Leonida. Look for the meditation activity markers on the pause-menu map, visit each one and complete the meditation interaction. The trophy tracks spots across the whole state, so sweep the map region by region as you explore.",
+   "kind": "collectible",
+   "missable": false,
+   "tips": [
+    "Use the map's activity markers to find meditation spots.",
+    "Sweep one region at a time so you do not miss a spot."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 29,
    "name": "Fair Game",
    "description": "Hunt a unique animal for Bret.",
    "grade": "bronze",
-   "guide": "Hunt the unique animal for Bret."
+   "guide": "Hunt the unique animal for Bret when his request becomes available. Follow the hunt prompts and give yourself enough time to track the animal without rushing. Because the target is unique, save before starting so you can reload if the hunt goes wrong.",
+   "kind": "side",
+   "missable": true,
+   "tips": [
+    "Make a manual save before beginning Bret's hunt.",
+    "Bring a suitable weapon and do not abandon the tracking phase.",
+    "Reload rather than risk losing the unique target if the attempt fails."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 30,
    "name": "Don't Touch My Deck",
    "description": "Complete 3 Collectible Card sets.",
    "grade": "silver",
-   "guide": "Complete 3 collectible card sets (silver)."
+   "guide": "Collect the cards needed to finish three full Collectible Card sets. Use the in-game collection menu to see which sets are closest to completion, then target the missing cards in those sets rather than spreading pickups across many partial sets. The trophy should pop when the third set is completed.",
+   "kind": "collectible",
+   "missable": false,
+   "tips": [
+    "Focus on three sets that are already close to complete.",
+    "Check the collection menu after each pickup to confirm the set count."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 31,
    "name": "You WAiNKer!",
    "description": "WAiNK It at 100 locations.",
    "grade": "silver",
-   "guide": "WAiNK It at 100 locations (silver)."
+   "guide": "Use WAiNK It at 100 different locations. The interaction is tied to locations, so keep an eye out for WAiNK prompts as you explore and use it once at each new spot. Check the in-game activity or collectible tracker to see how many locations you have already logged.",
+   "kind": "collectible",
+   "missable": false,
+   "tips": [
+    "Use WAiNK It whenever you reach a new area instead of passing it by.",
+    "Track your count so you do not waste time revisiting old spots."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 32,
    "name": "One Last Thing",
    "description": "Complete 50 Challenges.",
    "grade": "bronze",
-   "guide": "Finish 50 challenges."
+   "guide": "Complete 50 Challenges. Open the in-game challenge list to see the available objectives, then complete them as you travel rather than saving all 50 for one session. The counter is cumulative, so mix challenges into normal free roam and check the list whenever you need a new target.",
+   "kind": "challenge",
+   "missable": false,
+   "tips": [
+    "Check the challenge list before long drives so you can combine objectives.",
+    "Knock out easy challenges while travelling between main activities."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 33,
    "name": "Hot Together",
    "description": "Lose a 4 star Wanted Level with your partner and escape the heat.",
    "grade": "bronze",
-   "guide": "Lose a 4-star wanted level with your partner."
+   "guide": "Lose a four-star wanted level while playing with your partner. Raise your wanted level to four stars, stay with your partner during the escape, and then use the usual escape tools, such as breaking line of sight, changing vehicles or leaving the search area, until the stars clear. Keep your partner with you and avoid getting busted or wasted before the wanted level drops.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Reach four stars before committing to the escape route.",
+    "Stay close to your partner so the trophy condition is not broken.",
+    "Avoid getting busted while the wanted level is still active."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 34,
    "name": "Retail Therapy",
    "description": "Rob 3 shops back-to-back with your partner without losing your Wanted Level.",
    "grade": "bronze",
-   "guide": "Rob 3 shops in a row with your partner, keeping your wanted level."
+   "guide": "Rob three shops in a row with your partner without losing your wanted level between them. Hit the first shop, then move directly to the next two while the police are still active. Do not wait out the wanted level or get arrested; the streak has to survive all three robberies.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Plan a short route between the three shops before starting.",
+    "Do not stop to lose the police until the third robbery is done.",
+    "Keep your partner with you for the whole streak."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 35,
    "name": "Whip It Good",
    "description": "Discover 100 vehicles.",
    "grade": "bronze",
-   "guide": "Discover 100 vehicles."
+   "guide": "Discover 100 different vehicles. Vehicles count when you get in or drive them, so switch cars often during free roam and use the in-game vehicle list to spot models you have not tried. Rare or parked vehicles you pass are worth grabbing even if you only drive them a short distance.",
+   "kind": "collectible",
+   "missable": false,
+   "tips": [
+    "Get into every unfamiliar vehicle you pass during free roam.",
+    "Use the in-game vehicle list to target models you have not discovered."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 36,
    "name": "Gunslinger",
    "description": "Take down 5 enemies in a single use of Combat Focus.",
    "grade": "bronze",
-   "guide": "Down 5 enemies in one Combat Focus."
+   "guide": "Take down five enemies during a single Combat Focus activation. Trigger Combat Focus when at least five enemies are nearby, then line up quick shots before the slow-motion window ends. If you run out of targets, let the ability recharge and try again in a denser fight.",
+   "kind": "challenge",
+   "missable": false,
+   "tips": [
+    "Start Combat Focus only when several enemies are already in view.",
+    "Aim for body shots that are easy to land rather than risky headshots.",
+    "If the group is too small, wait for a larger encounter."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 37,
    "name": "Catch Me If You Can",
    "description": "Make an unscheduled departure at VCIA.",
    "grade": "bronze",
-   "guide": "Leave VCIA in an unscheduled way."
+   "guide": "Head to VCIA in free roam and look for a way to leave the airport that is not a scheduled flight. The trophy is a free-roam stunt rather than a story objective, so experiment with airport access and escape routes. If nothing triggers, check the trophy hints or try a different approach to leaving the grounds.",
+   "kind": "misc",
+   "missable": false,
+   "tips": [
+    "Treat this as a free-roam experiment, not a story mission.",
+    "Try leaving the airport by a route that is clearly not a normal flight."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 38,
    "name": "Challenging Tank",
    "description": "Kinda hot in these Rhinos.",
    "grade": "bronze",
-   "guide": "Deal with Rhinos (tanks)."
+   "guide": "The description is a hint rather than a full instruction: it points to the Rhinos, which players will recognize as tanks. Look for a free-roam opportunity involving a tank and complete it; if the trophy does not trigger, check the in-game trophy hints for the exact condition. Because the wording is cryptic, avoid assuming a story mission will award it.",
+   "kind": "misc",
+   "missable": false,
+   "tips": [
+    "Check the in-game trophy hints if the description is not clear enough.",
+    "Look for a tank-related free-roam opportunity rather than a story job."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 39,
    "name": "Sneakthief",
    "description": "Rob a jewelry store without being detected.",
    "grade": "bronze",
-   "guide": "Rob a jewelry store without being seen."
+   "guide": "Rob a jewelry store without being detected. Approach the store in free roam, avoid or disable any alarms and guards, and get out with the loot before the police are alerted. If you are spotted, the trophy will not count for that attempt, so restart or find another jewelry store and try a quieter route.",
+   "kind": "challenge",
+   "missable": false,
+   "tips": [
+    "Scout the store before starting the robbery.",
+    "Silence alarms and avoid guards instead of fighting through.",
+    "Restart immediately if you are detected."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 40,
    "name": "Maximum Withdrawal",
    "description": "Rob 5 Bank Vaults and escape.",
    "grade": "silver",
-   "guide": "Rob 5 bank vaults and escape (silver)."
+   "guide": "Rob five Bank Vaults and escape each time. Complete the vault, get out of the search area, and then move on to the next one. The trophy tracks successful escapes, so do not start the next vault until the previous job is fully finished.",
+   "kind": "challenge",
+   "missable": false,
+   "tips": [
+    "Finish each vault and escape before starting the next one.",
+    "Plan an exit route before you enter the vault.",
+    "Keep a vehicle ready for the getaway."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 41,
    "name": "A Classic Blitz Play",
    "description": "Rob an Armored Truck and escape.",
    "grade": "bronze",
-   "guide": "Rob an armored truck and escape."
+   "guide": "Rob an Armored Truck and escape. Stop an armored truck, take the cargo and get away from the police. The trophy is for the full robbery and escape, so plan an exit before you hit the truck.",
+   "kind": "challenge",
+   "missable": false,
+   "tips": [
+    "Pick a stretch of road where you can stop the truck cleanly.",
+    "Have a getaway vehicle ready before you start the robbery."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 42,
    "name": "The Goodtime State",
    "description": "Explore all of Leonida.",
    "grade": "bronze",
-   "guide": "Explore all 52 areas of Leonida."
+   "guide": "Explore all of Leonida. The trophy is tied to visiting the game's named regions or areas rather than to collectibles, so drive, fly or sail through every part of the map and let the exploration counter update. Use the pause-menu map to spot large areas you have not entered yet and sweep them methodically.",
+   "kind": "collectible",
+   "missable": false,
+   "tips": [
+    "Use the pause-menu map to find regions you have not entered.",
+    "Sweep the map in large loops instead of revisiting familiar areas."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 43,
    "name": "Pest Control",
    "description": "Rob an Illegal Operation belonging to each gang.",
    "grade": "bronze",
-   "guide": "Rob one illegal operation of each of the 9 gangs."
+   "guide": "Rob an Illegal Operation belonging to each gang. Look for gang-controlled illegal operations in free roam, hit one for each gang and escape after each robbery. Use the map or activity markers to identify which gangs you have already crossed off; the trophy needs one operation per gang, not every operation in the state.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Track which gangs you have already robbed.",
+    "Escape cleanly after each operation before moving to the next gang."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 44,
    "name": "In The Beginning…",
    "description": "Enjoy a cocktail with a view on Ocean Beach.",
    "grade": "bronze",
-   "guide": "Have a cocktail with a view on Ocean Beach."
+   "guide": "Go to Ocean Beach in free roam, find a venue that serves cocktails and has a view, and order a drink. The trophy is about the setting and the drink rather than a story mission. If the prompt does not appear, try another beachfront venue or check the map for a bar icon.",
+   "kind": "misc",
+   "missable": false,
+   "tips": [
+    "Look for a beachfront venue with a view rather than an interior bar.",
+    "Check the map for a bar icon if you cannot find the right spot."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 45,
    "name": "Capital Offense",
    "description": "Smash your way out of a vehicle showroom in classic style.",
    "grade": "bronze",
-   "guide": "Smash out of a vehicle showroom in style."
+   "guide": "Find a vehicle showroom in free roam, get into a car and drive through the glass or display window to make your exit. The trophy is for the destructive exit, so make sure you are actually inside the showroom before you floor it. If the showroom does not have a suitable vehicle, try another one.",
+   "kind": "misc",
+   "missable": false,
+   "tips": [
+    "Get fully inside the showroom before accelerating at the glass.",
+    "Pick a sturdy vehicle so the exit does not stall."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 46,
    "name": "Let’s Go Bowling",
    "description": "Follow-through at the Kolt & Associates' bowling alley.",
    "grade": "bronze",
-   "guide": "Play bowling at the Kolt & Associates alley."
+   "guide": "Visit the Kolt & Associates' bowling alley and play a game of bowling. Follow through on your throws and play enough of the game for the trophy to register. If you cannot find the alley, look for the bowling activity marker on the pause-menu map.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Use the map's bowling marker if you cannot find the alley.",
+    "Finish a full game rather than leaving after one throw."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 47,
    "name": "Personal Best",
    "description": "A partnership with mass appeal.",
    "grade": "bronze",
-   "guide": "A partnership moment with mass appeal."
+   "guide": "This trophy is tied to the partnership moment described as having mass appeal. Keep playing the story and partnership content, and watch for a scene or activity that focuses on the two characters; the trophy should pop when that beat is completed. Because the description is intentionally vague, check the in-game trophy list or recent progress if it has not appeared by the endgame.",
+   "kind": "misc",
+   "missable": false,
+   "tips": [
+    "Follow partnership-focused story and side content rather than avoiding it.",
+    "Check the in-game trophy hints if it has not popped by the endgame."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 48,
    "name": "Actions Speak Louder",
    "description": "Choices made (for better or worse).",
    "grade": "bronze",
-   "guide": "Make choices (PSN tracks a count to 500)."
+   "guide": "Make story choices as you play; the trophy tracks the decisions you commit to rather than a single mission objective. Keep a manual save before major story branches so you can go back if a choice-dependent trophy does not appear. The official description does not name a specific choice, so treat any major decision as a potential trigger.",
+   "kind": "story",
+   "missable": true,
+   "tips": [
+    "Keep a manual save before every major story decision.",
+    "Do not overwrite that save until the trophy has popped.",
+    "If a choice-dependent trophy is missing, replay from an earlier branch."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 49,
    "name": "Bad Luck, I Guess",
    "description": "Second time's the charm.",
    "grade": "bronze",
-   "guide": "Succeed on a second try."
+   "guide": "The description points to succeeding on a second attempt. When you fail a mission or activity, use the retry option rather than reloading a save, then complete it on that second try. If no trophy appears, try the same pattern with another repeatable activity.",
+   "kind": "misc",
+   "missable": false,
+   "tips": [
+    "Use the in-game retry option instead of reloading a manual save.",
+    "Pick a repeatable activity where failure is quick and easy to recover from."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 50,
    "name": "The Truth Is Out There",
    "description": "What the hell just happened?",
    "grade": "bronze",
-   "guide": "Witness something strange."
+   "guide": "This is a discovery trophy for witnessing something strange in Leonida. Keep exploring free roam and follow unusual encounters or side events when they appear; the trophy should pop when the strange moment plays out. Because the description is deliberately cryptic, check the in-game trophy hints if you have finished the main story without seeing it.",
+   "kind": "misc",
+   "missable": false,
+   "tips": [
+    "Follow unusual free-roam encounters instead of driving past them.",
+    "Check the in-game trophy hints if it has not triggered by the endgame."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 51,
    "name": "Ten Pin",
    "description": "Bowl 'em over with a melee drive-by.",
    "grade": "bronze",
-   "guide": "Knock someone down with a melee drive-by."
+   "guide": "Knock someone down with a melee drive-by. Get a vehicle, drive alongside a pedestrian or enemy, and use a melee attack from the vehicle so the target goes down. The trophy is about the melee hit from a vehicle, not about bowling despite the name.",
+   "kind": "challenge",
+   "missable": false,
+   "tips": [
+    "Slow down alongside the target before swinging.",
+    "Use a melee attack from the vehicle rather than a firearm."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 52,
    "name": "Dime on the Dollar",
    "description": "Earn $250,000 laundering Marked Bills through your contacts.",
    "grade": "bronze",
-   "guide": "Launder $250,000 of marked bills."
+   "guide": "Earn $250,000 by laundering Marked Bills through your contacts. Collect marked bills as you play, then use the contact who handles laundering instead of spending the bills elsewhere. Keep laundering until the cumulative total reaches $250,000; the trophy tracks the amount earned, not a single transaction.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Launder marked bills as you earn them instead of spending them.",
+    "Check the trophy progress to see how much of the total remains."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 53,
    "name": "Treat Yo Self",
    "description": "Spend $100,000 across all shops.",
    "grade": "bronze",
-   "guide": "Spend $100,000 in shops."
+   "guide": "Buy items from the shops around Leonida until your total spending reaches $100,000. The trophy is cumulative across different shops, so spread your purchases rather than trying to spend everything in one place. If you are unsure how much is left, check the in-game stats or trophy progress before buying more.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Spread purchases across several shops instead of one store.",
+    "Check the trophy progress before making a large purchase."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 54,
    "name": "Little Boxes",
    "description": "Purchase all garage properties.",
    "grade": "bronze",
-   "guide": "Buy all 8 garage properties."
+   "guide": "Purchase all garage properties. Use the in-game property list or map to find every garage that is for sale, then buy them one by one as you can afford them. The trophy should pop when the final garage is purchased; check the property menu if a garage you thought you owned is not counted.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Use the property list to see which garages are still unowned.",
+    "Check the property menu after each purchase to confirm it counted."
+   ],
+   "sources": ["Official trophy description"]
   },
   {
    "id": 55,
    "name": "On the Spot",
    "description": "Register 10 vehicles to the Scooter Bros app.",
    "grade": "bronze",
-   "guide": "Register 10 vehicles in the Scooter Bros app."
+   "guide": "Register ten vehicles in the Scooter Bros app, using the app's list to track which ones you have already added. You can do this as you acquire vehicles in free roam, so there is no need to wait for the endgame. Check the app after each registration to confirm the count moved.",
+   "kind": "side",
+   "missable": false,
+   "tips": [
+    "Register each new vehicle as soon as you acquire it.",
+    "Use the app's list to avoid registering the same vehicle twice."
+   ],
+   "sources": ["Official trophy description"]
   }
  ]
 }
