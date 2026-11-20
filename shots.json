@@ -1,5 +1,22 @@
 [
-  { "file": "1-checklist.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "2-silver.jpg", "path": "/", "grade": "silver", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "3-bronze.jpg", "path": "/", "grade": "bronze", "scroll": 1400, "viewport": { "width": 1280, "height": 800 } }
+  {
+    "file": "1-checklist.jpg",
+    "view": "checklist",
+    "caption": "Checklist at the top: overall progress, grade breakdown, search and filters, and the first trophy rows."
+  },
+  {
+    "file": "2-trophy-detail.jpg",
+    "view": "trophy-detail",
+    "caption": "Fair Game detail dialog with its Missable badge, full guide, tips and cited sources."
+  },
+  {
+    "file": "3-roadmap.jpg",
+    "view": "roadmap",
+    "caption": "Roadmap view with all six stages to the platinum, trophy chips, missable warnings and route notes."
+  },
+  {
+    "file": "4-spoiler-progress.jpg",
+    "view": "spoiler-progress",
+    "caption": "Spoiler mode on with 12 trophies ticked: 22% progress and unearned story trophies concealed."
+  }
 ]
