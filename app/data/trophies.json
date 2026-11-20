@@ -452,7 +452,8 @@
       "sources": [
         1,
         2,
-        4
+        4,
+        13
       ],
       "steps": [
         {
@@ -493,8 +494,14 @@
       "sources": [
         1,
         2,
-        4
+        4,
+        16
       ],
+      "target": {
+        "need": 250,
+        "unit": "stunts",
+        "src": 16
+      },
       "steps": [
         {
           "text": "Open the map and filter for stunts, then pick the quickest category.",
@@ -567,8 +574,14 @@
       "sources": [
         1,
         2,
-        4
+        4,
+        9
       ],
+      "target": {
+        "need": 12,
+        "unit": "shooting range golds",
+        "src": 9
+      },
       "steps": [
         {
           "text": "Find the 12 Shooting Range locations on the map.",
@@ -605,8 +618,14 @@
         1,
         2,
         4,
-        5
+        5,
+        10
       ],
+      "target": {
+        "need": 14,
+        "unit": "drone race locations won",
+        "src": 10
+      },
       "steps": [
         {
           "text": "Find the 14 Top Fun drone race locations.",
@@ -642,8 +661,14 @@
       "sources": [
         1,
         2,
-        5
+        5,
+        8
       ],
+      "target": {
+        "need": 20,
+        "unit": "races won",
+        "src": 8
+      },
       "steps": [
         {
           "text": "Open the map and find the race markers.",
@@ -709,8 +734,14 @@
       "sources": [
         1,
         2,
-        5
+        5,
+        17
       ],
+      "target": {
+        "need": 1,
+        "unit": "arcade game",
+        "src": 17
+      },
       "steps": [
         {
           "text": "Use the controllers at the home TV in Chapter 1.",
@@ -936,7 +967,8 @@
         1,
         2,
         3,
-        5
+        5,
+        11
       ],
       "steps": [
         {
@@ -974,8 +1006,14 @@
         1,
         2,
         3,
-        4
+        4,
+        6
       ],
+      "target": {
+        "need": 18,
+        "unit": "meditations",
+        "src": 6
+      },
       "steps": [
         {
           "text": "Save before the Chapter 1 meditation at Jason's house after Down to Earth.",
@@ -1054,8 +1092,14 @@
       ],
       "sources": [
         1,
-        4
+        4,
+        12
       ],
+      "target": {
+        "need": 3,
+        "unit": "card sets",
+        "src": 12
+      },
       "steps": [
         {
           "text": "Open Map > Activities > Target Deck to see the deck list.",
@@ -1086,8 +1130,14 @@
       ],
       "sources": [
         1,
-        2
+        2,
+        7
       ],
+      "target": {
+        "need": 100,
+        "unit": "WAiNK scans",
+        "src": 7
+      },
       "steps": [
         {
           "text": "Hold the WAiNK scan control while looking at a scannable object.",
@@ -1123,8 +1173,14 @@
       "sources": [
         1,
         2,
-        4
+        4,
+        13
       ],
+      "target": {
+        "need": 50,
+        "unit": "challenges",
+        "src": 13
+      },
       "steps": [
         {
           "text": "Open Progress > Challenges and sort by what is close to done.",
@@ -1201,8 +1257,14 @@
         1,
         2,
         3,
-        5
+        5,
+        15
       ],
+      "target": {
+        "need": 3,
+        "unit": "shops in a row",
+        "src": 15
+      },
       "steps": [
         {
           "text": "Finish Chapter 2's Coffee Break and bring your partner.",
@@ -1425,8 +1487,14 @@
       "sources": [
         1,
         2,
-        3
+        3,
+        14
       ],
+      "target": {
+        "need": 5,
+        "unit": "bank vaults",
+        "src": 14
+      },
       "steps": [
         {
           "text": "Complete Chapter 4's That’s Where The Money Is… (Wait at the Cafe).",

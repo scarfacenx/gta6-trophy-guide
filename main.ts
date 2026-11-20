@@ -139,6 +139,76 @@ function checkCitations(trophies, register) {
   return { steps, cited, withSources, twoPlus };
 }
 
+const TARGET_STOPWORDS = new Set(['a', 'an', 'and', 'at', 'for', 'in', 'of', 'on', 'the', 'to', 'with']);
+
+function targetWords(text) {
+  return (String(text).toLowerCase().match(/[a-z0-9]+/g) ?? []).filter((word) => !TARGET_STOPWORDS.has(word));
+}
+
+function singularWord(word) {
+  if (word.endsWith('ies') && word.length > 4) return `${word.slice(0, -3)}y`;
+  if (/(?:ches|shes|xes|zes)$/.test(word)) return word.slice(0, -2);
+  if (word.endsWith('s') && !/(?:ss|us|is)$/.test(word)) return word.slice(0, -1);
+  return word;
+}
+
+function isPluralNoun(word) {
+  return word.length > 2 && word.endsWith('s') && !/(?:ss|us|is)$/.test(word);
+}
+
+function targetCoverage(trophy, source) {
+  const texts = [source.title, source.covers, trophy.description, trophy.guide];
+  if (Array.isArray(trophy.tips)) texts.push(...trophy.tips);
+  if (Array.isArray(trophy.steps)) texts.push(...trophy.steps.map((step) => step?.text));
+  const covered = new Set();
+  for (const word of targetWords(texts.filter((text) => typeof text === 'string').join(' '))) {
+    covered.add(word);
+    covered.add(singularWord(word));
+  }
+  return covered;
+}
+
+function checkTargets(trophies, register) {
+  const problems = [];
+  let counted = 0;
+  for (const trophy of trophies) {
+    if (!Object.prototype.hasOwnProperty.call(trophy, 'target')) continue;
+    counted += 1;
+    const label = typeof trophy?.name === 'string' ? trophy.name.trim() : 'untitled trophy';
+    const target = trophy.target;
+    if (!target || typeof target !== 'object' || Array.isArray(target)) {
+      problems.push(`${label}: target is not an object`);
+      continue;
+    }
+    const need = target.need;
+    if (!Number.isInteger(need) || need <= 0) problems.push(`${label}: target need ${JSON.stringify(need)} is not a positive integer`);
+    const src = target.src;
+    if (!Number.isInteger(src) || !register.ids.has(src)) problems.push(`${label}: target source ${JSON.stringify(src)} is not registered`);
+    const unit = typeof target.unit === 'string' ? target.unit.trim() : '';
+    if (unit === '') {
+      problems.push(`${label}: target unit is empty`);
+      continue;
+    }
+    const words = targetWords(unit);
+    if (!/^[A-Za-z][A-Za-z' -]*$/.test(unit) || words.length === 0) {
+      problems.push(`${label}: target unit ${JSON.stringify(unit)} is not a noun phrase`);
+      continue;
+    }
+    if (Number.isInteger(need) && need > 1 && !words.some(isPluralNoun)) {
+      problems.push(`${label}: target unit ${JSON.stringify(unit)} is not plural for a count of ${need}`);
+    }
+    if (Number.isInteger(src) && register.ids.has(src)) {
+      const source = register.list.find((entry) => Number(entry.id) === src);
+      const covered = targetCoverage(trophy, source);
+      const matched = words.some((word) => covered.has(word) || covered.has(singularWord(word)));
+      if (!matched) problems.push(`${label}: target unit ${JSON.stringify(unit)} does not match source ${src} covers`);
+    }
+  }
+  if (problems.length > 0) fail(`target audit failed: ${describeNames(problems, 10)}`);
+  log(`targets: ${counted}/${trophies.length} trophies carry a positive, registered-source target with a matching noun unit`);
+  return counted;
+}
+
 function checkRoadmap(trophies) {
   const roadmap = readJson(join(here, 'app', 'data', 'roadmap.json'), 'app/data/roadmap.json');
   if (!Array.isArray(roadmap?.stages)) fail('app/data/roadmap.json must have a stages array');
@@ -225,13 +295,14 @@ function main() {
   const trophies = loadTrophies();
   const register = loadSources();
   const citations = checkCitations(trophies, register);
+  const targets = checkTargets(trophies, register);
   checkRoadmap(trophies);
   const shots = checkScreenshots();
   const appFiles = copyEntry(shots);
   const dossier = buildDossier(out, { text_max_bytes: 163840, screenshots: { max: 4, max_bytes: 262144 }, app_max_files: 993, app_max_bytes: 50331648 });
   writeFileSync(join(out, 'dossier.json'), dossier);
   const dossierBytes = statSync(join(out, 'dossier.json')).size;
-  log(`wrote ${out}: ${trophies.length} trophies, ${citations.steps} steps (${citations.cited} cited), ${citations.twoPlus} trophies with 2+ sources, ${shots.length} screenshots, ${appFiles} app files, ${dossierBytes}-byte dossier.json`);
+  log(`wrote ${out}: ${trophies.length} trophies, ${citations.steps} steps (${citations.cited} cited), ${citations.twoPlus} trophies with 2+ sources, ${targets} trophies with a target, ${shots.length} screenshots, ${appFiles} app files, ${dossierBytes}-byte dossier.json`);
 }
 
 main();
