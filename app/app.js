@@ -39,6 +39,7 @@ const defaultFilters = () => ({ grade: 'all', kind: 'all', query: '', hideComple
 const state = { earned: new Set(), spoiler: false, filters: defaultFilters(), tab: 'checklist' };
 
 let trophies = [];
+let platinumTrophy = null;
 let roadmap = null;
 let byTrophyId = new Map();
 let byTrophyName = new Map();
@@ -78,6 +79,7 @@ function loadState() {
     const raw = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (!raw || typeof raw !== 'object') return;
     state.earned = sanitizeEarned(raw.earned);
+    syncPlatinum();
     state.spoiler = raw.spoiler === true;
     state.filters = sanitizeFilters(raw.filters);
     if (TABS.includes(raw.tab)) state.tab = raw.tab;
@@ -106,7 +108,16 @@ function saveState() {
 const isEarned = (trophy) => state.earned.has(trophy.id);
 const isHidden = (trophy) => state.spoiler && trophy.kind === 'story' && !isEarned(trophy);
 const kindLabel = (kind) => KIND_LABELS[kind] || kind;
-const padId = (id) => '#' + String(id).padStart(2, '0');
+const positionTag = (trophy) => '#' + String(trophies.indexOf(trophy) + 1).padStart(2, '0');
+const platinumLocked = () => trophies.some((trophy) => trophy.grade !== 'platinum' && !state.earned.has(trophy.id));
+const platinumHint = () => platinumLocked()
+  ? 'Earn the other ' + (trophies.length - 1) + ' trophies first'
+  : 'Earned automatically: all ' + (trophies.length - 1) + ' other trophies are done';
+function syncPlatinum() {
+  if (!platinumTrophy) return;
+  if (platinumLocked()) state.earned.delete(platinumTrophy.id);
+  else state.earned.add(platinumTrophy.id);
+}
 
 function gradeBadge(grade) {
   return el('span', 'badge badge--' + grade, grade);
@@ -233,6 +244,14 @@ function buildRow(trophy) {
   const visual = el('span', 'check-box');
   visual.append(tplIcon('tpl-icon-check'));
   wrap.append(box, visual);
+  if (trophy.grade === 'platinum') {
+    const hint = el('span', '', 'Earn the other ' + (trophies.length - 1) + ' trophies first; the platinum then unlocks automatically.');
+    hint.id = 'platinum-hint';
+    hint.hidden = true;
+    box.setAttribute('aria-describedby', hint.id);
+    box.addEventListener('click', (event) => event.preventDefault());
+    wrap.append(hint);
+  }
 
   const main = el('button', 'trophy-main');
   main.type = 'button';
@@ -247,7 +266,7 @@ function buildRow(trophy) {
   const excerpt = el('span', 'trophy-excerpt', hidden ? '' : trophy.guide);
   if (hidden) excerpt.hidden = true;
   const meta = el('span', 'trophy-meta');
-  meta.append(el('span', 'chip chip--id', padId(trophy.id)), el('span', 'chip chip--kind', kindLabel(trophy.kind)));
+  meta.append(el('span', 'chip chip--id', positionTag(trophy)), el('span', 'chip chip--kind', kindLabel(trophy.kind)));
   main.append(top, desc, excerpt, meta);
   main.addEventListener('click', () => openDetail(trophy.id));
 
@@ -257,6 +276,16 @@ function buildRow(trophy) {
 
   item.append(wrap, main, chevron);
   return { item, box };
+}
+
+function syncPlatinumRow() {
+  if (!platinumTrophy) return;
+  const row = rowRefs.get(platinumTrophy.id);
+  if (!row) return;
+  row.box.disabled = platinumLocked();
+  row.box.checked = isEarned(platinumTrophy);
+  row.box.title = platinumHint();
+  row.item.dataset.earned = String(isEarned(platinumTrophy));
 }
 
 function renderList() {
@@ -269,6 +298,7 @@ function renderList() {
     rowRefs.set(trophy.id, row);
     list.append(row.item);
   }
+  syncPlatinumRow();
   const active = activeFilterParts();
   byId('visible-count').textContent = 'Showing ' + visible.length + ' of ' + trophies.length + ' trophies (' + visible.filter(isEarned).length + ' earned in this view)';
   byId('clear-filters').hidden = active.length === 0;
@@ -284,8 +314,15 @@ function renderList() {
 function setEarned(id, earned) {
   const trophy = byTrophyId.get(id);
   if (!trophy) return;
+  if (trophy.grade === 'platinum') {
+    const platinumRow = rowRefs.get(id);
+    if (platinumRow) platinumRow.box.checked = isEarned(trophy);
+    if (detailDialog.open && detailOrder[detailIndex] === id) byId('detail-earned').checked = isEarned(trophy);
+    return;
+  }
   if (earned) state.earned.add(id);
   else state.earned.delete(id);
+  syncPlatinum();
   saveState();
   renderHeader();
   renderGradeStats();
@@ -299,6 +336,7 @@ function setEarned(id, earned) {
       if (isHidden(trophy)) row.item.dataset.locked = 'true';
       else delete row.item.dataset.locked;
     }
+    syncPlatinumRow();
     byId('visible-count').textContent = 'Showing ' + rowRefs.size + ' of ' + trophies.length + ' trophies (' + [...rowRefs.keys()].filter((key) => state.earned.has(key)).length + ' earned in this view)';
   }
   renderRoadmap();
@@ -346,7 +384,7 @@ function fillDetail() {
   byId('detail-desc').textContent = hidden ? HIDDEN_DESC : trophy.description;
 
   const badges = byId('detail-badges');
-  badges.replaceChildren(gradeBadge(trophy.grade), el('span', 'chip chip--kind', kindLabel(trophy.kind)), el('span', 'chip chip--id', padId(trophy.id)));
+  badges.replaceChildren(gradeBadge(trophy.grade), el('span', 'chip chip--kind', kindLabel(trophy.kind)), el('span', 'chip chip--id', positionTag(trophy)));
   if (trophy.missable) badges.append(missableBadge());
   if (isEarned(trophy)) {
     const earned = el('span', 'chip');
@@ -363,7 +401,10 @@ function fillDetail() {
   const sources = byId('detail-sources');
   sources.replaceChildren();
   if (!hidden) for (const source of trophy.sources || []) sources.append(el('li', '', source));
-  byId('detail-earned').checked = isEarned(trophy);
+  const detailBox = byId('detail-earned');
+  detailBox.checked = isEarned(trophy);
+  detailBox.disabled = trophy.grade === 'platinum';
+  detailBox.title = trophy.grade === 'platinum' ? platinumHint() : '';
   byId('detail-position').textContent = (detailIndex + 1) + ' / ' + detailOrder.length;
   byId('detail-prev').disabled = detailIndex <= 0;
   byId('detail-next').disabled = detailIndex >= detailOrder.length - 1;
@@ -433,6 +474,7 @@ async function importProgress(file) {
   try {
     const parsed = parseImport(await file.text());
     state.earned = parsed.earned;
+    syncPlatinum();
     state.spoiler = parsed.spoiler;
     state.filters = parsed.filters;
     state.tab = parsed.tab;
@@ -444,7 +486,7 @@ async function importProgress(file) {
     renderRoadmap();
     setTab(parsed.tab);
     if (detailDialog.open) fillDetail();
-    showToast('Imported ' + parsed.earned.size + ' earned trophies');
+    showToast('Imported ' + state.earned.size + ' earned trophies');
   } catch (error) {
     showToast('Import failed: ' + (error && error.message ? error.message : 'invalid file'));
   }
@@ -679,7 +721,8 @@ async function boot() {
     if (!trophyDoc || !Array.isArray(trophyDoc.trophies) || trophyDoc.trophies.length === 0) {
       throw new Error('trophies.json has no trophy list');
     }
-    trophies = trophyDoc.trophies;
+    trophies = trophyDoc.trophies.slice().sort((a, b) => Number(a.grade === 'platinum') - Number(b.grade === 'platinum') || a.id - b.id);
+    platinumTrophy = trophies.find((trophy) => trophy.grade === 'platinum') || null;
     roadmap = roadmapDoc && typeof roadmapDoc === 'object' ? roadmapDoc : null;
   } catch (error) {
     byId('boot').hidden = true;

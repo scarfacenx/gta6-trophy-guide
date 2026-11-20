@@ -744,6 +744,8 @@ kbd {
 }
 
 .earn:hover + .check-box { border-color: var(--cyan); }
+.earn:disabled + .check-box { opacity: 0.45; cursor: not-allowed; }
+.earn:disabled:hover + .check-box { border-color: var(--line); }
 
 .earn:checked + .check-box {
   border-color: transparent;
