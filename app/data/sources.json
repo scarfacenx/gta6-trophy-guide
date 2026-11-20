@@ -1,0 +1,45 @@
+{
+  "read_date": "2026-11-20",
+  "sources": [
+    {
+      "id": 1,
+      "title": "Official PS5 trophy list — the bounty kit's reference list (mirrors Exophase and PSNProfiles)",
+      "url": "https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/",
+      "kind": "official list",
+      "covers": "official name, description, grade and hidden flag",
+      "read": "2026-11-20"
+    },
+    {
+      "id": 2,
+      "title": "PowerPyx — GTA 6 (Grand Theft Auto VI) Trophy Guide & Roadmap",
+      "url": "https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/",
+      "kind": "trophy guide",
+      "covers": "how each trophy unlocks: chapter, mission, count, missable status",
+      "read": "2026-11-20"
+    },
+    {
+      "id": 3,
+      "title": "PowerPyx — GTA 6 Full Walkthrough – All Missions",
+      "url": "https://www.powerpyx.com/gta-6-full-walkthrough-all-missions/",
+      "kind": "walkthrough",
+      "covers": "chapter and mission order",
+      "read": "2026-11-20"
+    },
+    {
+      "id": 4,
+      "title": "PowerPyx — GTA 6 100% Completion Checklist & Guide",
+      "url": "https://www.powerpyx.com/gta-6-100-completion-checklist-guide/",
+      "kind": "100% checklist",
+      "covers": "what 100% completion needs: counts for vehicles, animals, challenges, decks, robberies",
+      "read": "2026-11-20"
+    },
+    {
+      "id": 5,
+      "title": "PSNProfiles — GTA 6 trophy list",
+      "url": "https://psnprofiles.com/trophies/43531-grand-theft-auto-vi",
+      "kind": "trophy list",
+      "covers": "PSN's own grade split and hidden flags",
+      "read": "2026-11-20"
+    }
+  ]
+}

@@ -76,6 +76,9 @@
         <button class="tab" id="tab-roadmap" type="button" role="tab" aria-selected="false" aria-controls="panel-roadmap" data-view="roadmap" tabindex="-1">
           <svg class="icon" aria-hidden="true"><use href="#i-map"></use></svg> Roadmap
         </button>
+        <button class="tab" id="tab-sources" type="button" role="tab" aria-selected="false" aria-controls="panel-sources" data-view="sources" tabindex="-1">
+          <svg class="icon" aria-hidden="true"><use href="#i-info"></use></svg> Sources
+        </button>
       </div>
 
       <div class="progress-actions" aria-label="Progress data">
@@ -96,6 +99,14 @@
   <main class="shell" id="main" tabindex="-1">
     <section class="view" id="panel-checklist" role="tabpanel" aria-labelledby="tab-checklist" tabindex="0">
       <h2 class="sr-only">Trophy checklist</h2>
+
+      <div id="audit-strip" aria-label="Citation audit" style="display:flex;flex-wrap:wrap;gap:7px;margin:0 2px 12px">
+        <span class="small" id="audit-official" style="padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)"></span>
+        <span class="small" id="audit-grades" style="padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)"></span>
+        <span class="small" id="audit-steps" style="padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)"></span>
+        <span class="small" id="audit-guides" style="padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)"></span>
+        <span class="small" id="audit-sources" style="padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)"></span>
+      </div>
 
       <div class="toolbar" aria-label="Trophy filters">
         <div class="search-field">
@@ -177,6 +188,19 @@
     <section class="view" id="panel-roadmap" role="tabpanel" aria-labelledby="tab-roadmap" tabindex="0" hidden>
       <h2 class="sr-only">Roadmap</h2>
       <div id="roadmap-root"></div>
+    </section>
+
+    <section class="view" id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" tabindex="0" hidden>
+      <h2 class="sr-only">Sources</h2>
+      <div class="roadmap-head">
+        <div>
+          <h2 class="roadmap-title">Sources and citations</h2>
+          <p class="roadmap-sub">The pages this guide was built from, the date each one was read, and how many trophy guides cite it. Every count below is computed from the data at load time.</p>
+        </div>
+        <div class="roadmap-summary" id="sources-summary"></div>
+      </div>
+      <ul class="source-list" id="sources-list" aria-label="Sources" style="list-style:none;padding-left:0"></ul>
+      <p class="roadmap-foot">Every step in this guide carries the number of the source it comes from.</p>
     </section>
   </main>
 

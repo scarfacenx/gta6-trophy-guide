@@ -5,7 +5,53 @@ const PROGRESS_KEY = 'gta6-trophy-progress-v1';
 const PREFS_KEY = 'gta6-trophy-guide-prefs-v1';
 const GRADE_ORDER = ['platinum', 'gold', 'silver', 'bronze'];
 const KIND_NAMES = { story: 'Story', side: 'Side', collectible: 'Collectible', challenge: 'Challenge', online: 'Online', misc: 'Misc' };
-const VIEW_NAMES = ['checklist', 'roadmap'];
+const VIEW_NAMES = ['checklist', 'roadmap', 'sources'];
+
+// The citation register is embedded at build time so the app never fetches it.
+const SOURCES = [
+  {
+    "id": 1,
+    "title": "Official PS5 trophy list — the bounty kit's reference list (mirrors Exophase and PSNProfiles)",
+    "url": "https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/",
+    "kind": "official list",
+    "covers": "official name, description, grade and hidden flag",
+    "read": "2026-11-20"
+  },
+  {
+    "id": 2,
+    "title": "PowerPyx — GTA 6 (Grand Theft Auto VI) Trophy Guide & Roadmap",
+    "url": "https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/",
+    "kind": "trophy guide",
+    "covers": "how each trophy unlocks: chapter, mission, count, missable status",
+    "read": "2026-11-20"
+  },
+  {
+    "id": 3,
+    "title": "PowerPyx — GTA 6 Full Walkthrough – All Missions",
+    "url": "https://www.powerpyx.com/gta-6-full-walkthrough-all-missions/",
+    "kind": "walkthrough",
+    "covers": "chapter and mission order",
+    "read": "2026-11-20"
+  },
+  {
+    "id": 4,
+    "title": "PowerPyx — GTA 6 100% Completion Checklist & Guide",
+    "url": "https://www.powerpyx.com/gta-6-100-completion-checklist-guide/",
+    "kind": "100% checklist",
+    "covers": "what 100% completion needs: counts for vehicles, animals, challenges, decks, robberies",
+    "read": "2026-11-20"
+  },
+  {
+    "id": 5,
+    "title": "PSNProfiles — GTA 6 trophy list",
+    "url": "https://psnprofiles.com/trophies/43531-grand-theft-auto-vi",
+    "kind": "trophy list",
+    "covers": "PSN's own grade split and hidden flags",
+    "read": "2026-11-20"
+  }
+];
+const SOURCE_BY_ID = new Map(SOURCES.map((source) => [source.id, source]));
+const SOURCE_IDS = new Set(SOURCES.map((source) => source.id));
 const MASK_NAME = 'Hidden story trophy';
 const MASK_DESC = 'Turn spoiler mode off to read this.';
 const MASK_CHIP = 'Hidden';
@@ -44,21 +90,33 @@ function labelledBadge(className, templateId, label) {
   return badge;
 }
 
-function sourceItem(source) {
-  const text = String(source);
-  const item = make('li');
-  const match = text.match(/https?:\/\/[^\s)]+/);
-  if (!match) {
-    item.textContent = text;
+function formatReadDate(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ''));
+  if (!match) return String(value || '');
+  const date = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
+  return new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(date);
+}
+
+function sourceById(value) {
+  const id = Number(value);
+  return Number.isInteger(id) ? SOURCE_BY_ID.get(id) || null : null;
+}
+
+function trophySourceItem(value) {
+  const id = Number(value);
+  const source = sourceById(id);
+  const item = make('li', 'trophy-source');
+  item.append(make('span', 'chip chip--id', '[' + id + ']'), document.createTextNode(' '));
+  if (!source) {
+    item.append(document.createTextNode('Source ' + id));
     return item;
   }
-  const url = match[0];
-  const at = text.indexOf(url);
-  const link = make('a', '', url);
-  link.href = url;
+  item.append(make('strong', '', source.title), document.createTextNode(' — '));
+  const link = make('a', '', source.url);
+  link.href = source.url;
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
-  item.append(document.createTextNode(text.slice(0, at)), link, document.createTextNode(text.slice(at + url.length)));
+  item.append(link);
   return item;
 }
 
@@ -434,14 +492,23 @@ const detail = {
     const sources = masked ? [] : trophy.sources || [];
     const stepsList = dom['trophy-steps'];
     stepsList.replaceChildren();
-    for (const step of steps) stepsList.append(make('li', '', step));
+    for (const step of steps) {
+      const item = make('li');
+      if (step && typeof step === 'object') {
+        item.append(document.createTextNode(step.text));
+        if (step.src !== undefined) item.append(document.createTextNode(' '), make('sup', 'step-src', '[' + step.src + ']'));
+      } else {
+        item.textContent = String(step);
+      }
+      stepsList.append(item);
+    }
     dom['detail-steps-section'].hidden = steps.length === 0;
     const tipsList = dom['detail-tips'];
     tipsList.replaceChildren();
     for (const tip of tips) tipsList.append(make('li', '', tip));
     const sourcesList = dom['trophy-sources'];
     sourcesList.replaceChildren();
-    for (const source of sources) sourcesList.append(sourceItem(source));
+    for (const source of sources) sourcesList.append(trophySourceItem(source));
     dom['detail-sources-section'].hidden = sources.length === 0;
     const tick = dom['detail-earned'];
     tick.checked = earnedHas(trophy);
@@ -547,6 +614,7 @@ function paintRoadmap() {
   }
   missables.append(missableChips);
   root.append(missables);
+  root.append(make('p', 'roadmap-foot', '1 possibly missable — positive mental attitude (Chapter 1 meditation); everything else is still earnable in free-roam.'));
 
   const notes = make('section', 'info-card');
   const notesTitle = make('h3');
@@ -557,6 +625,67 @@ function paintRoadmap() {
   root.append(notes);
 
   root.append(make('p', 'roadmap-foot', 'Every chip opens the full guide. Progress lives in this browser; export a JSON backup before clearing site data.'));
+}
+
+function paintAudit() {
+  const total = guide.trophies.length;
+  const official = guide.trophies.filter((trophy) => trophy.name && trophy.description && trophy.grade).length;
+  const counts = Object.fromEntries(GRADE_ORDER.map((grade) => [grade, guide.trophies.filter((trophy) => trophy.grade === grade).length]));
+  const hidden = guide.trophies.filter((trophy) => trophy.hidden === true).length;
+  let steps = 0;
+  let cited = 0;
+  for (const trophy of guide.trophies) {
+    for (const step of trophy.steps || []) {
+      steps += 1;
+      if (step && SOURCE_IDS.has(Number(step.src))) cited += 1;
+    }
+  }
+  const guidesCited = guide.trophies.filter((trophy) => {
+    const sources = Array.isArray(trophy.sources) ? trophy.sources : [];
+    return sources.length > 0 && sources.every((id) => SOURCE_IDS.has(Number(id))) && typeof trophy.guide === 'string' && trophy.guide.trim() !== '';
+  }).length;
+  const facts = {
+    'audit-official': official + '/' + total + ' official name, description and grade',
+    'audit-grades': counts.platinum + 'P ' + counts.gold + 'G ' + counts.silver + 'S ' + counts.bronze + 'B · ' + hidden + ' PSN-hidden',
+    'audit-steps': cited + '/' + steps + ' steps cited',
+    'audit-guides': guidesCited + '/' + total + ' guides cite sources',
+    'audit-sources': SOURCES.length + ' sources read ' + formatReadDate(SOURCES[0] && SOURCES[0].read)
+  };
+  for (const [id, text] of Object.entries(facts)) {
+    if (dom[id]) dom[id].textContent = text;
+  }
+  if (dom['audit-strip']) dom['audit-strip'].dataset.ready = 'true';
+}
+
+function paintSources() {
+  const list = dom['sources-list'];
+  if (!list) return;
+  list.replaceChildren();
+  const total = guide.trophies.length;
+  for (const source of SOURCES) {
+    const cited = guide.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.map(Number).includes(source.id)).length;
+    const row = make('li', 'source-row');
+    row.style.cssText = 'display:grid;gap:5px;padding:13px 0;border-bottom:1px solid var(--line);list-style:none';
+    const top = make('div');
+    top.append(make('span', 'chip chip--id', '[' + source.id + ']'), document.createTextNode(' '), make('strong', '', source.title));
+    const link = make('a', '', source.url);
+    link.href = source.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.style.overflowWrap = 'anywhere';
+    const meta = make('div', 'muted small', source.kind + ' · read ' + formatReadDate(source.read) + ' · cited by ' + cited + '/' + total + ' guides');
+    row.append(top, link, meta);
+    list.append(row);
+  }
+  const summary = dom['sources-summary'];
+  if (summary) {
+    summary.replaceChildren(
+      summaryPill(String(SOURCES.length), 'sources'),
+      summaryPill(String(total), 'trophies'),
+      summaryPill(String(guide.trophies.reduce((sum, trophy) => sum + (trophy.steps || []).length, 0)), 'steps'),
+      summaryPill(String(guide.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.length > 0).length), 'guides with sources')
+    );
+  }
 }
 
 let searchTimer = 0;
@@ -681,12 +810,16 @@ function resetProgress() {
 }
 
 function wireEvents() {
-  dom['tab-checklist'].addEventListener('click', () => setView('checklist'));
-  dom['tab-roadmap'].addEventListener('click', () => setView('roadmap'));
+  for (const name of VIEW_NAMES) {
+    const tab = dom['tab-' + name];
+    if (tab) tab.addEventListener('click', () => setView(name));
+  }
   dom['tabs'].addEventListener('keydown', (event) => {
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
     event.preventDefault();
-    const next = session.view === 'checklist' ? 'roadmap' : 'checklist';
+    const index = VIEW_NAMES.indexOf(session.view);
+    const direction = event.key === 'ArrowRight' ? 1 : -1;
+    const next = VIEW_NAMES[(index + direction + VIEW_NAMES.length) % VIEW_NAMES.length];
     setView(next);
     dom['tab-' + next].focus();
   });
@@ -820,6 +953,8 @@ async function boot() {
   paintGradeChips();
   paintChecklist();
   paintRoadmap();
+  paintAudit();
+  paintSources();
   setView(session.view);
   dom['boot'].hidden = true;
 }

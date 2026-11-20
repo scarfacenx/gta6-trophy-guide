@@ -8,7 +8,7 @@
       "name": "Vice Got a Price!",
       "description": "Congratulations! You're a Leonida Legend.",
       "grade": "platinum",
-      "guide": "Unlock every other trophy in the list. Work through the story, side content, collectibles, challenges and free-roam activities, then come back to this one after the other 54 have popped. The platinum is automatic once the rest of the list is complete, so use the trophy list to find the last few stragglers.",
+      "guide": "Earn all 54 other trophies in single-player; the platinum has no multiplayer or DLC requirement. Finish the story first, then clear the optional questlines, collectibles, challenges and 100% checklist. Leave this one as the final tick, because it unlocks only when the rest of the list is complete. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "misc",
       "missable": false,
       "tips": [
@@ -16,22 +16,36 @@
         "Check the trophy list after every cleanup session to see what is left."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Work through the story, side content, collectibles, challenges and free-roam activities",
-        "Finish every other trophy on the list, checking the list for stragglers",
-        "Return to this trophy after the other 54 have popped",
-        "Confirm the platinum unlocks automatically"
-      ]
+        {
+          "text": "Earn every other trophy in the list; no multiplayer or DLC is required.",
+          "src": 2
+        },
+        {
+          "text": "Finish the story, then sweep side content, collectibles and challenges.",
+          "src": 2
+        },
+        {
+          "text": "Check the trophy list for any trophy you have not earned yet.",
+          "src": 2
+        },
+        {
+          "text": "Claim the platinum after the other 54 have popped.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 2,
       "name": "Just Like Paradise",
       "description": "Complete Gone Fishing.",
       "grade": "bronze",
-      "guide": "Work through the story until Gone Fishing becomes available, then complete its objectives. It is a named mission, so the trophy is tied to finishing that job rather than to any optional activity. Follow the story marker and stay in the mission until the completion screen appears.",
+      "guide": "Complete Gone Fishing, the first main mission of Chapter 1. It is an automatic story trophy and cannot be missed, so the only requirement is to keep following the campaign marker until the mission ends. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -39,21 +53,32 @@
         "If the mission is not on your map yet, advance the main campaign."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Advance the story until Gone Fishing becomes available",
-        "Follow the story marker and start the mission",
-        "Complete its objectives and stay until the completion screen appears"
-      ]
+        {
+          "text": "Start the Chapter 1 main mission Gone Fishing.",
+          "src": 2
+        },
+        {
+          "text": "Follow the story marker and finish the mission's objectives.",
+          "src": 2
+        },
+        {
+          "text": "Let the mission-complete screen appear; the trophy is automatic.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 3,
       "name": "Paradise Lost",
       "description": "Complete Chapter 1.",
       "grade": "bronze",
-      "guide": "Complete the main story missions that make up Chapter 1. The trophy pops as soon as the chapter's final mission is finished, so it is part of normal campaign progress and cannot be skipped by ignoring side content. Follow the story markers whenever you want to move the plot forward.",
+      "guide": "Finish every main story mission in Chapter 1. The trophy registers after the first Chapter 2 mission, What’s in the Bag?, so do not expect it the moment the chapter's last job ends. It is automatic and cannot be missed. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -61,21 +86,32 @@
         "Use the pause menu to confirm which story objective is next."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Play the main story missions that make up Chapter 1",
-        "Follow the story markers whenever you want to move the plot forward",
-        "Finish the chapter's final mission and let the chapter completion register"
-      ]
+        {
+          "text": "Complete the main story missions that make up Chapter 1.",
+          "src": 2
+        },
+        {
+          "text": "Continue into Chapter 2 and start What’s in the Bag?.",
+          "src": 2
+        },
+        {
+          "text": "Finish that mission to let the Chapter 1 trophy register.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 4,
       "name": "T**s Ass Drug Money",
       "description": "Complete Chapter 2.",
       "grade": "bronze",
-      "guide": "Push the main campaign through Chapter 2 and finish its closing mission. This is a story milestone, so the trophy arrives through normal progression rather than a hidden objective. Keep following the campaign markers after Chapter 1 and the chapter completion should register automatically.",
+      "guide": "Clear the Chapter 2 main story. The unlock lands after the first Chapter 3 mission, Welcome to Vice City, rather than at the exact chapter boundary. It is story-bound and unmissable. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -83,21 +119,32 @@
         "Keep a manual save at the start of the chapter if you like replaying missions."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Push the main campaign through Chapter 2",
-        "Keep following the campaign markers after Chapter 1",
-        "Finish the chapter's closing mission and let the trophy register"
-      ]
+        {
+          "text": "Play through the main missions of Chapter 2.",
+          "src": 2
+        },
+        {
+          "text": "Move on to Chapter 3 and complete Welcome to Vice City.",
+          "src": 2
+        },
+        {
+          "text": "Confirm the trophy after that mission; it cannot be missed.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 5,
       "name": "Vice City, Baby!",
       "description": "Complete Chapter 3.",
       "grade": "bronze",
-      "guide": "Play the Chapter 3 story missions in order and complete the chapter's final job. The trophy is a campaign checkpoint, so it should unlock without any special performance requirement. If you have been sidetracked, return to the story markers and continue the main plot.",
+      "guide": "Complete Chapter 3's main story. The trophy pops after the first two Chapter 4 missions, Ocean Beach and Another Life, so keep playing into Chapter 4. It is automatic and cannot be missed. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -105,21 +152,32 @@
         "Check the chapter progress before starting a long free-roam session."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Play the Chapter 3 story missions in order",
-        "Return to the story markers if side content has pulled you away",
-        "Complete the chapter's final job to unlock the trophy"
-      ]
+        {
+          "text": "Finish the Chapter 3 main missions.",
+          "src": 2
+        },
+        {
+          "text": "Start Chapter 4 and complete Ocean Beach.",
+          "src": 2
+        },
+        {
+          "text": "Complete Another Life to trigger the Chapter 3 trophy.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 6,
       "name": "Top Of The World, Ma",
       "description": "Complete Chapter 4.",
       "grade": "bronze",
-      "guide": "Finish the Chapter 4 story missions and complete the final mission of the chapter. This is another main-campaign milestone, so the trophy is awarded for progression rather than for a side objective or collectible. Keep the story moving until the chapter-end mission is done.",
+      "guide": "Finish the main story of Chapter 4. The trophy unlocks after the chapter's final mission, Starting From Zero. It is automatic and cannot be missed. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -127,21 +185,32 @@
         "Follow the story markers rather than searching for extra jobs first."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Finish the Chapter 4 story missions",
-        "Keep the story moving until the chapter-end mission is done",
-        "Save before the chapter finale if you want to replay it"
-      ]
+        {
+          "text": "Clear the Chapter 4 main missions.",
+          "src": 2
+        },
+        {
+          "text": "Finish the final Chapter 4 mission, Starting From Zero.",
+          "src": 2
+        },
+        {
+          "text": "Wait for the mission-complete screen; the trophy is automatic.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 7,
       "name": "You Gotta Know When to Get Off",
       "description": "Complete the final mission.",
       "grade": "gold",
-      "guide": "Play the campaign through to its final mission and complete it. The trophy is gold and marks the end of the main story, so it arrives only after the last story job is finished. Keep a manual save before the finale if you want to revisit the ending or clean up afterwards.",
+      "guide": "Complete the final main mission of the story, Starting From Zero in Chapter 4. It is automatic and cannot be missed, and it arrives alongside the Chapter 4 completion trophy. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -149,22 +218,32 @@
         "Keep a save from before the final mission for ending-related cleanup."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Play the campaign through to its final mission",
-        "Complete the last story job and let the mission end",
-        "Watch for the gold trophy as the story wraps up",
-        "Keep a save from before the finale for ending cleanup"
-      ]
+        {
+          "text": "Play the campaign through Chapter 4.",
+          "src": 2
+        },
+        {
+          "text": "Complete the final main mission, Starting From Zero.",
+          "src": 2
+        },
+        {
+          "text": "Let the ending play out and the trophy register.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 8,
       "name": "Trust",
       "description": "Complete Breakfast Run.",
       "grade": "bronze",
-      "guide": "When Breakfast Run appears in the story, play it through to the end. The trophy unlocks on mission completion, so there is no separate challenge or collectible to worry about. If it is not on your map yet, keep advancing the main campaign.",
+      "guide": "Complete Breakfast Run, a main mission in Chapter 2. It is an automatic story trophy, so follow the campaign marker and finish the job. There is no optional step and no way to miss it. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -172,21 +251,32 @@
         "Check the story marker if you cannot find the next mission."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Advance the main campaign until Breakfast Run appears in the story",
-        "Follow the story marker and start the mission",
-        "Play the mission through to the end in one run"
-      ]
+        {
+          "text": "Reach Chapter 2 and start the main mission Breakfast Run.",
+          "src": 2
+        },
+        {
+          "text": "Complete the mission's objectives.",
+          "src": 2
+        },
+        {
+          "text": "Confirm the automatic trophy after the mission ends.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 9,
       "name": "Break the Bank",
       "description": "Complete The Cartel Heist.",
       "grade": "bronze",
-      "guide": "Progress the campaign until The Cartel Heist is offered, then finish the heist. The trophy is awarded for completing the mission, not for a specific approach or bonus objective. Follow the mission prompts and keep a save before starting if you like to replay heists.",
+      "guide": "Complete The Cartel Heist, a Chapter 3 main mission. The trophy is automatic and cannot be missed. Keep following the story markers until the heist is finished. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -194,21 +284,32 @@
         "Do not restart the heist for bonus cash until the trophy has popped."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Progress the campaign until The Cartel Heist is offered",
-        "Read the mission prompts before committing to an approach",
-        "Finish the heist and let the trophy pop before retrying for bonus cash"
-      ]
+        {
+          "text": "Reach Chapter 3 and begin The Cartel Heist.",
+          "src": 2
+        },
+        {
+          "text": "Finish the heist's story objectives.",
+          "src": 2
+        },
+        {
+          "text": "Let the mission end; the trophy is automatic.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 10,
       "name": "Family Matters",
       "description": "Complete Child's Play.",
       "grade": "bronze",
-      "guide": "Complete the named story mission Child's Play when it becomes available. The trophy is tied to finishing the mission, so follow the objectives and stay in the mission until it ends. There is no need to hunt for extra collectibles during it.",
+      "guide": "Complete Child’s Play, a main mission in Chapter 4. It is automatic and cannot be missed. Play the campaign normally and the trophy will arrive at the end of the mission. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -216,21 +317,32 @@
         "Keep a save before the mission if you want to replay it later."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Complete the named story mission Child's Play when it becomes available",
-        "Follow the objectives and stay in the mission until it ends",
-        "Skip hunting for extra collectibles during the mission"
-      ]
+        {
+          "text": "Reach Chapter 4 and start Child’s Play.",
+          "src": 2
+        },
+        {
+          "text": "Complete the mission's story objectives.",
+          "src": 2
+        },
+        {
+          "text": "Confirm the trophy after the mission ends.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 11,
       "name": "DWNFALL",
       "description": "Complete Headliners.",
       "grade": "bronze",
-      "guide": "Play through the story mission Headliners and finish all of its objectives. This is a straightforward mission-completion trophy; the game awards it when the job ends, not when you first accept it. Continue the campaign if Headliners has not appeared yet.",
+      "guide": "Complete Headliners, a Chapter 4 main mission. It is an automatic story trophy with no optional requirement. Finish the mission and the trophy will register. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -238,21 +350,32 @@
         "Check your story progress if the mission seems to be missing."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Play the story mission Headliners when it appears",
-        "Finish all of its objectives in one run",
-        "Stay with the mission until the results screen appears"
-      ]
+        {
+          "text": "Reach Chapter 4 and begin Headliners.",
+          "src": 2
+        },
+        {
+          "text": "Follow the story objectives to the end of the mission.",
+          "src": 2
+        },
+        {
+          "text": "Let the mission-complete screen trigger the trophy.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 12,
       "name": "Hi-Jacked",
       "description": "Complete VCIA Takedown.",
       "grade": "bronze",
-      "guide": "Advance the story until VCIA Takedown is available and complete it. The trophy unlocks at the end of that mission and is separate from the free-roam VCIA airport trophy. Follow the story marker and finish the mission objectives.",
+      "guide": "Complete VCIA Takedown, a main mission in Chapter 4. The trophy is automatic and cannot be missed. Keep the campaign moving and finish the mission. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -260,22 +383,32 @@
         "Finish the mission in one sitting to avoid losing progress."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Advance the story until VCIA Takedown is available",
-        "Follow the story marker and complete the mission objectives",
-        "Finish the mission in one sitting",
-        "Do not confuse it with the free-roam airport trophy"
-      ]
+        {
+          "text": "Reach the Chapter 4 main mission VCIA Takedown.",
+          "src": 2
+        },
+        {
+          "text": "Complete its story objectives.",
+          "src": 2
+        },
+        {
+          "text": "Confirm the trophy when the mission ends.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 13,
       "name": "Snow Storm",
       "description": "Complete Operation Savage Glory.",
       "grade": "bronze",
-      "guide": "Play through the campaign until Operation Savage Glory appears, then complete the operation. The trophy is awarded for finishing the mission, so follow the objectives to the end. Keep a save before the mission if you want to replay it later.",
+      "guide": "Complete Operation Savage Glory, the Chapter 5 main mission. It is an automatic story trophy and cannot be missed. Finish the mission to keep the campaign moving toward the finale. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": false,
       "tips": [
@@ -283,22 +416,32 @@
         "Follow the objective prompts instead of exploring during the mission."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Play the campaign until Operation Savage Glory appears",
-        "Complete the operation by following its objectives to the end",
-        "Stay in the mission until it ends and the trophy pops",
-        "Keep a save before the mission if you want to replay it"
-      ]
+        {
+          "text": "Reach Chapter 5 and start Operation Savage Glory.",
+          "src": 2
+        },
+        {
+          "text": "Complete the mission's story objectives.",
+          "src": 2
+        },
+        {
+          "text": "Let the mission end and the trophy register.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 14,
       "name": "A Long Road",
       "description": "Attain 100% Completion.",
       "grade": "gold",
-      "guide": "Reach 100% completion across the whole game, not just the story. Use the in-game completion checklist to see which categories are outstanding, then work through missions, activities, collectibles and challenges until every requirement is marked done. This is the longest trophy on the list, so save it for the endgame and clean up one category at a time.",
+      "guide": "Reach 100% completion after the story; the checklist opens under Progress > Stats > 100% Completion, and campaign progress already counts. Nothing is missable and one playthrough is enough, but there is no mission replay or New Game+, so keep manual saves for story moments. The completion list includes 200 of 277 vehicles, 100 of 255 animals, 70 of 80 challenges, all 15 Target Decks, every meditation spot, all robberies, shooting ranges and drone races. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "challenge",
       "missable": false,
       "tips": [
@@ -307,23 +450,40 @@
         "Clean up one category at a time instead of jumping between them."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        4
       ],
       "steps": [
-        "Finish the story first so every activity and area is available",
-        "Open the in-game completion checklist and note each outstanding category",
-        "Clean up one category at a time: missions, activities, collectibles and challenges",
-        "Keep going until every requirement is marked done"
-      ]
+        {
+          "text": "Finish the story, then open Progress > Stats > 100% Completion.",
+          "src": 2
+        },
+        {
+          "text": "Scan 200 of the 277 base vehicles and study 100 of the 255 animals.",
+          "src": 4
+        },
+        {
+          "text": "Complete 70 of 80 challenges and every meditation spot.",
+          "src": 4
+        },
+        {
+          "text": "Clear all 15 Target Decks, all robberies, shooting ranges and drone races.",
+          "src": 4
+        },
+        {
+          "text": "Finish all 100 optional missions; one playthrough is enough.",
+          "src": 4
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 15,
       "name": "Cunning Stunts",
       "description": "Complete 250 Stunts.",
       "grade": "silver",
-      "guide": "Complete 250 stunts. The counter is cumulative, so keep an eye on trophy progress and work stunts into normal travel rather than saving them all for one grinding session. If you are unsure what counts, try a jump or trick and check whether the stunt counter increases.",
+      "guide": "Complete 250 stunts, drawn from any mix of the four categories: 130 Stunt Jumps, 202 Under the Bridges, 40 Knife Flights and 25 Base Jumps. There are 397 in total, so pick the fastest types and repeat them. The 100% checklist asks for 300, so you will pass this trophy on the way. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "challenge",
       "missable": false,
       "tips": [
@@ -331,23 +491,36 @@
         "Check trophy progress periodically so you know how many remain."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        4
       ],
       "steps": [
-        "Complete stunts and check that the trophy progress counter increases",
-        "Work stunts into normal travel between jobs",
-        "Keep an eye on trophy progress so you know how many remain",
-        "Finish 250 stunts in total"
-      ]
+        {
+          "text": "Open the map and filter for stunts, then pick the quickest category.",
+          "src": 2
+        },
+        {
+          "text": "Complete any 250 of the 397 stunts.",
+          "src": 2
+        },
+        {
+          "text": "Keep going to 300 if you are also chasing 100% completion.",
+          "src": 4
+        },
+        {
+          "text": "Mix Stunt Jumps, Under the Bridges, Knife Flights and Base Jumps.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 16,
       "name": "Master of None",
       "description": "Try each type of activity once.",
       "grade": "bronze",
-      "guide": "Try each type of activity once. Open the pause-menu map and look for the different activity icons, then sample one of each category rather than repeating the same activity. You do not need to win or gold them for this trophy; simply completing one attempt of each type is enough, based on the official description.",
+      "guide": "Try each of the nine activity types at least once. The tracker under Touchpad > Progress > Activities shows how many of each you have done, and the map's Activities filter helps you find the rest. Most types appear through the story or as you unfog the map. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -355,21 +528,36 @@
         "A quick attempt counts, so do not grind gold medals for this one."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Open the pause-menu map and find the different activity icons",
-        "Sample one attempt of each activity type, not just one category",
-        "Do not grind gold medals; a quick attempt counts"
-      ]
+        {
+          "text": "Open Touchpad > Progress > Activities to see the nine types.",
+          "src": 2
+        },
+        {
+          "text": "Complete at least one activity of each type.",
+          "src": 2
+        },
+        {
+          "text": "Use the map's Activities filter to find the missing types.",
+          "src": 2
+        },
+        {
+          "text": "Check the tracker again after unfogging new areas.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 17,
       "name": "The Shootist",
       "description": "Earn a gold medal in all Shooting Range challenges.",
       "grade": "silver",
-      "guide": "Earn a gold medal in every Shooting Range challenge. Find the Shooting Range activity on the map, then replay each challenge until you hit the gold threshold. The challenges are score-based, so follow the scoring rules shown on screen and focus on beating the gold requirement rather than just finishing.",
+      "guide": "Earn a gold medal at every Shooting Range challenge. There are 12 Shooting Range locations and 42 gold medals in total, and all of them are needed for the trophy. The 100% checklist also requires the full shooting-range sweep. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "challenge",
       "missable": false,
       "tips": [
@@ -377,22 +565,36 @@
         "Replay a challenge immediately after a poor run while the layout is fresh."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        4
       ],
       "steps": [
-        "Find the Shooting Range activity on the map",
-        "Learn each challenge's scoring rule before spending time on repeat runs",
-        "Replay each challenge until you hit the gold threshold",
-        "Beat gold in every Shooting Range challenge"
-      ]
+        {
+          "text": "Find the 12 Shooting Range locations on the map.",
+          "src": 2
+        },
+        {
+          "text": "Earn a gold medal in each of the 42 challenges.",
+          "src": 4
+        },
+        {
+          "text": "Replay a range if a challenge is not gold yet.",
+          "src": 2
+        },
+        {
+          "text": "Finish every range for the 100% checklist as well.",
+          "src": 4
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 18,
       "name": "Top Fun",
       "description": "Win a Top Fun Drone Race at every location.",
       "grade": "bronze",
-      "guide": "Win a Top Fun Drone Race at every location where it is offered. Use the pause-menu map to find the drone-race markers, then win each one; second place does not count. Check the activity list after each win so you know which locations are still outstanding.",
+      "guide": "Win a Top Fun drone race at every one of the 14 locations. Each location has three races, for 42 in total, and the third race unlocks after you beat par on the first two. One win per location is enough for the trophy. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -400,22 +602,37 @@
         "Practice the route after a loss so the next attempt is cleaner."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        4,
+        5
       ],
       "steps": [
-        "Use the pause-menu map to find the Top Fun Drone Race markers",
-        "Win at each location rather than settling for second place",
-        "Check the activity list after each win so you know what remains",
-        "Return to any location you have not won yet"
-      ]
+        {
+          "text": "Find the 14 Top Fun drone race locations.",
+          "src": 2
+        },
+        {
+          "text": "Win one race at each location.",
+          "src": 2
+        },
+        {
+          "text": "Beat par on the first two races to unlock the third at each site.",
+          "src": 2
+        },
+        {
+          "text": "Use the 42 races to cover all 14 locations.",
+          "src": 4
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 19,
       "name": "Earn Cash, Not Kudos",
       "description": "Win 20 different races.",
       "grade": "bronze",
-      "guide": "Win 20 different races, not the same race 20 times. Enter races from the map or activity markers and keep track of which tracks you have already won. If a race is difficult, retry it with a vehicle suited to the event and learn the route before pushing for first.",
+      "guide": "Win 20 different races. There are 40 unique race locations, so you can choose the events you find easiest and ignore the rest. Check the in-game race markers as you open the map. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -423,23 +640,32 @@
         "Use a vehicle that fits the race type instead of a random pickup."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Enter different races from the map or activity markers",
-        "Keep a list of the races you have already won",
-        "Retry difficult races with a vehicle suited to the event",
-        "Win 20 different races, not the same one 20 times"
-      ]
+        {
+          "text": "Open the map and find the race markers.",
+          "src": 2
+        },
+        {
+          "text": "Win 20 different races.",
+          "src": 2
+        },
+        {
+          "text": "Pick from the 40 unique race locations; repeats do not count.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 20,
       "name": "Baited My Tackle",
       "description": "Beat Cal in a fishing challenge.",
       "grade": "bronze",
-      "guide": "Beat Cal in a fishing challenge when the opportunity appears. Accept the challenge, then focus on landing the better catch or score before the contest ends; the trophy is for the win, not just for participating. If you lose, check whether the challenge can be retried from the activity marker.",
+      "guide": "Beat Cal in a fishing challenge. After Chapter 1's main mission Feng Shui (Meet Cal), Cal texts you a fishing spot marked west of Key Lento; go there and win the challenge. The quest remains available after the story. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -447,22 +673,33 @@
         "If the first attempt goes badly, retry rather than waiting for a new opportunity."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Accept Cal's fishing challenge when the opportunity appears",
-        "Check the challenge's scoring rule before you start casting",
-        "Land the better catch or score before the contest ends",
-        "Retry from the activity marker if the first attempt goes badly"
-      ]
+        {
+          "text": "Complete Chapter 1's Feng Shui (Meet Cal).",
+          "src": 2
+        },
+        {
+          "text": "Wait for Cal's text marking the fishing spot west of Key Lento.",
+          "src": 2
+        },
+        {
+          "text": "Go to the purple icon and beat Cal in the fishing challenge.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 21,
       "name": "Stick Fiddler",
       "description": "Complete an arcade game.",
       "grade": "bronze",
-      "guide": "Complete any one arcade game. Find an arcade machine in free roam, start a game and play it through to the end; the trophy should pop when the game's completion screen appears. You do not need to finish every arcade game, only one.",
+      "guide": "Complete any one of the four arcade games: Tenebrae Lux, Street Trash III, Time Jackers Rewind or Bang For Your Buck. The first three are playable on the TV at home from Chapter 1, though some story sections lock the TV temporarily. The fourth is found elsewhere and counts just the same. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -470,21 +707,36 @@
         "Do not leave the machine until the game's completion screen appears."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Find an arcade machine in free roam",
-        "Start any one arcade game and play it through",
-        "Reach the arcade game's completion screen to pop the trophy"
-      ]
+        {
+          "text": "Use the controllers at the home TV in Chapter 1.",
+          "src": 2
+        },
+        {
+          "text": "Pick Tenebrae Lux, Street Trash III or Time Jackers Rewind.",
+          "src": 2
+        },
+        {
+          "text": "Finish the arcade game to unlock the trophy.",
+          "src": 2
+        },
+        {
+          "text": "If the TV is locked by a story section, come back later.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 22,
       "name": "Road to Rehabilitation",
       "description": "Complete the final mission for Andy.",
       "grade": "bronze",
-      "guide": "Finish the last mission in Andy's mission strand. Work through Andy's earlier jobs first, then complete the final one when it appears; the trophy is tied to the end of that storyline. Check the pause-menu map for the relevant side-mission marker if you cannot find the next job.",
+      "guide": "Complete the final mission in Andy's five-quest chain. The chain is marked during Chapter 3 while playing as Lucia: she calls, then texts her home address in Belville. Start with Climbing the Cellerichain and finish all five jobs; they remain available after the story. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -492,22 +744,37 @@
         "Check the map for a side-mission marker if the strand seems to stall."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Finish Andy's earlier jobs first",
-        "Work through the strand until the final mission appears",
-        "Complete the final mission to close out the storyline",
-        "Check the pause-menu map if the next side-mission marker is missing"
-      ]
+        {
+          "text": "Play Chapter 3 as Lucia and take Andy's call.",
+          "src": 2
+        },
+        {
+          "text": "Use the texted Belville address to open the questline.",
+          "src": 2
+        },
+        {
+          "text": "Complete Climbing the Cellerichain and the other four Andy jobs.",
+          "src": 2
+        },
+        {
+          "text": "Come back after the story if you missed the chain.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 23,
       "name": "This Was No Boat Accident",
       "description": "Complete the final mission for Kenton.",
       "grade": "bronze",
-      "guide": "Complete the final mission in Kenton's mission strand. Do Kenton's earlier jobs as they become available, then finish the last one to trigger the trophy. If the strand seems to stall, open the map and check for a side-mission marker rather than assuming it is gone.",
+      "guide": "Complete the final mission in Kenton's questline. The chain appears in Chapter 1 after Island Dreams (Work for Kenton): he calls, then his green KR icon shows in Key Lento. His treasure-diving jobs mark shipwrecks with purple chest icons, and all of them stay available after the story. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -515,22 +782,37 @@
         "Use the map's side-mission markers to find the next job."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Do Kenton's earlier jobs as they become available",
-        "Work through the strand in order instead of skipping ahead",
-        "Complete the final mission to trigger the trophy",
-        "Scan the map for a side-mission marker if the strand stalls"
-      ]
+        {
+          "text": "Complete Chapter 1's Island Dreams (Work for Kenton).",
+          "src": 2
+        },
+        {
+          "text": "Take Kenton's call and find the green KR icon in Key Lento.",
+          "src": 2
+        },
+        {
+          "text": "Dive the marked shipwrecks and finish his final mission.",
+          "src": 2
+        },
+        {
+          "text": "Return after the story if the chain is still open.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 24,
       "name": "The Lone Rider",
       "description": "Complete the final mission for Billy.",
       "grade": "bronze",
-      "guide": "Finish the final mission in Billy's mission strand. Complete Billy's earlier jobs first, then see the storyline through to its last mission; the trophy unlocks at the end of that strand. If you lose track of Billy's jobs, scan the pause-menu map for the next side-mission marker.",
+      "guide": "Complete the final mission in Billy's five-job chain. It appears after Chapter 2's Coffee Break at the Thrillbilly Mudclub in Kelly County, starting with Thrillbillies (Check Out the Mud Club). The other jobs include Twist Wrist, Smash Grab and Mall Rats, and the chain remains available after the story. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -538,22 +820,37 @@
         "Check the map for a side-mission marker if Billy's jobs stop appearing."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Complete Billy's earlier jobs first",
-        "Work through the strand to its last mission",
-        "Finish the final mission to unlock the trophy",
-        "Scan the pause-menu map if Billy's jobs stop appearing"
-      ]
+        {
+          "text": "Complete Chapter 2's Coffee Break.",
+          "src": 2
+        },
+        {
+          "text": "Go to the Thrillbilly Mudclub in Kelly County.",
+          "src": 2
+        },
+        {
+          "text": "Finish Thrillbillies and the rest of Billy's five jobs.",
+          "src": 2
+        },
+        {
+          "text": "Return after the story if you have not finished the chain.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 25,
       "name": "Strangers & Freaks",
       "description": "Complete 8 mission strands for strangers across the state of Leonida.",
       "grade": "silver",
-      "guide": "Complete eight different stranger mission strands across Leonida. These are the side stories you pick up from characters in free roam, so work through each strand's missions until its final job is done. Keep a list of the strands you have finished and check the map for any stranger icons you have not touched yet.",
+      "guide": "Complete eight stranger mission strands across Leonida. These side quests remain after the story, so they are safe to leave for cleanup. Keep your criminal profile below Irredeemable, because that rating is permanent and makes police more aggressive; the Jason–Lucia relationship status does not affect the trophy. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -561,23 +858,36 @@
         "Sweep the map for stranger icons after the story opens up more of Leonida."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Pick up stranger mission strands from characters in free roam",
-        "Finish each strand's missions through to its final job",
-        "Keep a list of the strands you have completed",
-        "Sweep the map for stranger icons you have not touched and complete 8 strands"
-      ]
+        {
+          "text": "Complete eight stranger mission strands across Leonida.",
+          "src": 2
+        },
+        {
+          "text": "Use the map's stranger markers to find the remaining strands.",
+          "src": 2
+        },
+        {
+          "text": "Finish them after the story if you prefer; they do not expire.",
+          "src": 2
+        },
+        {
+          "text": "Avoid the permanent Irredeemable criminal profile while doing them.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 26,
       "name": "Supply & Demand",
       "description": "Complete the final mission for Randy.",
       "grade": "bronze",
-      "guide": "Complete the final mission in Randy's mission strand. Do Randy's earlier jobs first, then finish the last mission in the strand to unlock the trophy. If the next job is not showing, open the pause-menu map and look for the relevant side-mission marker.",
+      "guide": "Complete the final mission in Randy's Wish List. The chain opens after Chapter 3's Clonin’ Keys, Makin’ GS (Steal the Zorrusso for Randy), which also gives you the Key Cloner. Randy then lists 16 sports cars to deliver; the chain stays open after the story. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -585,21 +895,37 @@
         "Check the map for the next marker if the strand appears to stop."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Do Randy's earlier jobs first",
-        "Finish the last mission in the strand",
-        "Open the pause-menu map if the next job is not showing"
-      ]
+        {
+          "text": "Complete Chapter 3's Clonin’ Keys, Makin’ GS (Steal the Zorrusso for Randy).",
+          "src": 2
+        },
+        {
+          "text": "Open Randy's Wish List and read the 16-car request.",
+          "src": 2
+        },
+        {
+          "text": "Steal and deliver all 16 sports cars.",
+          "src": 2
+        },
+        {
+          "text": "Finish the final delivery to close the chain.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 27,
       "name": "Spin On This!",
       "description": "Complete the final mission for Tyrone.",
       "grade": "bronze",
-      "guide": "Finish the final mission in Tyrone's mission strand. Work through Tyrone's earlier jobs, then complete the last one to close out the storyline and earn the trophy. Use the pause-menu map to find the next side-mission marker if you cannot locate it.",
+      "guide": "Complete the final mission in Tyrone's questline. It opens after Chapter 3's Here, Kitty Kitty and is available only while playing as Jason. Destroy the purple-marked Synthetic Labs in Vice City during Take Out Kitty Litter, then finish the chain; everything remains available after the story. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -607,21 +933,37 @@
         "Check the map for a side-mission marker if the next job is missing."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Work through Tyrone's earlier jobs",
-        "Complete the last mission to close out the storyline",
-        "Use the pause-menu map if the next side-mission marker is missing"
-      ]
+        {
+          "text": "Complete Chapter 3's Here, Kitty Kitty as Jason.",
+          "src": 2
+        },
+        {
+          "text": "Follow the purple Synthetic Labs markers in Vice City.",
+          "src": 2
+        },
+        {
+          "text": "Destroy the labs during Take Out Kitty Litter.",
+          "src": 2
+        },
+        {
+          "text": "Finish the final Tyrone mission after the story if needed.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 28,
       "name": "Positive Mental Attitude",
       "description": "Meditate at every spot across Leonida.",
       "grade": "bronze",
-      "guide": "Meditate at every meditation spot in Leonida. Look for the meditation activity markers on the pause-menu map, visit each one and complete the meditation interaction. The trophy tracks spots across the whole state, so sweep the map region by region as you explore.",
+      "guide": "Meditate at every meditation spot in Leonida. The first one, at Jason's house in Chapter 1 after Down to Earth, may not register as a Meditation Spot, so it is the one potentially missable step; save first and check the tracker. Every other spot remains available in free-roam, and the 100% checklist wants all of them. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "collectible",
       "missable": false,
       "tips": [
@@ -629,21 +971,37 @@
         "Sweep one region at a time so you do not miss a spot."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        4
       ],
       "steps": [
-        "Look for meditation activity markers on the pause-menu map",
-        "Visit each one and complete the meditation interaction",
-        "Sweep Leonida region by region so you do not miss a spot"
-      ]
+        {
+          "text": "Save before the Chapter 1 meditation at Jason's house after Down to Earth.",
+          "src": 2
+        },
+        {
+          "text": "Check that the first meditation registers as a Meditation Spot.",
+          "src": 2
+        },
+        {
+          "text": "Find and complete every remaining meditation spot in Leonida.",
+          "src": 4
+        },
+        {
+          "text": "Sweep the map region by region after the story.",
+          "src": 4
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 29,
       "name": "Fair Game",
       "description": "Hunt a unique animal for Bret.",
       "grade": "bronze",
-      "guide": "Hunt the unique animal for Bret when his request becomes available. Follow the hunt prompts and give yourself enough time to track the animal without rushing. Because the target is unique, save before starting so you can reload if the hunt goes wrong.",
+      "guide": "Hunt a unique animal for Bret. His chain opens after Chapter 2's Coffee Break with a text only Jason receives; the first job, Veteran Hunted (Meet Bret), is in Lummox County, and later he marks purple hunting spots for specific animals. The chain stays open after the story, and the 100% checklist wants all 15 Bret hunts. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": true,
       "tips": [
@@ -652,22 +1010,42 @@
         "Reload rather than risk losing the unique target if the attempt fails."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        4,
+        5
       ],
       "steps": [
-        "Make a manual save before beginning Bret's hunt",
-        "Accept Bret's request when it becomes available",
-        "Follow the hunt prompts and track the unique animal without rushing",
-        "Reload rather than risk losing the unique target if the attempt fails"
-      ]
+        {
+          "text": "Complete Chapter 2's Coffee Break.",
+          "src": 2
+        },
+        {
+          "text": "Switch to Jason and read Bret's text marking Veteran Hunted (Meet Bret).",
+          "src": 2
+        },
+        {
+          "text": "Visit Bret in Lummox County and complete his first hunt.",
+          "src": 2
+        },
+        {
+          "text": "Hunt the requested animals at the purple spots and return them to Bret.",
+          "src": 2
+        },
+        {
+          "text": "Finish all 15 Bret hunts for the 100% checklist.",
+          "src": 4
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 30,
       "name": "Don't Touch My Deck",
       "description": "Complete 3 Collectible Card sets.",
       "grade": "silver",
-      "guide": "Collect the cards needed to finish three full Collectible Card sets. Use the in-game collection menu to see which sets are closest to completion, then target the missing cards in those sets rather than spreading pickups across many partial sets. The trophy should pop when the third set is completed.",
+      "guide": "The official description asks for three complete Collectible Card sets. Our 100% research also tracks the 15 Target Decks under Map > Activities > Target Deck, and the completion checklist requires all of them. Clear the decks while you sweep the map so the same passes serve both targets. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "collectible",
       "missable": false,
       "tips": [
@@ -675,22 +1053,31 @@
         "Check the collection menu after each pickup to confirm the set count."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        4
       ],
       "steps": [
-        "Open the in-game collection menu and check which sets are closest to completion",
-        "Target the missing cards in those sets",
-        "Finish three full Collectible Card sets"
-      ]
+        {
+          "text": "Open Map > Activities > Target Deck to see the deck list.",
+          "src": 4
+        },
+        {
+          "text": "Complete all 15 Target Decks during your map sweep.",
+          "src": 4
+        },
+        {
+          "text": "Confirm the decks are done; 100% completion requires them too.",
+          "src": 4
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 31,
       "name": "You WAiNKer!",
       "description": "WAiNK It at 100 locations.",
       "grade": "silver",
-      "guide": "Use WAiNK It at 100 different locations. The interaction is tied to locations, so keep an eye out for WAiNK prompts as you explore and use it once at each new spot. Check the in-game activity or collectible tracker to see how many locations you have already logged.",
+      "guide": "Scan 100 locations with WAiNK. There are more than 100 available, so any 100 count; the guide's split is 31 Landmarks, 35 Curiosities and 23 Sculptures, plus the No Flusher tags. Scan what you pass while exploring and the trophy will arrive at 100. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "collectible",
       "missable": false,
       "tips": [
@@ -698,23 +1085,35 @@
         "Track your count so you do not waste time revisiting old spots."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2
       ],
       "steps": [
-        "Use WAiNK It once at each new location you reach",
-        "Keep an eye out for WAiNK prompts as you explore",
-        "Track your count so you do not revisit old spots",
-        "Log 100 different locations"
-      ]
+        {
+          "text": "Hold the WAiNK scan control while looking at a scannable object.",
+          "src": 2
+        },
+        {
+          "text": "Scan any 100 locations; there are more than 100 in Leonida.",
+          "src": 2
+        },
+        {
+          "text": "Scan the 31 Landmarks, 35 Curiosities and 23 Sculptures.",
+          "src": 2
+        },
+        {
+          "text": "Add No Flusher tags to reach the 100 total.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 32,
       "name": "One Last Thing",
       "description": "Complete 50 Challenges.",
       "grade": "bronze",
-      "guide": "Complete 50 Challenges. Open the in-game challenge list to see the available objectives, then complete them as you travel rather than saving all 50 for one session. The counter is cumulative, so mix challenges into normal free roam and check the list whenever you need a new target.",
+      "guide": "Complete 50 challenges. There are 80 in the game, so pick the 50 you find quickest; the 100% checklist asks for any 70 of the 80. The pause menu tracks them under Progress > Challenges, where the Completed checkmark shows what is done. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "challenge",
       "missable": false,
       "tips": [
@@ -722,23 +1121,36 @@
         "Knock out easy challenges while travelling between main activities."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        4
       ],
       "steps": [
-        "Open the in-game challenge list to see the available objectives",
-        "Complete easy challenges while travelling between main activities",
-        "Mix challenges into normal free roam",
-        "Complete 50 Challenges in total"
-      ]
+        {
+          "text": "Open Progress > Challenges and sort by what is close to done.",
+          "src": 2
+        },
+        {
+          "text": "Complete any 50 of the 80 challenges.",
+          "src": 2
+        },
+        {
+          "text": "Reach 70 of 80 if you are also finishing the 100% checklist.",
+          "src": 4
+        },
+        {
+          "text": "Use the Completed checkmark to track each one.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 33,
       "name": "Hot Together",
       "description": "Lose a 4 star Wanted Level with your partner and escape the heat.",
       "grade": "bronze",
-      "guide": "Lose a four-star wanted level while playing with your partner. Raise your wanted level to four stars, stay with your partner during the escape, and then use the usual escape tools, such as breaking line of sight, changing vehicles or leaving the search area, until the stars clear. Keep your partner with you and avoid getting busted or wasted before the wanted level drops.",
+      "guide": "Lose a four-star wanted level while playing with your partner. Free-roam together unlocks after Chapter 2's Coffee Break, when you can call the other character. Cause enough chaos to reach four stars, then break line of sight and escape; an armored vehicle helps. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -747,22 +1159,37 @@
         "Avoid getting busted while the wanted level is still active."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Raise your wanted level to four stars with your partner",
-        "Stay with your partner during the escape",
-        "Break line of sight, change vehicles or leave the search area",
-        "Wait for the wanted level to clear without getting busted or wasted"
-      ]
+        {
+          "text": "Finish Chapter 2's Coffee Break to unlock partner free-roam.",
+          "src": 2
+        },
+        {
+          "text": "Call your partner and stay together in free-roam.",
+          "src": 2
+        },
+        {
+          "text": "Reach a four-star wanted level.",
+          "src": 2
+        },
+        {
+          "text": "Escape the police while your partner is with you.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 34,
       "name": "Retail Therapy",
       "description": "Rob 3 shops back-to-back with your partner without losing your Wanted Level.",
       "grade": "bronze",
-      "guide": "Rob three shops in a row with your partner without losing your wanted level between them. Hit the first shop, then move directly to the next two while the police are still active. Do not wait out the wanted level or get arrested; the streak has to survive all three robberies.",
+      "guide": "Rob three shops back-to-back with your partner without losing the wanted level. This becomes possible after Chapter 2's Coffee Break. Hit three green robbery targets while the police are chasing you and keep the red-and-blue wanted meter alive between shops; an armored vest and sticky bombs make it safer. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -771,23 +1198,37 @@
         "Keep your partner with you for the whole streak."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Plan a short route between three shops before starting",
-        "Rob the first shop with your partner",
-        "Move directly to the next two without losing the wanted level",
-        "Do not wait out the police or get arrested until the third robbery is done"
-      ]
+        {
+          "text": "Finish Chapter 2's Coffee Break and bring your partner.",
+          "src": 2
+        },
+        {
+          "text": "Rob a green shop target and keep the police chase active.",
+          "src": 2
+        },
+        {
+          "text": "Rob two more shops before the wanted level clears.",
+          "src": 2
+        },
+        {
+          "text": "Use an armored vest and sticky bombs to survive the run.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 35,
       "name": "Whip It Good",
       "description": "Discover 100 vehicles.",
       "grade": "bronze",
-      "guide": "Discover 100 different vehicles. Vehicles count when you get in or drive them, so switch cars often during free roam and use the in-game vehicle list to spot models you have not tried. Rare or parked vehicles you pass are worth grabbing even if you only drive them a short distance.",
+      "guide": "Discover 100 different vehicles. The game has 557 at launch, and scanning with WAiNK is the quickest route: stand by a busy road and scan each new model that passes. The 100% checklist needs 200 of the 277 base vehicles. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "collectible",
       "missable": false,
       "tips": [
@@ -795,23 +1236,36 @@
         "Use the in-game vehicle list to target models you have not discovered."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        4
       ],
       "steps": [
-        "Get into every unfamiliar vehicle you pass during free roam",
-        "Use the in-game vehicle list to spot models you have not tried",
-        "Grab rare or parked vehicles even for a short drive",
-        "Discover 100 different vehicles"
-      ]
+        {
+          "text": "Hold the WAiNK scan control while looking at a vehicle.",
+          "src": 2
+        },
+        {
+          "text": "Stand at a busy road and scan every new model that passes.",
+          "src": 2
+        },
+        {
+          "text": "Discover 100 different vehicles.",
+          "src": 2
+        },
+        {
+          "text": "Reach 200 of the 277 base vehicles for the 100% checklist.",
+          "src": 4
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 36,
       "name": "Gunslinger",
       "description": "Take down 5 enemies in a single use of Combat Focus.",
       "grade": "bronze",
-      "guide": "Take down five enemies during a single Combat Focus activation. Trigger Combat Focus when at least five enemies are nearby, then line up quick shots before the slow-motion window ends. If you run out of targets, let the ability recharge and try again in a denser fight.",
+      "guide": "Take down five enemies during one Combat Focus activation. Activate Focus with the shoulder buttons while aiming; it slows time and highlights weak spots, but only for a few seconds. Build the purple focus meter first and start the fight with five targets nearby. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "challenge",
       "missable": false,
       "tips": [
@@ -820,23 +1274,35 @@
         "If the group is too small, wait for a larger encounter."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2
       ],
       "steps": [
-        "Wait for an encounter with at least five enemies nearby",
-        "Trigger Combat Focus and line up quick shots",
-        "Keep the shots quick and accurate before the slow-motion window ends",
-        "Let the ability recharge and retry in a denser fight if targets run out"
-      ]
+        {
+          "text": "Fill the purple Combat Focus meter below health and stamina.",
+          "src": 2
+        },
+        {
+          "text": "Aim at a group of at least five enemies.",
+          "src": 2
+        },
+        {
+          "text": "Activate Combat Focus with the shoulder buttons.",
+          "src": 2
+        },
+        {
+          "text": "Take down five enemies before the Focus bar empties.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 37,
       "name": "Catch Me If You Can",
       "description": "Make an unscheduled departure at VCIA.",
       "grade": "bronze",
-      "guide": "Head to VCIA in free roam and look for a way to leave the airport that is not a scheduled flight. The trophy is a free-roam stunt rather than a story objective, so experiment with airport access and escape routes. If nothing triggers, check the trophy hints or try a different approach to leaving the grounds.",
+      "guide": "Steal a large passenger plane from a VCIA departure terminal and take off without permission. Use a plane attached to a boarding bridge, not one parked on the airfield. Go upstairs, enter the cockpit, reverse onto the airstrip and fly out. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "misc",
       "missable": false,
       "tips": [
@@ -844,22 +1310,36 @@
         "Try leaving the airport by a route that is clearly not a normal flight."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Head to VCIA in free roam",
-        "Look for a way to leave the airport that is not a scheduled flight",
-        "Experiment with airport access and escape routes",
-        "Check the trophy hints or try a different exit if nothing triggers"
-      ]
+        {
+          "text": "Go to VCIA and find a plane attached to a departure bridge.",
+          "src": 2
+        },
+        {
+          "text": "Climb upstairs and enter the cockpit.",
+          "src": 2
+        },
+        {
+          "text": "Reverse the plane onto the airstrip.",
+          "src": 2
+        },
+        {
+          "text": "Take off to trigger the unscheduled departure.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 38,
       "name": "Challenging Tank",
       "description": "Kinda hot in these Rhinos.",
       "grade": "bronze",
-      "guide": "The description is a hint rather than a full instruction: it points to the Rhinos, which players will recognize as tanks. Look for a free-roam opportunity involving a tank and complete it; if the trophy does not trigger, check the in-game trophy hints for the exact condition. Because the wording is cryptic, avoid assuming a story mission will award it.",
+      "guide": "Steal a military tank from Mile Zero Air Station, the island at the south-west edge of Mariana County. The tanks sit in the south of the base; drive through the gate or use the stunt jump by the south-east entrance. Once inside, shoot a few enemies. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "misc",
       "missable": false,
       "tips": [
@@ -867,22 +1347,36 @@
         "Look for a tank-related free-roam opportunity rather than a story job."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Treat the Rhinos hint as a tank reference",
-        "Look for a free-roam opportunity involving a tank",
-        "Complete it rather than assuming a story mission will award it",
-        "Check the in-game trophy hints if the trophy does not trigger"
-      ]
+        {
+          "text": "Travel to Mile Zero Air Station in Mariana County.",
+          "src": 2
+        },
+        {
+          "text": "Enter the base through the gate or the south-east stunt jump.",
+          "src": 2
+        },
+        {
+          "text": "Steal a tank from the south side of the base.",
+          "src": 2
+        },
+        {
+          "text": "Shoot enemies until the trophy appears.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 39,
       "name": "Sneakthief",
       "description": "Rob a jewelry store without being detected.",
       "grade": "bronze",
-      "guide": "Rob a jewelry store without being detected. Approach the store in free roam, avoid or disable any alarms and guards, and get out with the loot before the police are alerted. If you are spotted, the trophy will not count for that attempt, so restart or find another jewelry store and try a quieter route.",
+      "guide": "Rob a jewelry store without being detected. Finish Chapter 3's Yasmani’s Jewelry Jobs to unlock the Snap Gun and jewelry-store robberies; the stores then appear as green icons. Pick a back door, open it with the Snap Gun and clear the job quietly. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "challenge",
       "missable": false,
       "tips": [
@@ -891,22 +1385,36 @@
         "Restart immediately if you are detected."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Scout a jewelry store before starting the robbery",
-        "Avoid or disable any alarms and guards",
-        "Get out with the loot before the police are alerted",
-        "Restart or find another store if you are spotted"
-      ]
+        {
+          "text": "Complete Chapter 3's Yasmani’s Jewelry Jobs.",
+          "src": 2
+        },
+        {
+          "text": "Find a green jewelry-store robbery icon on the map.",
+          "src": 2
+        },
+        {
+          "text": "Open the back door with the Snap Gun.",
+          "src": 2
+        },
+        {
+          "text": "Finish the robbery without being detected.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 40,
       "name": "Maximum Withdrawal",
       "description": "Rob 5 Bank Vaults and escape.",
       "grade": "silver",
-      "guide": "Rob five Bank Vaults and escape each time. Complete the vault, get out of the search area, and then move on to the next one. The trophy tracks successful escapes, so do not start the next vault until the previous job is fully finished.",
+      "guide": "Rob five bank vaults and escape. The Chapter 4 optional mission That’s Where The Money Is… (Wait at the Cafe) introduces the vault job and counts as the first one. Tail a security van, follow the guard with the briefcase and clear five vaults in total. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "challenge",
       "missable": false,
       "tips": [
@@ -915,23 +1423,36 @@
         "Keep a vehicle ready for the getaway."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Plan an exit route and keep a vehicle ready before entering the vault",
-        "Complete the vault robbery",
-        "Escape the search area before starting the next vault",
-        "Repeat until five Bank Vaults are robbed and escaped"
-      ]
+        {
+          "text": "Complete Chapter 4's That’s Where The Money Is… (Wait at the Cafe).",
+          "src": 2
+        },
+        {
+          "text": "Tail a security van to a bank and follow the guard inside.",
+          "src": 2
+        },
+        {
+          "text": "Rob the first vault during the mission.",
+          "src": 2
+        },
+        {
+          "text": "Repeat until you have robbed five bank vaults and escaped.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 41,
       "name": "A Classic Blitz Play",
       "description": "Rob an Armored Truck and escape.",
       "grade": "bronze",
-      "guide": "Rob an Armored Truck and escape. Stop an armored truck, take the cargo and get away from the police. The trophy is for the full robbery and escape, so plan an exit before you hit the truck.",
+      "guide": "Rob an armored truck and escape. The Chapter 4 optional mission That’s Where The Money Is… (Wait at the Cafe) unlocks this robbery type; tail the truck, then follow the guard carrying the cash. Robbing a large bank vault counts as the armored-truck job too. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "challenge",
       "missable": false,
       "tips": [
@@ -939,21 +1460,36 @@
         "Have a getaway vehicle ready before you start the robbery."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3
       ],
       "steps": [
-        "Plan an exit route before you hit the Armored Truck",
-        "Have a getaway vehicle ready before you start",
-        "Stop the Armored Truck, take the cargo and escape the police"
-      ]
+        {
+          "text": "Complete Chapter 4's That’s Where The Money Is… (Wait at the Cafe).",
+          "src": 2
+        },
+        {
+          "text": "Tail an armored truck until it stops at a bank.",
+          "src": 2
+        },
+        {
+          "text": "Follow the guard with the cash and take the score.",
+          "src": 2
+        },
+        {
+          "text": "Escape; a large bank-vault robbery also counts.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 42,
       "name": "The Goodtime State",
       "description": "Explore all of Leonida.",
       "grade": "bronze",
-      "guide": "Explore all of Leonida. The trophy is tied to visiting the game's named regions or areas rather than to collectibles, so drive, fly or sail through every part of the map and let the exploration counter update. Use the pause-menu map to spot large areas you have not entered yet and sweep them methodically.",
+      "guide": "Reveal the whole map by clearing every patch of black fog. Flying a plane over the remaining areas is the fastest method. Keep going until no fog is left anywhere in Leonida. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "collectible",
       "missable": false,
       "tips": [
@@ -961,22 +1497,31 @@
         "Sweep the map in large loops instead of revisiting familiar areas."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2
       ],
       "steps": [
-        "Use the pause-menu map to spot large areas you have not entered",
-        "Drive, fly or sail through every part of Leonida",
-        "Sweep the map in large loops rather than revisiting familiar areas",
-        "Let the exploration counter update until all of Leonida is explored"
-      ]
+        {
+          "text": "Get a plane and fly over the map's black fog.",
+          "src": 2
+        },
+        {
+          "text": "Sweep every region until the fog clears.",
+          "src": 2
+        },
+        {
+          "text": "Check the map for any remaining dark patch.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 43,
       "name": "Pest Control",
       "description": "Rob an Illegal Operation belonging to each gang.",
       "grade": "bronze",
-      "guide": "Rob an Illegal Operation belonging to each gang. Look for gang-controlled illegal operations in free roam, hit one for each gang and escape after each robbery. Use the map or activity markers to identify which gangs you have already crossed off; the trophy needs one operation per gang, not every operation in the state.",
+      "guide": "Rob one illegal operation belonging to each of the nine gangs. There are 39 operations in total, but the trophy only needs one per gang; the 100% checklist needs all 39. Yellow icons mark them as you get close, and story progress reveals many. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -984,22 +1529,37 @@
         "Escape cleanly after each operation before moving to the next gang."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        4,
+        5
       ],
       "steps": [
-        "Look for gang-controlled illegal operations in free roam",
-        "Track which gangs you have already robbed",
-        "Rob one operation for each gang and escape cleanly",
-        "Move to the next gang only after the previous escape"
-      ]
+        {
+          "text": "Find the yellow illegal-operation icons on the map.",
+          "src": 2
+        },
+        {
+          "text": "Rob at least one operation for each of the nine gangs.",
+          "src": 2
+        },
+        {
+          "text": "Use story progress to reveal more operations.",
+          "src": 2
+        },
+        {
+          "text": "Clear all 39 operations if you are finishing the 100% checklist.",
+          "src": 4
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 44,
       "name": "In The Beginning…",
       "description": "Enjoy a cocktail with a view on Ocean Beach.",
       "grade": "bronze",
-      "guide": "Go to Ocean Beach in free roam, find a venue that serves cocktails and has a view, and order a drink. The trophy is about the setting and the drink rather than a story mission. If the prompt does not appear, try another beachfront venue or check the map for a bar icon.",
+      "guide": "Buy an Apple Martini at the Ocean View Rooftop Bar on Ocean Beach and drink it beside the bar. The trophy is about the view as much as the drink, so stay on the rooftop while you finish it. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "misc",
       "missable": false,
       "tips": [
@@ -1007,22 +1567,32 @@
         "Check the map for a bar icon if you cannot find the right spot."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Go to Ocean Beach in free roam",
-        "Find a venue that serves cocktails and has a view",
-        "Order a drink and let the trophy register",
-        "Try another beachfront venue or check the map for a bar icon if no prompt appears"
-      ]
+        {
+          "text": "Go to the Ocean View Rooftop Bar on Ocean Beach.",
+          "src": 2
+        },
+        {
+          "text": "Buy an Apple Martini.",
+          "src": 2
+        },
+        {
+          "text": "Drink it while standing next to the bar.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 45,
       "name": "Capital Offense",
       "description": "Smash your way out of a vehicle showroom in classic style.",
       "grade": "bronze",
-      "guide": "Find a vehicle showroom in free roam, get into a car and drive through the glass or display window to make your exit. The trophy is for the destructive exit, so make sure you are actually inside the showroom before you floor it. If the showroom does not have a suitable vehicle, try another one.",
+      "guide": "Steal the blue Banshee from the vehicle showroom in south Vice City and drive it through the showroom window. You need the Key Cloner from Chapter 3's Clonin’ Keys, Makin’ GS (Steal the Zorrusso for Randy) before the car can be hacked. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "misc",
       "missable": false,
       "tips": [
@@ -1030,21 +1600,37 @@
         "Pick a sturdy vehicle so the exit does not stall."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Find a vehicle showroom in free roam",
-        "Get fully inside the showroom and into a car",
-        "Drive through the glass or display window to make your exit"
-      ]
+        {
+          "text": "Complete Chapter 3's Clonin’ Keys, Makin’ GS (Steal the Zorrusso for Randy).",
+          "src": 2
+        },
+        {
+          "text": "Go to the showroom in south Vice City.",
+          "src": 2
+        },
+        {
+          "text": "Hack the blue Banshee with the Key Cloner.",
+          "src": 2
+        },
+        {
+          "text": "Drive it through the showroom window.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 46,
       "name": "Let’s Go Bowling",
       "description": "Follow-through at the Kolt & Associates' bowling alley.",
       "grade": "bronze",
-      "guide": "Visit the Kolt & Associates' bowling alley and play a game of bowling. Follow through on your throws and play enough of the game for the trophy to register. If you cannot find the alley, look for the bowling activity marker on the pause-menu map.",
+      "guide": "Finish the Kolt & Associates bowling-alley job in Port Gellhorn. It is the Kingpin Bowling gang operation from Chapter 2's optional mission Hit Kingpin Bowling. Bring Sticky Bombs from an Ammu-Nation to destroy the safe, and steal all three key valuables. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -1052,21 +1638,37 @@
         "Finish a full game rather than leaving after one throw."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Look for the bowling activity marker on the pause-menu map",
-        "Visit the Kolt & Associates' bowling alley",
-        "Play a full game and follow through on your throws"
-      ]
+        {
+          "text": "Buy Sticky Bombs at an Ammu-Nation.",
+          "src": 2
+        },
+        {
+          "text": "Start Chapter 2's optional mission Hit Kingpin Bowling.",
+          "src": 2
+        },
+        {
+          "text": "Steal all three key valuables at Kingpin Bowling.",
+          "src": 2
+        },
+        {
+          "text": "Use the Sticky Bombs to destroy the safe and finish the job.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 47,
       "name": "Personal Best",
       "description": "A partnership with mass appeal.",
       "grade": "bronze",
-      "guide": "This trophy is tied to the partnership moment described as having mass appeal. Keep playing the story and partnership content, and watch for a scene or activity that focuses on the two characters; the trophy should pop when that beat is completed. Because the description is intentionally vague, check the in-game trophy list or recent progress if it has not appeared by the endgame.",
+      "guide": "Raise the strength stat to maximum on both Jason and Lucia at the same time. Free-roam switching unlocks after Chapter 2's Coffee Break; work out with each character and check Touchpad > Jason & Lucia > Strength. You need both bars full before the trophy counts. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "misc",
       "missable": false,
       "tips": [
@@ -1074,22 +1676,37 @@
         "Check the in-game trophy hints if it has not popped by the endgame."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Keep playing the story and partnership content",
-        "Watch for a scene or activity focused on the two characters",
-        "Complete that beat and let the trophy pop",
-        "Check the in-game trophy hints if it has not appeared by the endgame"
-      ]
+        {
+          "text": "Finish Chapter 2's Coffee Break to unlock character switching.",
+          "src": 2
+        },
+        {
+          "text": "Work out as Jason until his Strength is maxed.",
+          "src": 2
+        },
+        {
+          "text": "Work out as Lucia until her Strength is maxed.",
+          "src": 2
+        },
+        {
+          "text": "Check Touchpad > Jason & Lucia > Strength for both.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 48,
       "name": "Actions Speak Louder",
       "description": "Choices made (for better or worse).",
       "grade": "bronze",
-      "guide": "Make story choices as you play; the trophy tracks the decisions you commit to rather than a single mission objective. Keep a manual save before major story branches so you can go back if a choice-dependent trophy does not appear. The official description does not name a specific choice, so treat any major decision as a potential trigger.",
+      "guide": "Perform 500 actions that affect your criminal profile. The trophy checklist shows the count, and turning on Criminal Profile notifications under Settings > UI > HUD Notifications makes each qualifying action visible with a demon icon. This is a long cumulative trophy rather than a single job. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "story",
       "missable": true,
       "tips": [
@@ -1098,22 +1715,35 @@
         "If a choice-dependent trophy is missing, replay from an earlier branch."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2
       ],
       "steps": [
-        "Keep a manual save before every major story decision",
-        "Make the story choices you commit to as you play",
-        "Do not overwrite the save until the trophy has popped",
-        "Replay from an earlier branch if a choice-dependent trophy is missing"
-      ]
+        {
+          "text": "Turn on Criminal Profile notifications under Settings > UI > HUD Notifications.",
+          "src": 2
+        },
+        {
+          "text": "Perform actions that affect your criminal profile.",
+          "src": 2
+        },
+        {
+          "text": "Open the trophy list to check your progress out of 500.",
+          "src": 2
+        },
+        {
+          "text": "Keep going until all 500 actions are counted.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 49,
       "name": "Bad Luck, I Guess",
       "description": "Second time's the charm.",
       "grade": "bronze",
-      "guide": "The description points to succeeding on a second attempt. When you fail a mission or activity, use the retry option rather than reloading a save, then complete it on that second try. If no trophy appears, try the same pattern with another repeatable activity.",
+      "guide": "The exact trigger is still unknown. The trophy guide connects it to the Payday Loans store from the Prologue, possibly robbing it again in a specific way at the Little Cuba location in Vice City. Treat this as a lead to test, not a confirmed route. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "misc",
       "missable": false,
       "tips": [
@@ -1121,22 +1751,36 @@
         "Pick a repeatable activity where failure is quick and easy to recover from."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Pick a mission or activity you can retry quickly",
-        "Fail, then use the in-game retry option rather than reloading a save",
-        "Complete the activity on that second try",
-        "Try the same pattern with another repeatable activity if no trophy appears"
-      ]
+        {
+          "text": "Note the Payday Loans store from the Prologue.",
+          "src": 2
+        },
+        {
+          "text": "Return to the Little Cuba location in Vice City.",
+          "src": 2
+        },
+        {
+          "text": "Try robbing the store again in a different way.",
+          "src": 2
+        },
+        {
+          "text": "The exact trigger is unknown, so treat this as a lead.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 50,
       "name": "The Truth Is Out There",
       "description": "What the hell just happened?",
       "grade": "bronze",
-      "guide": "This is a discovery trophy for witnessing something strange in Leonida. Keep exploring free roam and follow unusual encounters or side events when they appear; the trophy should pop when the strange moment plays out. Because the description is deliberately cryptic, check the in-game trophy hints if you have finished the main story without seeing it.",
+      "guide": "Complete the UFO Easter Egg on the road north-west of the Starlet Motel in Kelly County. Go solo at night after 2AM; the event is random, so a blinking car may or may not be waiting. If it is not there, drive away and return. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "misc",
       "missable": false,
       "tips": [
@@ -1144,22 +1788,40 @@
         "Check the in-game trophy hints if it has not triggered by the endgame."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Keep exploring free roam",
-        "Follow unusual encounters or side events when they appear",
-        "Let the strange moment play out",
-        "Check the in-game trophy hints if it has not triggered by the endgame"
-      ]
+        {
+          "text": "Travel alone to the road north-west of the Starlet Motel.",
+          "src": 2
+        },
+        {
+          "text": "Arrive after 2AM at night.",
+          "src": 2
+        },
+        {
+          "text": "Look for a blinking car at the roadside.",
+          "src": 2
+        },
+        {
+          "text": "If it is missing, drive away and come back.",
+          "src": 2
+        },
+        {
+          "text": "Trigger the UFO when the blinking car appears.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 51,
       "name": "Ten Pin",
       "description": "Bowl 'em over with a melee drive-by.",
       "grade": "bronze",
-      "guide": "Knock someone down with a melee drive-by. Get a vehicle, drive alongside a pedestrian or enemy, and use a melee attack from the vehicle so the target goes down. The trophy is about the melee hit from a vehicle, not about bowling despite the name.",
+      "guide": "Drive any bike and kick 10 pedestrians within 60 seconds. Crowded streets in Vice City or at Ocean Beach give you the easiest targets. Keep moving and chain the kicks quickly. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "challenge",
       "missable": false,
       "tips": [
@@ -1167,21 +1829,31 @@
         "Use a melee attack from the vehicle rather than a firearm."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2
       ],
       "steps": [
-        "Get a vehicle and slow down alongside a pedestrian or enemy",
-        "Use a melee attack from the vehicle so the target goes down",
-        "Use melee rather than a firearm"
-      ]
+        {
+          "text": "Get on any bike and ride into a crowded area.",
+          "src": 2
+        },
+        {
+          "text": "Kick 10 pedestrians within 60 seconds.",
+          "src": 2
+        },
+        {
+          "text": "Try Vice City or Ocean Beach for dense crowds.",
+          "src": 2
+        }
+      ],
+      "hidden": false
     },
     {
       "id": 52,
       "name": "Dime on the Dollar",
       "description": "Earn $250,000 laundering Marked Bills through your contacts.",
       "grade": "bronze",
-      "guide": "Earn $250,000 by laundering Marked Bills through your contacts. Collect marked bills as you play, then use the contact who handles laundering instead of spending the bills elsewhere. Keep laundering until the cumulative total reaches $250,000; the trophy tracks the amount earned, not a single transaction.",
+      "guide": "Launder $250,000 in Marked Bills through a Fence. Finish Chapter 3's Credit Check (Meet Raul’s Crew) to unlock the Dye Pack Jammer, then rob banks and Payday Loans and deliver the marked bills; Yasmani in Vice City pays the most. The total counts across all robberies. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -1189,23 +1861,37 @@
         "Check the trophy progress to see how much of the total remains."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Collect marked bills as you play",
-        "Use the contact who handles laundering instead of spending the bills",
-        "Launder until the cumulative total reaches $250,000",
-        "Check trophy progress to see how much remains"
-      ]
+        {
+          "text": "Complete Chapter 3's Credit Check (Meet Raul’s Crew).",
+          "src": 2
+        },
+        {
+          "text": "Rob banks and Payday Loans to collect Marked Bills.",
+          "src": 2
+        },
+        {
+          "text": "Deliver $250,000 in Marked Bills to a Fence.",
+          "src": 2
+        },
+        {
+          "text": "Use Yasmani in Vice City for the best payout.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 53,
       "name": "Treat Yo Self",
       "description": "Spend $100,000 across all shops.",
       "grade": "bronze",
-      "guide": "Buy items from the shops around Leonida until your total spending reaches $100,000. The trophy is cumulative across different shops, so spread your purchases rather than trying to spend everything in one place. If you are unsure how much is left, check the in-game stats or trophy progress before buying more.",
+      "guide": "Spend $100,000 across shops. The total is cumulative and any shop type counts; guns, car mods and tattoos are the fastest because they cost more. The guide's shop counts include 24 Ammu-Nations, 67 clothing stores and 14 mod shops. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -1213,23 +1899,36 @@
         "Check the trophy progress before making a large purchase."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        5
       ],
       "steps": [
-        "Buy items from shops around Leonida",
-        "Spread purchases across several shops instead of one store",
-        "Keep buying until total spending reaches $100,000",
-        "Check the in-game stats or trophy progress before buying more"
-      ]
+        {
+          "text": "Buy guns, car mods or tattoos to spend quickly.",
+          "src": 2
+        },
+        {
+          "text": "Spend a total of $100,000 across all shop types.",
+          "src": 2
+        },
+        {
+          "text": "Use the 14 mod shops, 19 Pay 'n' Sprays and 24 Ammu-Nations.",
+          "src": 2
+        },
+        {
+          "text": "Add clothing, footwear, salons and electronics if needed.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 54,
       "name": "Little Boxes",
       "description": "Purchase all garage properties.",
       "grade": "bronze",
-      "guide": "Purchase all garage properties. Use the in-game property list or map to find every garage that is for sale, then buy them one by one as you can afford them. The trophy should pop when the final garage is purchased; check the property menu if a garage you thought you owned is not counted.",
+      "guide": "Buy all eight purchasable garages. The four story garages do not count; the eight you need cost $160,000 in total. They unlock after Chapter 2's Daily Driver (Steal the Crawler for Moses), when Vice City Real Estate appears on your phone. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -1237,22 +1936,37 @@
         "Check the property menu after each purchase to confirm it counted."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        5
       ],
       "steps": [
-        "Use the in-game property list or map to find every garage for sale",
-        "Buy each garage as you can afford it",
-        "Check the property menu after each purchase to confirm it counted",
-        "Buy the final garage to pop the trophy"
-      ]
+        {
+          "text": "Complete Chapter 2's Daily Driver (Steal the Crawler for Moses).",
+          "src": 2
+        },
+        {
+          "text": "Open Vice City Real Estate on your phone.",
+          "src": 2
+        },
+        {
+          "text": "Buy all eight purchasable garages.",
+          "src": 2
+        },
+        {
+          "text": "Budget $160,000; the four story garages do not count.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     },
     {
       "id": 55,
       "name": "On the Spot",
       "description": "Register 10 vehicles to the Scooter Bros app.",
       "grade": "bronze",
-      "guide": "Register ten vehicles in the Scooter Bros app, using the app's list to track which ones you have already added. You can do this as you acquire vehicles in free roam, so there is no need to wait for the endgame. Check the app after each registration to confirm the count moved.",
+      "guide": "Register 10 vehicles in the Scooter Bros app. The app arrives after Chapter 2's Moses (Take A Vehicle to Moses); each garage adds parking spots, so buy enough garages first. Register stolen vehicles and they can be delivered to you anywhere. This is our own reading of the official description and the cited pages, not a playthrough.",
       "kind": "side",
       "missable": false,
       "tips": [
@@ -1260,16 +1974,31 @@
         "Use the app's list to avoid registering the same vehicle twice."
       ],
       "sources": [
-        "Official list on Exophase (https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/): the name, description and grade as published",
-        "PSNProfiles (https://psnprofiles.com/trophies/43531-grand-theft-auto-vi): PSN's progress target",
-        "Our own advice, from the official description: not yet checked in the game"
+        1,
+        2,
+        3,
+        4,
+        5
       ],
       "steps": [
-        "Register each new vehicle as soon as you acquire it",
-        "Use the Scooter Bros app's list to avoid duplicates",
-        "Check the app after each registration to confirm the count moved",
-        "Register 10 vehicles in total"
-      ]
+        {
+          "text": "Complete Chapter 2's Moses (Take A Vehicle to Moses).",
+          "src": 2
+        },
+        {
+          "text": "Buy garages from Little Boxes to open parking spots.",
+          "src": 2
+        },
+        {
+          "text": "Register stolen vehicles in the Scooter Bros app.",
+          "src": 2
+        },
+        {
+          "text": "Reach 10 registered vehicles.",
+          "src": 2
+        }
+      ],
+      "hidden": true
     }
   ]
 }

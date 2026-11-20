@@ -17,7 +17,7 @@ const GUIDE_MIN_CHARS = 40;
 const SHOT_MAX = 4;
 const SHOT_MAX_BYTES = 262144;
 const SHOT_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg']);
-const REQUIRED_APP_FILES = ['index.html', 'app.js', 'style.css', 'data/trophies.json', 'data/roadmap.json'];
+const REQUIRED_APP_FILES = ['index.html', 'app.js', 'style.css', 'data/trophies.json', 'data/roadmap.json', 'data/sources.json'];
 
 function log(message) {
   process.stdout.write(`[preflight] ${message}\n`);
@@ -84,6 +84,59 @@ function loadTrophies() {
   if (broken.length > 0) fail(`invalid trophies: ${describeNames(broken)}`);
   log(`trophies: ${list.length} entries, each with name, description, grade and a ${GUIDE_MIN_CHARS}+ char guide`);
   return list;
+}
+
+function loadSources() {
+  const doc = readJson(join(here, 'app', 'data', 'sources.json'), 'app/data/sources.json');
+  const list = Array.isArray(doc) ? doc : Array.isArray(doc?.sources) ? doc.sources : null;
+  if (!list || list.length === 0) fail('app/data/sources.json must have a non-empty sources array');
+  const ids = new Set();
+  const broken = [];
+  list.forEach((source, index) => {
+    const id = Number(source?.id);
+    const label = Number.isInteger(id) ? `source ${id}` : `source #${index + 1}`;
+    if (!Number.isInteger(id) || id <= 0) broken.push(`${label}: bad id`);
+    else if (ids.has(id)) broken.push(`${label}: duplicate id`);
+    else ids.add(id);
+    for (const key of ['title', 'url', 'kind', 'covers', 'read']) {
+      if (typeof source?.[key] !== 'string' || source[key].trim() === '') broken.push(`${label}: no ${key}`);
+    }
+  });
+  if (broken.length > 0) fail(`source register is invalid: ${describeNames(broken)}`);
+  log(`sources: ${list.length} entries in the register (ids ${[...ids].sort((a, b) => a - b).join(', ')})`);
+  return { ids, list };
+}
+
+function checkCitations(trophies, register) {
+  const problems = [];
+  let steps = 0;
+  let cited = 0;
+  let withSources = 0;
+  let twoPlus = 0;
+  for (const trophy of trophies) {
+    const label = typeof trophy?.name === 'string' ? trophy.name.trim() : 'untitled trophy';
+    const list = Array.isArray(trophy?.steps) ? trophy.steps : [];
+    if (list.length === 0) problems.push(`${label}: no steps`);
+    for (const [index, step] of list.entries()) {
+      steps += 1;
+      if (typeof step?.text !== 'string' || step.text.trim() === '') problems.push(`${label} step ${index + 1}: no text`);
+      const src = Number(step?.src);
+      if (!Number.isInteger(src) || !register.ids.has(src)) problems.push(`${label} step ${index + 1}: source ${JSON.stringify(step?.src)} is not registered`);
+      else cited += 1;
+    }
+    const sources = Array.isArray(trophy?.sources) ? trophy.sources : [];
+    if (sources.length === 0) problems.push(`${label}: no sources`);
+    else {
+      withSources += 1;
+      const unknown = sources.filter((id) => !register.ids.has(Number(id)));
+      if (unknown.length > 0) problems.push(`${label}: unregistered source ids ${unknown.join(', ')}`);
+      if (new Set(sources.map(Number)).size >= 2) twoPlus += 1;
+    }
+  }
+  if (twoPlus < 50) problems.push(`only ${twoPlus}/${trophies.length} trophies cite two or more sources (need at least 50)`);
+  if (problems.length > 0) fail(`citation audit failed: ${describeNames(problems, 10)}`);
+  log(`citations: ${trophies.length}/${trophies.length} trophies have steps; ${cited}/${steps} steps cite a registered source; ${withSources}/${trophies.length} trophies cite a registered source; ${twoPlus}/${trophies.length} cite two or more`);
+  return { steps, cited, withSources, twoPlus };
 }
 
 function checkRoadmap(trophies) {
@@ -170,13 +223,15 @@ function main() {
   log(`preflighting the entry at ${here}`);
   checkRequiredFiles();
   const trophies = loadTrophies();
+  const register = loadSources();
+  const citations = checkCitations(trophies, register);
   checkRoadmap(trophies);
   const shots = checkScreenshots();
   const appFiles = copyEntry(shots);
   const dossier = buildDossier(out, { text_max_bytes: 163840, screenshots: { max: 4, max_bytes: 262144 }, app_max_files: 993, app_max_bytes: 50331648 });
   writeFileSync(join(out, 'dossier.json'), dossier);
   const dossierBytes = statSync(join(out, 'dossier.json')).size;
-  log(`wrote ${out}: ${trophies.length} trophies, ${shots.length} screenshots, ${appFiles} app files, ${dossierBytes}-byte dossier.json`);
+  log(`wrote ${out}: ${trophies.length} trophies, ${citations.steps} steps (${citations.cited} cited), ${citations.twoPlus} trophies with 2+ sources, ${shots.length} screenshots, ${appFiles} app files, ${dossierBytes}-byte dossier.json`);
 }
 
 main();
