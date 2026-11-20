@@ -2,21 +2,21 @@
   {
     "file": "1-checklist.jpg",
     "view": "checklist",
-    "caption": "Checklist at the top: overall progress, grade breakdown, search and filters, and the bronze story rows that now lead the list (the platinum sits last as #55)."
+    "caption": "Cover: the three-pane checklist proves official-list coverage (55/55 fields; 1 platinum, 2 gold, 6 silver, 46 bronze; 28 PSN-hidden) on the audit ribbon, with saved progress at 31/55 and a 56% bar. Search, grade/kind filters and the hide-done/missables switches sit above chapter-group counts (Main story 12/12, Missable-sensitive 2/2); Fair Game is open with numbered steps ending in their source numbers, while Next up and Sources in this guide fill the right pane and Export/Import sit in the header."
   },
   {
-    "file": "2-trophy-detail.jpg",
-    "view": "trophy-detail",
-    "caption": "Fair Game detail dialog with its Missable badge, full guide, tips and cited sources."
+    "file": "2-guide-sources.jpg",
+    "view": "guide-sources",
+    "caption": "The same saved 31/55 dashboard with the collectible Positive Mental Attitude open: Bronze and Collectible badges, its Leonida-wide meditation target, four numbered steps cited to sources [2] and [4], and all five source titles in Sources in this guide, including the All Meditation Spot Locations page. The Collectibles group shows 4/5."
   },
   {
     "file": "3-roadmap.jpg",
     "view": "roadmap",
-    "caption": "Roadmap view with all six stages to the platinum, trophy chips, missable warnings and route notes."
+    "caption": "Roadmap view at the same saved 31/55: all six stages in the register with counts (Main story 12/12, Missable-sensitive 2/2, Side content 10/26, Collectibles 4/5, Challenges 3/9, Platinum 0/1), the two missable trophies flagged on stage 2, and the 2-missable / 6-stage summary."
   },
   {
-    "file": "4-spoiler-progress.jpg",
-    "view": "spoiler-progress",
-    "caption": "Spoiler mode on with 12 of 55 trophies ticked: 22% progress, Platinum 0/1 still locked, and unearned story trophies concealed."
+    "file": "4-spoiler-save.jpg",
+    "view": "spoiler-save",
+    "caption": "Spoiler mode on at a saved 12/55 (22%): the Main story group reads 0/12, every unearned story row and the opened story detail are concealed, Next up hides five story names, and the header keeps Platinum locked plus the Export and Import controls for the JSON save backup."
   }
 ]
