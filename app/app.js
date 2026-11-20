@@ -44,6 +44,24 @@ function labelledBadge(className, templateId, label) {
   return badge;
 }
 
+function sourceItem(source) {
+  const text = String(source);
+  const item = make('li');
+  const match = text.match(/https?:\/\/[^\s)]+/);
+  if (!match) {
+    item.textContent = text;
+    return item;
+  }
+  const url = match[0];
+  const at = text.indexOf(url);
+  const link = make('a', '', url);
+  link.href = url;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  item.append(document.createTextNode(text.slice(0, at)), link, document.createTextNode(text.slice(at + url.length)));
+  return item;
+}
+
 const gradeBadge = (grade) => make('span', 'badge badge--' + grade, grade);
 const missableBadge = () => labelledBadge('badge badge--missable', 'tpl-icon-warning', 'Missable');
 const earnedBadge = () => labelledBadge('badge badge--earned', 'tpl-icon-check', 'Earned');
@@ -411,14 +429,20 @@ const detail = {
     dom['detail-locked'].hidden = !masked;
     dom['detail-content'].hidden = masked;
     dom['detail-guide'].textContent = masked ? '' : trophy.guide;
-    const tips = dom['detail-tips'];
-    tips.replaceChildren();
-    const sources = dom['detail-sources'];
-    sources.replaceChildren();
-    if (!masked) {
-      for (const tip of trophy.tips || []) tips.append(make('li', '', tip));
-      for (const source of trophy.sources || []) sources.append(make('li', '', source));
-    }
+    const steps = masked ? [] : trophy.steps || [];
+    const tips = masked ? [] : trophy.tips || [];
+    const sources = masked ? [] : trophy.sources || [];
+    const stepsList = dom['trophy-steps'];
+    stepsList.replaceChildren();
+    for (const step of steps) stepsList.append(make('li', '', step));
+    dom['detail-steps-section'].hidden = steps.length === 0;
+    const tipsList = dom['detail-tips'];
+    tipsList.replaceChildren();
+    for (const tip of tips) tipsList.append(make('li', '', tip));
+    const sourcesList = dom['trophy-sources'];
+    sourcesList.replaceChildren();
+    for (const source of sources) sourcesList.append(sourceItem(source));
+    dom['detail-sources-section'].hidden = sources.length === 0;
     const tick = dom['detail-earned'];
     tick.checked = earnedHas(trophy);
     tick.disabled = trophy.grade === 'platinum';

@@ -208,7 +208,7 @@
 
       <div class="detail-locked" id="detail-locked" hidden>
         <span class="locked-icon" aria-hidden="true"><svg class="icon"><use href="#i-lock"></use></svg></span>
-        <p><strong>Spoiler mode is hiding this one.</strong> Its name, description and guide stay under wraps until you earn it or switch spoiler mode off.</p>
+        <p><strong>Spoiler mode is hiding this one.</strong> Its name, description, guide, steps and sources stay under wraps until you earn it or switch spoiler mode off.</p>
         <button class="btn btn--ghost" id="detail-reveal" type="button">Reveal this trophy</button>
       </div>
 
@@ -217,13 +217,18 @@
           <h3>How to get it</h3>
           <p id="detail-guide"></p>
         </section>
+        <section class="detail-section" id="detail-steps-section">
+          <h3>Step by step</h3>
+          <ol class="tips-list" id="trophy-steps"></ol>
+        </section>
         <section class="detail-section">
           <h3>Tips</h3>
           <ul class="tips-list" id="detail-tips"></ul>
         </section>
-        <section class="detail-section">
+        <section class="detail-section" id="detail-sources-section">
           <h3>Sources</h3>
-          <ul class="source-list" id="detail-sources"></ul>
+          <ul class="source-list" id="trophy-sources"></ul>
+          <p class="muted small" id="trophy-sources-note">Each guide is our own reading of the official description; names, descriptions and grades are PlayStation's as Exophase publishes them.</p>
         </section>
       </div>
     </div>
