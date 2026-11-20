@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="An offline GTA VI trophy guide, roadmap and checklist for all 55 trophies: missable warnings, filters, spoiler mode and progress saved in your browser.">
-  <title>GTA VI Trophy Guide &mdash; Checklist &amp; Roadmap to the Platinum</title>
+  <meta name="description" content="An offline GTA VI trophy dashboard: a staged checklist, cited guide steps, missable warnings, next-up queue and source audit for all 55 trophies.">
+  <title>GTA VI Trophy Dashboard &mdash; Checklist, Audit &amp; Sources</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -34,41 +34,34 @@
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5 13.7 9l5.5 1.7-5.5 1.7L12 18l-1.7-5.6L4.8 10.7 10.3 9 12 3.5Z"></path></symbol>
   </svg>
 
-  <a class="skip-link" href="#main">Skip to the trophy list</a>
+  <a class="skip-link" href="#main">Skip to the trophy dashboard</a>
 
   <header class="site-header">
-    <div class="shell header-grid">
+    <div class="header-top">
       <div class="brand">
         <span class="brand-mark" aria-hidden="true"><svg class="icon"><use href="#i-trophy"></use></svg></span>
         <div class="brand-text">
           <p class="kicker">Grand Theft Auto VI &middot; Leonida &middot; PlayStation 5</p>
-          <h1>GTA VI <span class="grad">Trophy Guide</span></h1>
-          <p class="brand-sub">All 55 trophies, the two missables, and a clean route to the platinum.</p>
+          <h1>GTA VI <span class="grad">Trophy Dashboard</span></h1>
+          <p class="brand-sub" id="brand-sub">Offline checklist &middot; cited steps &middot; missable warnings</p>
         </div>
       </div>
 
       <section class="progress-card" aria-label="Overall progress">
         <div class="progress-top">
-          <div>
-            <p class="kicker">Overall progress</p>
-            <p class="progress-count"><span id="earned-count">0</span><span class="progress-total" id="progress-total">/ 55</span></p>
-          </div>
-          <div class="progress-side">
-            <span class="percent" id="percent">0%</span>
-            <span class="platinum-pill" id="platinum-status">
-              <svg class="icon" aria-hidden="true"><use href="#i-trophy"></use></svg>
-              <span id="platinum-text">Platinum locked</span>
-            </span>
-          </div>
+          <p class="progress-count"><span id="earned-count">0</span><span class="progress-total" id="progress-total">/ 55</span></p>
+          <span class="percent" id="percent">0%</span>
+          <span class="platinum-pill" id="platinum-status">
+            <svg class="icon" aria-hidden="true"><use href="#i-trophy"></use></svg>
+            <span id="platinum-text">Platinum locked</span>
+          </span>
         </div>
         <div class="bar" id="progressbar" role="progressbar" aria-label="Trophies earned" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" aria-valuetext="0 of 55 trophies earned">
           <span class="bar-fill" id="bar-fill"></span>
         </div>
         <div class="grade-stats" id="grade-stats" role="group" aria-label="Filter by trophy grade"></div>
       </section>
-    </div>
-
-    <div class="shell viewbar">
+    </div>    <div class="header-bottom">
       <div class="tabs" id="tabs" role="tablist" aria-label="Views">
         <button class="tab" id="tab-checklist" type="button" role="tab" aria-selected="true" aria-controls="panel-checklist" data-view="checklist">
           <svg class="icon" aria-hidden="true"><use href="#i-list"></use></svg> Checklist
@@ -80,7 +73,6 @@
           <svg class="icon" aria-hidden="true"><use href="#i-info"></use></svg> Sources
         </button>
       </div>
-
       <div class="progress-actions" aria-label="Progress data">
         <button class="btn btn--ghost" id="export-btn" type="button">
           <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg> Export
@@ -96,182 +88,196 @@
     </div>
   </header>
 
-  <main class="shell" id="main" tabindex="-1">
-    <section class="view" id="panel-checklist" role="tabpanel" aria-labelledby="tab-checklist" tabindex="0">
+  <div class="audit-ribbon" id="audit-strip" aria-label="Source-verification audit">
+    <span class="audit-fact audit-fact--lead" id="audit-official"></span>
+    <span class="audit-fact" id="audit-grades"></span>
+    <span class="audit-fact" id="audit-steps"></span>
+    <span class="audit-fact" id="audit-guides"></span>
+    <span class="audit-fact" id="audit-sources"></span>
+    <span class="audit-fact" id="audit-missables"></span>
+    <span class="audit-fact" id="audit-flags"></span>
+  </div>
+
+  <main id="main" tabindex="-1">
+    <section class="view view--dashboard" id="panel-checklist" role="tabpanel" aria-labelledby="tab-checklist" tabindex="0">
       <h2 class="sr-only">Trophy checklist</h2>
 
-      <div id="audit-strip" aria-label="Citation audit" style="display:flex;flex-wrap:wrap;gap:7px;margin:0 2px 12px">
-        <span class="small" id="audit-official" style="padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)"></span>
-        <span class="small" id="audit-grades" style="padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)"></span>
-        <span class="small" id="audit-steps" style="padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)"></span>
-        <span class="small" id="audit-guides" style="padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)"></span>
-        <span class="small" id="audit-sources" style="padding:3px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)"></span>
-      </div>
+      <div class="dashboard" id="dashboard">
+        <aside class="pane pane-list" id="checklist-pane" aria-label="Trophy checklist by roadmap stage">
+          <div class="pane-head">
+            <div>
+              <p class="pane-kicker">Checklist</p>
+              <h2 class="pane-title">By roadmap stage</h2>
+            </div>
+            <p class="pane-meta" id="visible-count" aria-live="polite">Loading the trophy list&hellip;</p>
+          </div>
 
-      <div class="toolbar" aria-label="Trophy filters">
-        <div class="search-field">
-          <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
-          <input id="search" type="search" placeholder="Search names and guides&hellip;" aria-label="Search trophies by name and guide" autocomplete="off" spellcheck="false">
-          <button class="search-clear" id="search-clear" type="button" aria-label="Clear search" hidden>
-            <svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>
-          </button>
-        </div>
+          <div class="toolbar" aria-label="Trophy filters">
+            <div class="search-field">
+              <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
+              <input id="search" type="search" placeholder="Search names and guides&hellip;" aria-label="Search trophies by name and guide" autocomplete="off" spellcheck="false">
+              <button class="search-clear" id="search-clear" type="button" aria-label="Clear search" hidden>
+                <svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>
+              </button>
+            </div>
+            <div class="filter-row">
+              <span class="select-wrap">
+                <label class="sr-only" for="grade-filter">Filter by grade</label>
+                <select id="grade-filter">
+                  <option value="all">All grades</option>
+                  <option value="platinum">Platinum</option>
+                  <option value="gold">Gold</option>
+                  <option value="silver">Silver</option>
+                  <option value="bronze">Bronze</option>
+                </select>
+              </span>
+              <span class="select-wrap">
+                <label class="sr-only" for="kind-filter">Filter by kind</label>
+                <select id="kind-filter">
+                  <option value="all">All kinds</option>
+                  <option value="story">Story</option>
+                  <option value="side">Side</option>
+                  <option value="collectible">Collectible</option>
+                  <option value="challenge">Challenge</option>
+                  <option value="online">Online</option>
+                  <option value="misc">Misc</option>
+                </select>
+              </span>
+            </div>
+            <div class="switch-row">
+              <label class="switch" title="Hide trophies already earned">
+                <input type="checkbox" id="hide-completed" role="switch" aria-label="Hide completed trophies">
+                <span class="switch-track" aria-hidden="true"></span>
+                <span class="switch-text">Hide done</span>
+              </label>
+              <label class="switch switch--warn">
+                <input type="checkbox" id="missables-only" role="switch">
+                <span class="switch-track" aria-hidden="true"></span>
+                <span class="switch-text">Missables</span>
+              </label>
+              <label class="switch switch--spoiler">
+                <input type="checkbox" id="spoiler-toggle" role="switch">
+                <span class="switch-track" aria-hidden="true"></span>
+                <span class="switch-text">Spoiler mode</span>
+              </label>
+              <button class="btn btn--quiet" id="clear-filters" type="button" hidden>Clear</button>
+            </div>
+          </div>          <div class="list-scroll" id="list-scroll">
+            <div id="trophy-list" aria-label="Trophies grouped by roadmap stage"></div>
 
-        <span class="select-wrap">
-          <label class="sr-only" for="grade-filter">Filter by grade</label>
-          <select id="grade-filter">
-            <option value="all">All grades</option>
-            <option value="platinum">Platinum</option>
-            <option value="gold">Gold</option>
-            <option value="silver">Silver</option>
-            <option value="bronze">Bronze</option>
-          </select>
-        </span>
+            <div class="boot" id="boot"><span class="spinner" aria-hidden="true"></span> Loading the trophy list&hellip;</div>
 
-        <span class="select-wrap">
-          <label class="sr-only" for="kind-filter">Filter by kind</label>
-          <select id="kind-filter">
-            <option value="all">All kinds</option>
-            <option value="story">Story</option>
-            <option value="side">Side</option>
-            <option value="collectible">Collectible</option>
-            <option value="challenge">Challenge</option>
-            <option value="online">Online</option>
-            <option value="misc">Misc</option>
-          </select>
-        </span>
+            <div class="error-card" id="boot-error" hidden>
+              <h2>The trophy list could not load</h2>
+              <p id="boot-error-text">Something went wrong while reading the guide data.</p>
+              <p class="muted">Run <code>node serve.ts</code> from the project folder, then open <code>localhost:8080</code>.</p>
+            </div>
 
-        <label class="switch">
-          <input type="checkbox" id="hide-completed" role="switch">
-          <span class="switch-track" aria-hidden="true"></span>
-          <span class="switch-text">Hide completed</span>
-        </label>
+            <div class="empty" id="empty-state" hidden>
+              <span class="empty-icon" aria-hidden="true"><svg class="icon"><use href="#i-search"></use></svg></span>
+              <h2>Nothing here &mdash; yet</h2>
+              <p id="empty-text">No trophies match these filters.</p>
+              <button class="btn" id="empty-clear" type="button">Clear all filters</button>
+            </div>
+          </div>
+        </aside>
 
-        <label class="switch switch--warn">
-          <input type="checkbox" id="missables-only" role="switch">
-          <span class="switch-track" aria-hidden="true"></span>
-          <span class="switch-text">Missables only</span>
-        </label>
+        <section class="pane pane-detail" id="detail-dialog" aria-labelledby="detail-title">
+          <div class="detail-head">
+            <div class="detail-heading">
+              <p class="pane-kicker">Opened trophy <span class="detail-position" id="detail-position">1 of 55</span></p>
+              <h2 id="detail-title">Trophy</h2>
+              <div class="dialog-badges" id="detail-badges"></div>
+              <p class="detail-desc" id="detail-desc"></p>
+            </div>
+            <div class="detail-controls">
+              <label class="earn-label">
+                <input type="checkbox" id="detail-earned">
+                <span>Mark earned</span>
+              </label>
+              <button class="icon-btn" id="detail-close" type="button" aria-label="Re-conceal this spoiler trophy" title="Re-conceal" hidden>
+                <svg class="icon" aria-hidden="true"><use href="#i-lock"></use></svg>
+              </button>
+              <div class="dialog-nav">
+                <button class="icon-btn" id="detail-prev" type="button" aria-label="Previous trophy">
+                  <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+                </button>
+                <button class="icon-btn" id="detail-next" type="button" aria-label="Next trophy">
+                  <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
+                </button>
+              </div>
+            </div>
+          </div>
 
-        <label class="switch switch--spoiler">
-          <input type="checkbox" id="spoiler-toggle" role="switch">
-          <span class="switch-track" aria-hidden="true"></span>
-          <span class="switch-text">Spoiler mode</span>
-        </label>
+          <div class="detail-scroll" id="detail-scroll">
+            <div class="detail-locked" id="detail-locked" hidden>
+              <span class="locked-icon" aria-hidden="true"><svg class="icon"><use href="#i-lock"></use></svg></span>
+              <p><strong>Spoiler mode is hiding this one.</strong> Its name, description, guide, steps and source titles stay under wraps until you earn it or reveal it once.</p>
+              <button class="btn btn--ghost" id="detail-reveal" type="button">Reveal this trophy</button>
+            </div>
 
-        <button class="btn btn--quiet" id="clear-filters" type="button" hidden>Clear filters</button>
-      </div>
+            <div class="detail-content" id="detail-content">
+              <section class="detail-section">
+                <h3>How to get it</h3>
+                <p id="detail-guide"></p>
+              </section>
+              <section class="detail-section" id="detail-steps-section">
+                <h3>Step by step</h3>
+                <ol class="steps-list" id="trophy-steps"></ol>
+              </section>
+              <section class="detail-section">
+                <h3>Tips</h3>
+                <ul class="tips-list" id="detail-tips"></ul>
+              </section>
+            </div>
+          </div>
+        </section>        <aside class="pane pane-side" id="side-pane" aria-label="Next up and sources for the opened guide">
+          <section class="side-section" id="next-up-section" title="First five unearned trophies in roadmap order">
+            <div class="side-head">
+              <h2 class="pane-title">Next up</h2>
+              <span class="side-tag">&mdash;</span>
+            </div>
+            <ol class="next-list" id="next-up-list"></ol>
+          </section>
 
-      <div class="list-meta">
-        <p id="visible-count" aria-live="polite">Loading the trophy list&hellip;</p>
-        <p class="hint">Press <kbd>/</kbd> to search &middot; <kbd>Tab</kbd> to move</p>
-      </div>
-
-      <ul class="trophy-list" id="trophy-list" aria-label="Trophies"></ul>
-
-      <div class="boot" id="boot"><span class="spinner" aria-hidden="true"></span> Loading the trophy list&hellip;</div>
-
-      <div class="error-card" id="boot-error" hidden>
-        <h2>The trophy list could not load</h2>
-        <p id="boot-error-text">Something went wrong while reading the guide data.</p>
-        <p class="muted">Run <code>node serve.ts</code> from the project folder, then open <code>localhost:8080</code>. Browsers block <code>fetch()</code> from <code>file://</code> pages, so the guide needs a tiny local web server.</p>
-      </div>
-
-      <div class="empty" id="empty-state" hidden>
-        <span class="empty-icon" aria-hidden="true"><svg class="icon"><use href="#i-search"></use></svg></span>
-        <h2>Nothing here &mdash; yet</h2>
-        <p id="empty-text">No trophies match these filters.</p>
-        <button class="btn" id="empty-clear" type="button">Clear all filters</button>
+          <section class="side-section" id="detail-sources-section">
+            <div class="side-head">
+              <h2 class="pane-title">Sources in this guide</h2>
+              <span class="side-tag" id="source-count-tag">&mdash;</span>
+            </div>
+            <ul class="source-list" id="trophy-sources"></ul>
+            <p class="muted small" id="trophy-sources-note">Each step ends with the register number of the page it came from.</p>
+          </section>
+        </aside>
       </div>
     </section>
 
     <section class="view" id="panel-roadmap" role="tabpanel" aria-labelledby="tab-roadmap" tabindex="0" hidden>
       <h2 class="sr-only">Roadmap</h2>
-      <div id="roadmap-root"></div>
+      <div class="panel-scroll" id="roadmap-root"></div>
     </section>
 
     <section class="view" id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" tabindex="0" hidden>
       <h2 class="sr-only">Sources</h2>
-      <div class="roadmap-head">
-        <div>
-          <h2 class="roadmap-title">Sources and citations</h2>
-          <p class="roadmap-sub">The pages this guide was built from, the date each one was read, and how many trophy guides cite it. Every count below is computed from the data at load time.</p>
+      <div class="panel-scroll">
+        <div class="sources-head">
+          <div>
+            <h2 class="roadmap-title">Sources and citations</h2>
+            <p class="roadmap-sub">The pages this guide was built from, the date each one was read, and how many trophy guides cite it. Every count is computed from the register and trophy list at load time.</p>
+          </div>
+          <div class="roadmap-summary" id="sources-summary"></div>
         </div>
-        <div class="roadmap-summary" id="sources-summary"></div>
+        <ul class="source-list" id="sources-list" aria-label="Sources"></ul>
+        <p class="roadmap-foot">Every step in this guide carries the number of the source it comes from.</p>
       </div>
-      <ul class="source-list" id="sources-list" aria-label="Sources" style="list-style:none;padding-left:0"></ul>
-      <p class="roadmap-foot">Every step in this guide carries the number of the source it comes from.</p>
     </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="shell footer-grid">
-      <div>
-        <p class="footer-kicker">Built for the make.fun GTA VI trophy bounty</p>
-        <p class="muted">Trophy names and descriptions are derived from the official trophy list; the guides expand on them in our own words. Everything runs offline: no CDN, no web fonts, no tracking, no external requests.</p>
-      </div>
-      <div>
-        <p class="muted">Progress is stored in this browser only &mdash; one localStorage entry per trophy id. Export a JSON backup before clearing site data.</p>
-        <p class="muted small">MIT licensed &middot; spoiler mode persists between visits &middot; <a href="#main">Back to top</a></p>
-      </div>
+  </main>  <footer class="site-footer">
+    <div class="footer-grid">
+      <p class="footer-kicker">Built for the make.fun GTA VI trophy bounty</p>
+      <p class="muted">Official names, descriptions and grades come from the trophy register; the guides expand them in our own words. Everything runs offline: no CDN, no web fonts, no tracking and no external requests.</p>
+      <p class="muted small">Progress is stored in this browser under one localStorage key &middot; export a JSON backup before clearing site data.</p>
     </div>
   </footer>
-
-  <dialog class="dialog" id="detail-dialog" aria-labelledby="detail-title">
-    <div class="dialog-head">
-      <div class="dialog-badges" id="detail-badges"></div>
-      <button class="icon-btn" id="detail-close" type="button" aria-label="Close trophy details">
-        <svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>
-      </button>
-    </div>
-    <div class="dialog-body">
-      <div class="detail-heading">
-        <h2 id="detail-title">Trophy</h2>
-        <p class="detail-desc" id="detail-desc"></p>
-      </div>
-
-      <div class="detail-locked" id="detail-locked" hidden>
-        <span class="locked-icon" aria-hidden="true"><svg class="icon"><use href="#i-lock"></use></svg></span>
-        <p><strong>Spoiler mode is hiding this one.</strong> Its name, description, guide, steps and sources stay under wraps until you earn it or switch spoiler mode off.</p>
-        <button class="btn btn--ghost" id="detail-reveal" type="button">Reveal this trophy</button>
-      </div>
-
-      <div class="detail-content" id="detail-content">
-        <section class="detail-section">
-          <h3>How to get it</h3>
-          <p id="detail-guide"></p>
-        </section>
-        <section class="detail-section" id="detail-steps-section">
-          <h3>Step by step</h3>
-          <ol class="tips-list" id="trophy-steps"></ol>
-        </section>
-        <section class="detail-section">
-          <h3>Tips</h3>
-          <ul class="tips-list" id="detail-tips"></ul>
-        </section>
-        <section class="detail-section" id="detail-sources-section">
-          <h3>Sources</h3>
-          <ul class="source-list" id="trophy-sources"></ul>
-          <p class="muted small" id="trophy-sources-note">Each guide is our own reading of the official description; names, descriptions and grades are PlayStation's as Exophase publishes them.</p>
-        </section>
-      </div>
-    </div>
-    <div class="dialog-foot">
-      <label class="earn-label">
-        <input type="checkbox" id="detail-earned">
-        <span>Mark as earned</span>
-      </label>
-      <div class="dialog-nav">
-        <span class="muted small" id="detail-position"></span>
-        <button class="icon-btn" id="detail-prev" type="button" aria-label="Previous trophy">
-          <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
-        </button>
-        <button class="icon-btn" id="detail-next" type="button" aria-label="Next trophy">
-          <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"></use></svg>
-        </button>
-      </div>
-    </div>
-  </dialog>
 
   <dialog class="dialog dialog--small" id="reset-dialog" aria-labelledby="reset-title">
     <div class="dialog-body">
@@ -288,7 +294,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <noscript>
-    <div class="shell error-card">
+    <div class="error-card">
       <h2>JavaScript is required</h2>
       <p>The checklist, filters, spoiler mode and saved progress all run in your browser. Enable JavaScript and reload the page.</p>
     </div>
