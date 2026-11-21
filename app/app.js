@@ -241,6 +241,46 @@ function filteredTrophies() {
   return TROPHY_REGISTER.trophies.filter((trophy) => trophyMatchesFilters(trophy, tokens));
 }
 
+function paintRubricStrip() {
+  const total = TROPHY_REGISTER.trophies.length;
+  const official = TROPHY_REGISTER.trophies.filter((trophy) => trophy.name && trophy.description && trophy.grade).length;
+  const stageTrophyIds = TROPHY_REGISTER.stages.flatMap((stage) => (stage.trophies || [])
+    .map((name) => TROPHY_REGISTER.byName.get(name))
+    .filter(Boolean)
+    .map((trophy) => Number(trophy.id)));
+  const stageCovered = new Set(stageTrophyIds).size;
+  const stagesExactlyOnce = stageTrophyIds.length === total && stageCovered === total;
+  const missableFlags = TROPHY_REGISTER.trophies.filter((trophy) => trophy.missable === true).length;
+  let steps = 0;
+  let cited = 0;
+  for (const trophy of TROPHY_REGISTER.trophies) {
+    for (const step of trophy.steps || []) {
+      steps += 1;
+      if (step && SOURCE_REGISTER.ids.has(Number(step.src))) cited += 1;
+    }
+  }
+  const guidesSourced = TROPHY_REGISTER.trophies.filter((trophy) => {
+    const sources = Array.isArray(trophy.sources) ? trophy.sources : [];
+    return sources.length > 0 && sources.every((id) => SOURCE_REGISTER.ids.has(Number(id))) && typeof trophy.guide === 'string' && trophy.guide.trim() !== '';
+  }).length;
+  const pages = SOURCE_REGISTER.sources.length;
+  const readDate = formatSourceReadDate(SOURCE_REGISTER.readDate);
+  const panes = document.querySelectorAll('.pane').length;
+  const saved = TRACKER_STATE.earned.size;
+  const transfer = DOM_BY_ID['export-progress-json-backup'] && DOM_BY_ID['import-progress-json-backup'] ? 'export/import' : 'unavailable';
+  const facts = {
+    'rubric-official-list-coverage': [[official + '/' + total, true], [' official list', false]],
+    'rubric-roadmap-and-missables': [[String(TROPHY_REGISTER.stages.length), true], [' stages · ', false], [stageCovered + '/' + total, true], [stagesExactlyOnce ? ' once · ' : ' mapped · ', false], [String(missableFlags), true], [' flags', false]],
+    'rubric-cited-guidance': [[String(cited), true], [' steps cited · ', false], [String(guidesSourced), true], [' guides sourced · ', false], [String(pages), true], [' pages · ', false], [readDate, false]],
+    'rubric-offline-tracker': [[String(panes), true], [' panes · ', false], [saved + '/' + total, true], [' saved · ', false], [transfer, false]],
+  };
+  for (const [id, parts] of Object.entries(facts)) {
+    const node = DOM_BY_ID[id];
+    if (!node) continue;
+    node.replaceChildren(...parts.map(([text, numeric]) => createNode('span', numeric ? 'rubric-num' : 'rubric-label', text)));
+  }
+}
+
 function paintProgressCard() {
   const total = TROPHY_REGISTER.trophies.length || 55;
   const earned = TRACKER_STATE.earned.size;
@@ -256,6 +296,7 @@ function paintProgressCard() {
   DOM_BY_ID['bar-fill'].style.width = percent + '%';
   DOM_BY_ID['platinum-status'].classList.toggle('is-earned', complete);
   DOM_BY_ID['platinum-text'].textContent = complete ? 'Platinum earned' : 'Platinum locked';
+  paintRubricStrip();
 }
 
 function paintGradeCounters() {
