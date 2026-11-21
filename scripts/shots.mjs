@@ -295,7 +295,7 @@ async function scrollChecklistTop() {
 async function scrollDetailToSteps(offset = 16) {
   const info = await evaluate(`(() => {
     const scroller = document.getElementById("detail-scroll");
-    const section = document.getElementById("detail-steps-section");
+    const section = document.getElementById("guide-cited-steps");
     const dy = section.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
     scroller.scrollTop = Math.max(0, scroller.scrollTop + dy - ${offset});
     return { top: scroller.scrollTop, steps: document.querySelectorAll("#trophy-steps li").length };
@@ -307,7 +307,7 @@ async function scrollDetailToSteps(offset = 16) {
 async function scrollSideToSources(offset = 0) {
   const info = await evaluate(`(() => {
     const scroller = document.getElementById("side-pane");
-    const section = document.getElementById("detail-sources-section");
+    const section = document.getElementById("guide-sources-in-this-guide");
     const dy = section.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
     scroller.scrollTop = Math.max(0, scroller.scrollTop + dy - ${offset});
     return { top: scroller.scrollTop, sources: document.querySelectorAll("#trophy-sources li").length };
@@ -319,7 +319,7 @@ async function scrollSideToSources(offset = 0) {
 async function showRoadmap() {
   await evaluate(`document.getElementById("tab-roadmap").click()`);
   await waitUntil(
-    () => evaluate(`!document.getElementById("panel-roadmap").hidden && document.querySelectorAll("#roadmap-root ol.stages > li.stage").length === 6`),
+    () => evaluate(`!document.getElementById("panel-roadmap").hidden && document.querySelectorAll("#roadmap-stages-to-platinum ol.stages > li.stage").length === 6`),
     "roadmap stages"
   );
   await sleep(300);
@@ -460,23 +460,33 @@ async function main() {
   if (pma.title !== "Positive Mental Attitude") throw new Error("PMA did not open");
   if (pma.steps !== 4) throw new Error("expected 4 PMA steps, got " + pma.steps);
   if (pma.sources.length !== 5) throw new Error("expected 5 PMA source rows, got " + pma.sources.length);
+  const sourceRow = await evaluate(`(() => {
+    const row = document.querySelector("#trophy-sources li");
+    const link = row && row.querySelector("a");
+    return row ? {
+      text: row.textContent.trim().replace(/\\s+/g, " "),
+      linkText: link ? link.textContent.trim() : null,
+      linkTitle: link ? link.title : null,
+    } : null;
+  })()`);
+  console.log("source row " + JSON.stringify(sourceRow));
   console.log("pma detail " + JSON.stringify({ ...pma, detailScroll: pmaDetail.top, sideScroll: pmaSide.top }));
   await capture("2-guide-sources.jpg");
 
   // 3: roadmap with the seeded 31/55 and all six stages.
   await showRoadmap();
-  await evaluate(`document.getElementById("roadmap-root").scrollTop = 0`);
+  await evaluate(`document.getElementById("roadmap-stages-to-platinum").scrollTop = 0`);
   await sleep(300);
   const road = await evaluate(`(() => ({
     earned: document.getElementById("earned-count").textContent.trim(),
     percent: document.getElementById("percent").textContent.trim(),
-    summary: document.querySelector("#roadmap-root .roadmap-summary").textContent.trim(),
-    stages: [...document.querySelectorAll("#roadmap-root ol.stages > li.stage")].map((card) => ({
+    summary: document.querySelector("#roadmap-stages-to-platinum .roadmap-summary").textContent.trim(),
+    stages: [...document.querySelectorAll("#roadmap-stages-to-platinum ol.stages > li.stage")].map((card) => ({
       title: card.querySelector(".stage-title").textContent.trim(),
       count: card.querySelector(".stage-progress").textContent.trim(),
       missableChips: card.querySelectorAll('.tchip[data-missable="true"]').length,
     })),
-    missableCards: document.querySelectorAll("#roadmap-root .info-card--warn").length,
+    missableCards: document.querySelectorAll("#roadmap-stages-to-platinum .info-card--warn").length,
   }))()`);
   if (road.stages.length !== 6) throw new Error("expected 6 roadmap stages, got " + road.stages.length);
   if (road.earned !== "31") throw new Error("roadmap lost seeded progress: " + road.earned);
@@ -506,8 +516,8 @@ async function main() {
       lockedRows: document.querySelectorAll('li.trophy[data-locked="true"]').length,
       maskedTitle: document.getElementById("detail-title").textContent.trim(),
       detailLocked: !document.getElementById("detail-locked").hidden,
-      exportVisible: visibleBox(document.getElementById("export-btn")),
-      importVisible: visibleBox(document.getElementById("import-btn")),
+      exportVisible: visibleBox(document.getElementById("export-progress-json-backup")),
+      importVisible: visibleBox(document.getElementById("import-progress-json-backup")),
       storyGroup: [...document.querySelectorAll(".check-group")].find((section) => section.querySelector(".check-group-title").textContent.trim() === "Main story").querySelector(".check-group-count").textContent.trim(),
     };
   })()`);
