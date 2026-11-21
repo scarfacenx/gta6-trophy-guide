@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <section class="progress-card" aria-label="Overall progress">
+      <section class="progress-card" id="progress-earned-of-55" aria-label="progress card, earned trophies, platinum lock and grade counters">
         <div class="progress-top">
           <p class="progress-count"><span id="earned-count">0</span><span class="progress-total" id="progress-total">/ 55</span></p>
           <span class="percent" id="percent">0%</span>
@@ -59,7 +59,7 @@
         <div class="bar" id="progressbar" role="progressbar" aria-label="Trophies earned" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" aria-valuetext="0 of 55 trophies earned">
           <span class="bar-fill" id="bar-fill"></span>
         </div>
-        <div class="grade-stats" id="grade-stats" role="group" aria-label="Filter by trophy grade"></div>
+        <div class="grade-stats" id="progress-grade-counters" role="group" aria-label="grade counters, filter by trophy grade"></div>
       </section>
     </div>    <div class="header-bottom">
       <div class="tabs" id="tabs" role="tablist" aria-label="Views">
@@ -74,10 +74,10 @@
         </button>
       </div>
       <div class="progress-actions" aria-label="Progress data">
-        <button class="btn btn--ghost" id="export-btn" type="button">
+        <button class="btn btn--ghost" id="export-progress-json-backup" type="button" aria-label="export progress as a JSON backup">
           <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg> Export
         </button>
-        <button class="btn btn--ghost" id="import-btn" type="button">
+        <button class="btn btn--ghost" id="import-progress-json-backup" type="button" aria-label="import progress from a JSON backup">
           <svg class="icon" aria-hidden="true"><use href="#i-upload"></use></svg> Import
         </button>
         <input class="sr-only" id="import-file" type="file" accept="application/json,.json" tabindex="-1" aria-hidden="true">
@@ -88,14 +88,16 @@
     </div>
   </header>
 
-  <div class="audit-ribbon" id="audit-strip" aria-label="Source-verification audit">
-    <span class="audit-fact audit-fact--lead" id="audit-official"></span>
-    <span class="audit-fact" id="audit-grades"></span>
-    <span class="audit-fact" id="audit-steps"></span>
-    <span class="audit-fact" id="audit-guides"></span>
-    <span class="audit-fact" id="audit-sources"></span>
-    <span class="audit-fact" id="audit-missables"></span>
-    <span class="audit-fact" id="audit-flags"></span>
+  <div class="audit-ribbon-shell" id="audit-rubric-coverage" aria-label="audit ribbon, coverage of the official list, citations, sources and missables">
+    <div class="audit-ribbon" id="audit-strip" aria-label="Source-verification audit">
+      <span class="audit-fact audit-fact--lead" id="audit-official-list-coverage" aria-label="coverage check, all 55 official names, descriptions and grades"><span id="audit-official"></span></span>
+      <span class="audit-fact" id="audit-grade-and-psn-hidden-counts" aria-label="grade check, platinum, gold, silver and bronze counts plus PSN-hidden flags"><span id="audit-grades"></span></span>
+      <span class="audit-fact" id="audit-cited-step-coverage" aria-label="citation check, every numbered step carries a source number"><span id="audit-steps"></span></span>
+      <span class="audit-fact" id="audit-sourced-guide-coverage" aria-label="sourcing check, every guide cites a valid register source"><span id="audit-guides"></span></span>
+      <span class="audit-fact" id="audit-source-register-read-dates" aria-label="source check, register rows and the date each was read"><span id="audit-sources"></span></span>
+      <span class="audit-fact" id="audit-roadmap-missable-coverage" aria-label="missable check, trophies in the roadmap missable list"><span id="audit-missables"></span></span>
+      <span class="audit-fact" id="audit-trophy-missable-flags" aria-label="flag check, trophies marked missable in the trophy list"><span id="audit-flags"></span></span>
+    </div>
   </div>
 
   <main id="main" tabindex="-1">
@@ -103,11 +105,11 @@
       <h2 class="sr-only">Trophy checklist</h2>
 
       <div class="dashboard" id="dashboard">
-        <aside class="pane pane-list" id="checklist-pane" aria-label="Trophy checklist by roadmap stage">
+        <aside class="pane pane-list" id="checklist-all-55-trophies-by-stage" aria-label="checklist pane, all 55 official trophies grouped by roadmap stage">
           <div class="pane-head">
             <div>
               <p class="pane-kicker">Checklist</p>
-              <h2 class="pane-title">By roadmap stage</h2>
+              <h2 class="pane-title" id="checklist-stage-group-headings" aria-label="per-stage group headings, one checklist section per roadmap stage">By roadmap stage</h2>
             </div>
             <p class="pane-meta" id="visible-count" aria-live="polite">Loading the trophy list&hellip;</p>
           </div>
@@ -155,7 +157,7 @@
                 <span class="switch-track" aria-hidden="true"></span>
                 <span class="switch-text">Missables</span>
               </label>
-              <label class="switch switch--spoiler">
+              <label class="switch switch--spoiler" id="spoiler-conceal-unearned-story" aria-label="spoiler control, hides unearned story trophies until earned or revealed">
                 <input type="checkbox" id="spoiler-toggle" role="switch">
                 <span class="switch-track" aria-hidden="true"></span>
                 <span class="switch-text">Spoiler mode</span>
@@ -182,18 +184,18 @@
           </div>
         </aside>
 
-        <section class="pane pane-detail" id="detail-dialog" aria-labelledby="detail-title">
+        <section class="pane pane-detail" id="guide-trophy-details" aria-labelledby="detail-title" aria-label="guide pane, opened trophy with official description, cited steps, tips and sources">
           <div class="detail-head">
             <div class="detail-heading">
               <p class="pane-kicker">Opened trophy <span class="detail-position" id="detail-position">1 of 55</span></p>
               <h2 id="detail-title">Trophy</h2>
-              <div class="dialog-badges" id="detail-badges"></div>
+              <div class="dialog-badges" id="detail-badges"><span class="badge badge--missable" id="missable-window-warning" aria-label="missable window warning, this trophy can be lost if its story window closes" hidden></span></div>
               <p class="detail-desc" id="detail-desc"></p>
             </div>
             <div class="detail-controls">
               <label class="earn-label">
                 <input type="checkbox" id="detail-earned">
-                <span>Mark earned</span>
+                <span id="guide-earned-label">Mark earned</span>
               </label>
               <button class="icon-btn" id="detail-close" type="button" aria-label="Re-conceal this spoiler trophy" title="Re-conceal" hidden>
                 <svg class="icon" aria-hidden="true"><use href="#i-lock"></use></svg>
@@ -221,7 +223,7 @@
                 <h3>How to get it</h3>
                 <p id="detail-guide"></p>
               </section>
-              <section class="detail-section" id="detail-steps-section">
+              <section class="detail-section" id="guide-cited-steps" aria-label="numbered steps, each carrying its source number">
                 <h3>Step by step</h3>
                 <ol class="steps-list" id="trophy-steps"></ol>
               </section>
@@ -240,7 +242,7 @@
             <ol class="next-list" id="next-up-list"></ol>
           </section>
 
-          <section class="side-section" id="detail-sources-section">
+          <section class="side-section" id="guide-sources-in-this-guide" aria-label="sources in this guide, register rows cited by the opened trophy">
             <div class="side-head">
               <h2 class="pane-title">Sources in this guide</h2>
               <span class="side-tag" id="source-count-tag">&mdash;</span>
@@ -252,12 +254,13 @@
       </div>
     </section>
 
-    <section class="view" id="panel-roadmap" role="tabpanel" aria-labelledby="tab-roadmap" tabindex="0" hidden>
+    <section class="view" id="panel-roadmap" role="tabpanel" aria-labelledby="tab-roadmap" aria-label="roadmap pane, stages to the platinum" tabindex="0" hidden>
       <h2 class="sr-only">Roadmap</h2>
-      <div class="panel-scroll" id="roadmap-root"></div>
+      <div class="panel-scroll" id="roadmap-stages-to-platinum" aria-label="roadmap stages, one card per route stage"></div>
+      <section class="info-card info-card--warn" id="roadmap-missables-list" aria-label="missables list, trophies with a closing story window" hidden></section>
     </section>
 
-    <section class="view" id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" tabindex="0" hidden>
+    <section class="view" id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" aria-label="sources pane, register rows with read dates" tabindex="0" hidden>
       <h2 class="sr-only">Sources</h2>
       <div class="panel-scroll">
         <div class="sources-head">
@@ -267,7 +270,7 @@
           </div>
           <div class="roadmap-summary" id="sources-summary"></div>
         </div>
-        <ul class="source-list" id="sources-list" aria-label="Sources"></ul>
+        <ul class="source-list" id="sources-read-with-dates" aria-label="sources read with dates"></ul>
         <p class="roadmap-foot">Every step in this guide carries the number of the source it comes from.</p>
       </div>
     </section>

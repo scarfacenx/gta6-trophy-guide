@@ -1,57 +1,57 @@
 // GTA VI trophy dashboard: offline checklist, audit ribbon, cited guide, next-up queue and saved progress.
 // One ES module, no imports. Data comes from ./data/*.json; progress lives in localStorage.
 
-const PROGRESS_KEY = 'gta6-trophy-progress-v1';
-const PREFS_KEY = 'gta6-trophy-guide-prefs-v1';
-const GRADE_ORDER = ['platinum', 'gold', 'silver', 'bronze'];
-const KIND_NAMES = { story: 'Story', side: 'Side', collectible: 'Collectible', challenge: 'Challenge', online: 'Online', misc: 'Misc' };
-const VIEW_NAMES = ['checklist', 'roadmap', 'sources'];
-const MASK_NAME = 'Hidden story trophy';
-const MASK_DESC = 'Turn spoiler mode off to read this.';
-const MASK_CHIP = 'Hidden';
-const SEARCH_DEBOUNCE_MS = 180;
-const TOAST_LINGER_MS = 2800;
-const SVG_NS = 'http://www.w3.org/2000/svg';
+const PROGRESS_STORAGE_KEY = 'gta6-trophy-progress-v1';
+const PREFERENCES_STORAGE_KEY = 'gta6-trophy-guide-prefs-v1';
+const TROPHY_GRADES = ['platinum', 'gold', 'silver', 'bronze'];
+const TROPHY_KINDS = { story: 'Story', side: 'Side', collectible: 'Collectible', challenge: 'Challenge', online: 'Online', misc: 'Misc' };
+const DASHBOARD_VIEWS = ['checklist', 'roadmap', 'sources'];
+const SPOILER_MASK_NAME = 'Hidden story trophy';
+const SPOILER_MASK_DESCRIPTION = 'Turn spoiler mode off to read this.';
+const SPOILER_MASK_CHIP = 'Hidden';
+const SEARCH_DEBOUNCE_MILLISECONDS = 180;
+const TOAST_VISIBLE_MILLISECONDS = 2800;
+const SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
 
-const dom = Object.fromEntries([...document.querySelectorAll('[id]')].map((node) => [node.id, node]));
+const DOM_BY_ID = Object.fromEntries([...document.querySelectorAll('[id]')].map((node) => [node.id, node]));
 
-function make(tag, className, text) {
+function createNode(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
   if (text !== undefined && text !== null) node.textContent = String(text);
   return node;
 }
 
-function sprite(symbol, extraClass) {
-  const svg = document.createElementNS(SVG_NS, 'svg');
+function createSpriteIcon(symbol, extraClass) {
+  const svg = document.createElementNS(SVG_NAMESPACE, 'svg');
   svg.setAttribute('class', extraClass ? 'icon ' + extraClass : 'icon');
   svg.setAttribute('aria-hidden', 'true');
-  const use = document.createElementNS(SVG_NS, 'use');
+  const use = document.createElementNS(SVG_NAMESPACE, 'use');
   use.setAttribute('href', '#' + symbol);
   svg.append(use);
   return svg;
 }
 
-function fromTemplate(templateId, extraClass) {
-  const node = dom[templateId].content.firstElementChild.cloneNode(true);
+function cloneTemplateIcon(templateId, extraClass) {
+  const node = DOM_BY_ID[templateId].content.firstElementChild.cloneNode(true);
   if (extraClass) node.classList.add(...extraClass.split(' '));
   return node;
 }
 
-function labelledBadge(className, templateId, label) {
-  const badge = make('span', className);
-  badge.append(fromTemplate(templateId), document.createTextNode(label));
+function createLabelledBadge(className, templateId, label) {
+  const badge = createNode('span', className);
+  badge.append(cloneTemplateIcon(templateId), document.createTextNode(label));
   return badge;
 }
 
-function formatReadDate(value) {
+function formatSourceReadDate(value) {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ''));
   if (!match) return String(value || '');
   const date = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
   return new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(date);
 }
 
-function foldText(value) {
+function foldSearchText(value) {
   return String(value)
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
@@ -60,11 +60,32 @@ function foldText(value) {
     .toLowerCase();
 }
 
-const gradeBadge = (grade) => make('span', 'badge badge--' + grade, grade);
-const missableBadge = () => labelledBadge('badge badge--missable', 'tpl-icon-warning', 'Missable');
-const earnedBadge = () => labelledBadge('badge badge--earned', 'tpl-icon-check', 'Earned');
+function sourceDomainLabel(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return String(url);
+  }
+}
 
-const guide = {
+const createGradeBadge = (grade) => createNode('span', 'badge badge--' + grade, grade);
+function renderMissableWindow() {
+  const badge = DOM_BY_ID['missable-window-warning'];
+  if (!badge) {
+    const fallback = createLabelledBadge('badge badge--missable', 'tpl-icon-warning', 'Missable');
+    fallback.id = 'missable-window-warning';
+    fallback.setAttribute('aria-label', 'missable window warning, this trophy can be lost if its story window closes');
+    return fallback;
+  }
+  badge.className = 'badge badge--missable';
+  badge.hidden = false;
+  badge.setAttribute('aria-label', 'missable window warning, this trophy can be lost if its story window closes');
+  badge.replaceChildren(cloneTemplateIcon('tpl-icon-warning'), document.createTextNode('Missable'));
+  return badge;
+}
+const createEarnedBadge = () => createLabelledBadge('badge badge--earned', 'tpl-icon-check', 'Earned');
+
+const TROPHY_REGISTER = {
   trophies: [],
   byId: new Map(),
   byName: new Map(),
@@ -75,79 +96,84 @@ const guide = {
   stageById: new Map(),
   roadmapOrder: [],
   positionById: new Map(),
+};
+
+const SOURCE_REGISTER = {
   sources: [],
-  sourceById: new Map(),
-  sourceIds: new Set(),
+  byId: new Map(),
+  ids: new Set(),
   readDate: '',
 };
 
-function blankFilters() {
+function emptyFilterState() {
   return { grade: 'all', kind: 'all', query: '', hideCompleted: false, missablesOnly: false };
 }
 
-const session = {
+const TRACKER_STATE = {
   earned: new Set(),
   spoiler: false,
-  filters: blankFilters(),
+  filters: emptyFilterState(),
   view: 'checklist',
 };
 
-const earnedHas = (trophy) => session.earned.has(Number(trophy.id));
-const concealed = (trophy) => session.spoiler && trophy.kind === 'story' && !earnedHas(trophy);
-const kindName = (kind) => KIND_NAMES[kind] || kind;
-const sortedEarned = () => [...session.earned].sort((left, right) => left - right);
-const trophyPosition = (trophy) => guide.positionById.get(Number(trophy.id)) || guide.trophies.indexOf(trophy) + 1;
-const slotLabel = (trophy) => '#' + String(trophyPosition(trophy)).padStart(2, '0');
-const stageFor = (trophy) => guide.stageById.get(Number(trophy.id)) || { title: 'Roadmap', trophies: [] };
+const isTrophyEarned = (trophy) => TRACKER_STATE.earned.has(Number(trophy.id));
+const isStorySpoilerConcealed = (trophy) => TRACKER_STATE.spoiler && trophy.kind === 'story' && !isTrophyEarned(trophy);
+const trophyKindLabel = (kind) => TROPHY_KINDS[kind] || kind;
+const sortedEarnedIds = () => [...TRACKER_STATE.earned].sort((left, right) => left - right);
+const trophyRoadmapPosition = (trophy) => TROPHY_REGISTER.positionById.get(Number(trophy.id)) || TROPHY_REGISTER.trophies.indexOf(trophy) + 1;
+const trophySlotLabel = (trophy) => '#' + String(trophyRoadmapPosition(trophy)).padStart(2, '0');
+const stageForTrophy = (trophy) => TROPHY_REGISTER.stageById.get(Number(trophy.id)) || { title: 'Roadmap', trophies: [] };
 
-function sourceFor(value) {
+function sourceById(value) {
   const id = Number(value);
-  return Number.isInteger(id) ? guide.sourceById.get(id) || null : null;
-}function gateShut() {
-  return guide.trophies.some((trophy) => trophy.grade !== 'platinum' && !session.earned.has(Number(trophy.id)));
+  return Number.isInteger(id) ? SOURCE_REGISTER.byId.get(id) || null : null;
 }
 
-function gateHint() {
-  return gateShut()
-    ? 'Earn the other ' + (guide.trophies.length - 1) + ' trophies first'
-    : 'Earned automatically: all ' + (guide.trophies.length - 1) + ' other trophies are done';
+function platinumGateIsShut() {
+  return TROPHY_REGISTER.trophies.some((trophy) => trophy.grade !== 'platinum' && !TRACKER_STATE.earned.has(Number(trophy.id)));
 }
 
-function enforcePlatinumGate() {
-  if (!guide.platinum) return;
-  if (gateShut()) session.earned.delete(Number(guide.platinum.id));
-  else session.earned.add(Number(guide.platinum.id));
+function platinumGateHint() {
+  return platinumGateIsShut()
+    ? 'Earn the other ' + (TROPHY_REGISTER.trophies.length - 1) + ' trophies first'
+    : 'Earned automatically: all ' + (TROPHY_REGISTER.trophies.length - 1) + ' other trophies are done';
 }
 
-function coerceId(value) {
+function syncPlatinumLock() {
+  if (!TROPHY_REGISTER.platinum) return;
+  if (platinumGateIsShut()) TRACKER_STATE.earned.delete(Number(TROPHY_REGISTER.platinum.id));
+  else TRACKER_STATE.earned.add(Number(TROPHY_REGISTER.platinum.id));
+}
+
+function coerceTrophyId(value) {
   return typeof value === 'string' && /^\d+$/.test(value) ? Number(value) : value;
 }
 
-function collectKnownIds(raw) {
+function collectKnownTrophyIds(raw) {
   const found = new Set();
   if (!Array.isArray(raw)) return found;
   for (const entry of raw) {
-    const id = coerceId(entry);
-    if (Number.isInteger(id) && guide.knownIds.has(id)) found.add(id);
+    const id = coerceTrophyId(entry);
+    if (Number.isInteger(id) && TROPHY_REGISTER.knownIds.has(id)) found.add(id);
   }
   return found;
 }
 
-function cleanFilters(raw) {
-  const filters = blankFilters();
+function sanitiseFilters(raw) {
+  const filters = emptyFilterState();
   if (!raw || typeof raw !== 'object') return filters;
-  if (raw.grade === 'all' || GRADE_ORDER.includes(raw.grade)) filters.grade = raw.grade;
-  if (raw.kind === 'all' || Object.hasOwn(KIND_NAMES, raw.kind)) filters.kind = raw.kind;
+  if (raw.grade === 'all' || TROPHY_GRADES.includes(raw.grade)) filters.grade = raw.grade;
+  if (raw.kind === 'all' || Object.hasOwn(TROPHY_KINDS, raw.kind)) filters.kind = raw.kind;
   if (typeof raw.query === 'string') filters.query = raw.query.slice(0, 200);
   filters.hideCompleted = raw.hideCompleted === true;
   filters.missablesOnly = raw.missablesOnly === true;
   return filters;
 }
 
-function readSavedState() {
+function loadSavedProgress() {
   try {
-    const progressRaw = JSON.parse(localStorage.getItem(PROGRESS_KEY));
-    const prefsRaw = JSON.parse(localStorage.getItem(PREFS_KEY));
+    const progressRaw = JSON.parse(localStorage.getItem(PROGRESS_STORAGE_KEY));
+    const prefsRaw = JSON.parse(localStorage.getItem(PREFERENCES_STORAGE_KEY));
     let earnedRaw = null;
     let legacy = null;
     if (Array.isArray(progressRaw)) {
@@ -156,34 +182,34 @@ function readSavedState() {
       legacy = progressRaw;
       earnedRaw = progressRaw.earned;
     }
-    session.earned = collectKnownIds(earnedRaw);
-    enforcePlatinumGate();
+    TRACKER_STATE.earned = collectKnownTrophyIds(earnedRaw);
+    syncPlatinumLock();
     const prefs = legacy || (prefsRaw && typeof prefsRaw === 'object' ? prefsRaw : {});
-    session.spoiler = prefs.spoiler === true;
-    session.filters = cleanFilters(prefs.filters);
-    if (VIEW_NAMES.includes(prefs.tab)) session.view = prefs.tab;
+    TRACKER_STATE.spoiler = prefs.spoiler === true;
+    TRACKER_STATE.filters = sanitiseFilters(prefs.filters);
+    if (DASHBOARD_VIEWS.includes(prefs.tab)) TRACKER_STATE.view = prefs.tab;
   } catch {
-    session.earned = new Set();
-    session.spoiler = false;
-    session.filters = blankFilters();
-    session.view = 'checklist';
+    TRACKER_STATE.earned = new Set();
+    TRACKER_STATE.spoiler = false;
+    TRACKER_STATE.filters = emptyFilterState();
+    TRACKER_STATE.view = 'checklist';
   }
 }
 
-function persist() {
+function saveProgress() {
   try {
-    localStorage.setItem(PROGRESS_KEY, JSON.stringify(sortedEarned()));
-    localStorage.setItem(PREFS_KEY, JSON.stringify({ spoiler: session.spoiler, filters: session.filters, tab: session.view }));
+    localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(sortedEarnedIds()));
+    localStorage.setItem(PREFERENCES_STORAGE_KEY, JSON.stringify({ spoiler: TRACKER_STATE.spoiler, filters: TRACKER_STATE.filters, tab: TRACKER_STATE.view }));
   } catch {
     // Storage can be unavailable in private modes; the guide keeps working for this session.
   }
 }
 
-function activeFilterNotes() {
-  const filters = session.filters;
+function describeActiveFilters() {
+  const filters = TRACKER_STATE.filters;
   const notes = [];
   if (filters.grade !== 'all') notes.push('grade "' + filters.grade + '"');
-  if (filters.kind !== 'all') notes.push('kind "' + kindName(filters.kind) + '"');
+  if (filters.kind !== 'all') notes.push('kind "' + trophyKindLabel(filters.kind) + '"');
   if (filters.query.trim()) notes.push('search "' + filters.query.trim() + '"');
   if (filters.hideCompleted) notes.push('hide completed');
   if (filters.missablesOnly) notes.push('missables only');
@@ -191,63 +217,63 @@ function activeFilterNotes() {
 }
 
 function searchTokens() {
-  return foldText(session.filters.query).split(/\s+/).filter(Boolean);
+  return foldSearchText(TRACKER_STATE.filters.query).split(/\s+/).filter(Boolean);
 }
 
-function matchesFilters(trophy, tokens) {
-  const filters = session.filters;
+function trophyMatchesFilters(trophy, tokens) {
+  const filters = TRACKER_STATE.filters;
   if (filters.grade !== 'all' && trophy.grade !== filters.grade) return false;
   if (filters.kind !== 'all' && trophy.kind !== filters.kind) return false;
-  if (filters.hideCompleted && earnedHas(trophy)) return false;
+  if (filters.hideCompleted && isTrophyEarned(trophy)) return false;
   if (filters.missablesOnly && trophy.missable !== true) return false;
   if (tokens.length) {
-    const source = concealed(trophy)
-      ? MASK_NAME + ' ' + MASK_DESC
+    const source = isStorySpoilerConcealed(trophy)
+      ? SPOILER_MASK_NAME + ' ' + SPOILER_MASK_DESCRIPTION
       : trophy.name + ' ' + trophy.description + ' ' + trophy.guide;
-    const haystack = foldText(source);
+    const haystack = foldSearchText(source);
     if (!tokens.every((token) => haystack.includes(token))) return false;
   }
   return true;
 }
 
-function visibleTrophies() {
+function filteredTrophies() {
   const tokens = searchTokens();
-  return guide.trophies.filter((trophy) => matchesFilters(trophy, tokens));
+  return TROPHY_REGISTER.trophies.filter((trophy) => trophyMatchesFilters(trophy, tokens));
 }
 
-function paintSummary() {
-  const total = guide.trophies.length || 55;
-  const earned = session.earned.size;
+function paintProgressCard() {
+  const total = TROPHY_REGISTER.trophies.length || 55;
+  const earned = TRACKER_STATE.earned.size;
   const percent = total ? Math.round((earned / total) * 100) : 0;
   const complete = total > 0 && earned === total;
-  dom['earned-count'].textContent = String(earned);
-  dom['progress-total'].textContent = '/ ' + total;
-  dom['percent'].textContent = percent + '%';
-  const bar = dom['progressbar'];
+  DOM_BY_ID['earned-count'].textContent = String(earned);
+  DOM_BY_ID['progress-total'].textContent = '/ ' + total;
+  DOM_BY_ID['percent'].textContent = percent + '%';
+  const bar = DOM_BY_ID['progressbar'];
   bar.setAttribute('aria-valuemax', String(total));
   bar.setAttribute('aria-valuenow', String(earned));
   bar.setAttribute('aria-valuetext', earned + ' of ' + total + ' trophies earned');
-  dom['bar-fill'].style.width = percent + '%';
-  dom['platinum-status'].classList.toggle('is-earned', complete);
-  dom['platinum-text'].textContent = complete ? 'Platinum earned' : 'Platinum locked';
+  DOM_BY_ID['bar-fill'].style.width = percent + '%';
+  DOM_BY_ID['platinum-status'].classList.toggle('is-earned', complete);
+  DOM_BY_ID['platinum-text'].textContent = complete ? 'Platinum earned' : 'Platinum locked';
 }
 
-function paintGradeChips() {
-  const wrap = dom['grade-stats'];
+function paintGradeCounters() {
+  const wrap = DOM_BY_ID['progress-grade-counters'];
   wrap.replaceChildren();
-  for (const grade of GRADE_ORDER) {
-    const pool = guide.trophies.filter((trophy) => trophy.grade === grade);
-    const done = pool.filter(earnedHas).length;
-    const chip = make('button', 'grade-stat grade-stat--' + grade);
+  for (const grade of TROPHY_GRADES) {
+    const pool = TROPHY_REGISTER.trophies.filter((trophy) => trophy.grade === grade);
+    const done = pool.filter(isTrophyEarned).length;
+    const chip = createNode('button', 'grade-stat grade-stat--' + grade);
     chip.type = 'button';
-    chip.setAttribute('aria-pressed', String(session.filters.grade === grade));
+    chip.setAttribute('aria-pressed', String(TRACKER_STATE.filters.grade === grade));
     chip.setAttribute('aria-label', 'Filter ' + grade + ' trophies (' + done + ' of ' + pool.length + ' earned)');
-    chip.append(make('span', 'dot'), document.createTextNode(grade), make('span', 'count', done + '/' + pool.length));
+    chip.append(createNode('span', 'dot'), document.createTextNode(grade), createNode('span', 'count', done + '/' + pool.length));
     chip.addEventListener('click', () => {
-      session.filters.grade = session.filters.grade === grade ? 'all' : grade;
-      persist();
+      TRACKER_STATE.filters.grade = TRACKER_STATE.filters.grade === grade ? 'all' : grade;
+      saveProgress();
       syncFilterControls();
-      paintGradeChips();
+      paintGradeCounters();
       paintChecklist();
     });
     wrap.append(chip);
@@ -255,507 +281,550 @@ function paintGradeChips() {
 }
 
 function syncFilterControls() {
-  dom['grade-filter'].value = session.filters.grade;
-  dom['kind-filter'].value = session.filters.kind;
-  dom['hide-completed'].checked = session.filters.hideCompleted;
-  dom['missables-only'].checked = session.filters.missablesOnly;
-  dom['spoiler-toggle'].checked = session.spoiler;
-  if (dom['search'].value !== session.filters.query) dom['search'].value = session.filters.query;
-  dom['search-clear'].hidden = session.filters.query.length === 0;
-  dom['clear-filters'].hidden = activeFilterNotes().length === 0;
-}function trophySourceItem(value) {
+  DOM_BY_ID['grade-filter'].value = TRACKER_STATE.filters.grade;
+  DOM_BY_ID['kind-filter'].value = TRACKER_STATE.filters.kind;
+  DOM_BY_ID['hide-completed'].checked = TRACKER_STATE.filters.hideCompleted;
+  DOM_BY_ID['missables-only'].checked = TRACKER_STATE.filters.missablesOnly;
+  DOM_BY_ID['spoiler-toggle'].checked = TRACKER_STATE.spoiler;
+  if (DOM_BY_ID['search'].value !== TRACKER_STATE.filters.query) DOM_BY_ID['search'].value = TRACKER_STATE.filters.query;
+  DOM_BY_ID['search-clear'].hidden = TRACKER_STATE.filters.query.length === 0;
+  DOM_BY_ID['clear-filters'].hidden = describeActiveFilters().length === 0;
+}
+
+function renderGuideSourceRow(value) {
   const id = Number(value);
-  const source = guide.sourceById.get(id) || null;
-  const item = make('li', 'trophy-source');
-  const top = make('div', 'trophy-source-top');
-  top.append(make('span', 'chip chip--id', '[' + id + ']'));
+  const source = SOURCE_REGISTER.byId.get(id) || null;
+  const item = createNode('li', 'trophy-source');
+  const top = createNode('div', 'trophy-source-top');
+  top.append(createNode('span', 'chip chip--id', '[' + id + ']'));
   if (!source) {
-    top.append(make('strong', '', 'Source ' + id));
+    top.append(createNode('strong', '', 'Source ' + id));
     item.append(top);
     return item;
   }
-  const sourceTitle = make('strong', '', source.title);
+  const sourceTitle = createNode('strong', '', source.title);
   sourceTitle.title = source.title;
   top.append(sourceTitle);
-  const link = make('a', '', source.url);
+  const link = createNode('a', '', sourceDomainLabel(source.url));
   link.href = source.url;
+  link.title = source.url;
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
-  item.append(top, link, make('span', 'source-meta', source.kind + ' · read ' + formatReadDate(source.read)));
+  item.append(top, link, createNode('span', 'source-meta', source.kind + ' · read ' + formatSourceReadDate(source.read)));
   return item;
 }
 
-function markSelectedRow() {
-  const id = detail.currentId();
+function markSelectedChecklistRow() {
+  const id = GUIDE_PANE.currentId();
   for (const row of document.querySelectorAll('#trophy-list li.trophy')) {
     row.classList.toggle('is-selected', Number(row.dataset.id) === id);
   }
 }
 
-const detail = {
+function renderCitedSteps(trophy, masked) {
+  const steps = masked ? [] : (trophy.steps || []);
+  const stepsList = DOM_BY_ID['trophy-steps'];
+  stepsList.replaceChildren();
+  for (const step of steps) {
+    const item = createNode('li');
+    if (step && typeof step === 'object') {
+      item.append(createNode('span', 'step-text', step.text), document.createTextNode(' '));
+      const id = Number(step.src);
+      const source = sourceById(id);
+      const sup = createNode('sup', 'step-src', '[' + (Number.isFinite(id) ? id : step.src) + ']');
+      sup.title = source ? 'Source ' + id + ': ' + source.title : 'Source ' + step.src;
+      sup.setAttribute('aria-label', sup.title);
+      item.append(sup);
+    } else {
+      item.textContent = String(step);
+    }
+    stepsList.append(item);
+  }
+  DOM_BY_ID['guide-cited-steps'].hidden = steps.length === 0;
+  return steps.length;
+}
+
+function renderSourcesForGuide(trophy, masked) {
+  const sources = masked ? [] : (Array.isArray(trophy.sources) ? trophy.sources : []);
+  const sourcesList = DOM_BY_ID['trophy-sources'];
+  sourcesList.replaceChildren();
+  if (masked) {
+    sourcesList.append(createNode('li', 'trophy-source muted', 'Source titles are concealed while spoiler mode is on.'));
+  } else {
+    for (const source of sources) sourcesList.append(renderGuideSourceRow(source));
+  }
+  DOM_BY_ID['source-count-tag'].textContent = masked ? 'hidden' : String(sources.length);
+  DOM_BY_ID['guide-sources-in-this-guide'].hidden = !masked && sources.length === 0;
+  DOM_BY_ID['trophy-sources-note'].textContent = masked
+    ? 'Reveal or earn this trophy to restore its source titles.'
+    : 'Each step ends with the register number of the page it came from.';
+  return sources;
+}
+
+const GUIDE_PANE = {
   order: [],
   cursor: 0,
   revealed: new Set(),
   currentId() {
     return this.order[this.cursor];
   },
-  openAt(id, options = {}) {
-    const visible = visibleTrophies();
-    const pool = visible.some((trophy) => Number(trophy.id) === Number(id)) ? visible : guide.trophies;
+  openTrophy(id, options = {}) {
+    const visible = filteredTrophies();
+    const pool = visible.some((trophy) => Number(trophy.id) === Number(id)) ? visible : TROPHY_REGISTER.trophies;
     this.order = pool.map((trophy) => Number(trophy.id));
     this.cursor = Math.max(0, this.order.indexOf(Number(id)));
     this.revealed.clear();
-    this.paint();
+    this.render();
     if (!options.keepScroll) {
-      const scroller = dom['detail-scroll'];
+      const scroller = DOM_BY_ID['detail-scroll'];
       if (scroller) scroller.scrollTop = 0;
     }
-    markSelectedRow();
+    markSelectedChecklistRow();
     if (options.revealPane && window.matchMedia('(max-width: 999px)').matches) {
-      const pane = dom['detail-dialog'];
+      const pane = DOM_BY_ID['guide-trophy-details'];
       if (pane && pane.scrollIntoView) pane.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }
   },
-  step(offset) {
+  stepTrophy(offset) {
     const next = this.cursor + offset;
     if (next < 0 || next >= this.order.length) return;
     this.cursor = next;
     this.revealed.clear();
-    this.paint();
-    const scroller = dom['detail-scroll'];
+    this.render();
+    const scroller = DOM_BY_ID['detail-scroll'];
     if (scroller) scroller.scrollTop = 0;
-    markSelectedRow();
+    markSelectedChecklistRow();
   },
-  paint() {
-    const trophy = guide.byId.get(this.currentId());
+  render() {
+    const trophy = TROPHY_REGISTER.byId.get(this.currentId());
     if (!trophy) return;
-    const masked = concealed(trophy) && !this.revealed.has(Number(trophy.id));
-    dom['detail-title'].textContent = masked ? MASK_NAME : trophy.name;
-    dom['detail-desc'].textContent = masked ? MASK_DESC : trophy.description;
-    dom['detail-position'].textContent = trophyPosition(trophy) + ' of ' + guide.trophies.length;
-    const badges = dom['detail-badges'];
+    const masked = isStorySpoilerConcealed(trophy) && !this.revealed.has(Number(trophy.id));
+    const earned = isTrophyEarned(trophy);
+    DOM_BY_ID['detail-title'].textContent = masked ? SPOILER_MASK_NAME : trophy.name;
+    DOM_BY_ID['detail-desc'].textContent = masked ? SPOILER_MASK_DESCRIPTION : trophy.description;
+    DOM_BY_ID['detail-position'].textContent = trophyRoadmapPosition(trophy) + ' of ' + TROPHY_REGISTER.trophies.length;
+    const badges = DOM_BY_ID['detail-badges'];
     badges.replaceChildren(
-      gradeBadge(trophy.grade),
-      make('span', 'chip chip--kind', kindName(trophy.kind)),
-      make('span', 'chip chip--id', slotLabel(trophy))
+      createGradeBadge(trophy.grade),
+      createNode('span', 'chip chip--kind', trophyKindLabel(trophy.kind)),
+      createNode('span', 'chip chip--id', trophySlotLabel(trophy))
     );
-    if (trophy.missable) badges.append(missableBadge());
-    if (earnedHas(trophy)) badges.append(earnedBadge());
+    if (trophy.missable) badges.append(renderMissableWindow());
+    if (earned) badges.append(createEarnedBadge());
     const revealedNow = !masked && this.revealed.has(Number(trophy.id));
-    dom['detail-close'].hidden = !revealedNow;
-    dom['detail-locked'].hidden = !masked;
-    dom['detail-content'].hidden = masked;
-    dom['detail-guide'].textContent = masked ? '' : trophy.guide;
-    const steps = masked ? [] : (trophy.steps || []);
+    DOM_BY_ID['detail-close'].hidden = !revealedNow;
+    DOM_BY_ID['detail-locked'].hidden = !masked;
+    DOM_BY_ID['detail-content'].hidden = masked;
+    DOM_BY_ID['detail-guide'].textContent = masked ? '' : trophy.guide;
+    renderCitedSteps(trophy, masked);
     const tips = masked ? [] : (trophy.tips || []);
-    const sources = masked ? [] : (Array.isArray(trophy.sources) ? trophy.sources : []);
-    const stepsList = dom['trophy-steps'];
-    stepsList.replaceChildren();
-    for (const step of steps) {
-      const item = make('li');
-      if (step && typeof step === 'object') {
-        item.append(make('span', 'step-text', step.text), document.createTextNode(' '));
-        const id = Number(step.src);
-        const source = sourceFor(id);
-        const sup = make('sup', 'step-src', '[' + (Number.isFinite(id) ? id : step.src) + ']');
-        sup.title = source ? 'Source ' + id + ': ' + source.title : 'Source ' + step.src;
-        sup.setAttribute('aria-label', sup.title);
-        item.append(sup);
-      } else {
-        item.textContent = String(step);
-      }
-      stepsList.append(item);
-    }
-    dom['detail-steps-section'].hidden = steps.length === 0;
-    const tipsList = dom['detail-tips'];
+    const tipsList = DOM_BY_ID['detail-tips'];
     tipsList.replaceChildren();
-    for (const tip of tips) tipsList.append(make('li', '', tip));
+    for (const tip of tips) tipsList.append(createNode('li', '', tip));
     const tipsSection = tipsList.closest('.detail-section');
     if (tipsSection) tipsSection.hidden = tips.length === 0;
-    const sourcesList = dom['trophy-sources'];
-    sourcesList.replaceChildren();
-    if (masked) {
-      sourcesList.append(make('li', 'trophy-source muted', 'Source titles are concealed while spoiler mode is on.'));
-    } else {
-      for (const source of sources) sourcesList.append(trophySourceItem(source));
-    }
-    dom['source-count-tag'].textContent = masked ? 'hidden' : String(sources.length);
-    dom['detail-sources-section'].hidden = !masked && sources.length === 0;
-    dom['trophy-sources-note'].textContent = masked
-      ? 'Reveal or earn this trophy to restore its source titles.'
-      : 'Each step ends with the register number of the page it came from.';
-    const tick = dom['detail-earned'];
-    tick.checked = earnedHas(trophy);
+    renderSourcesForGuide(trophy, masked);
+    const tick = DOM_BY_ID['detail-earned'];
+    tick.checked = earned;
     tick.disabled = trophy.grade === 'platinum';
-    tick.title = trophy.grade === 'platinum' ? gateHint() : '';
-    dom['detail-prev'].disabled = this.cursor <= 0;
-    dom['detail-next'].disabled = this.cursor >= this.order.length - 1;
-    markSelectedRow();
+    tick.title = trophy.grade === 'platinum' ? platinumGateHint() : '';
+    const earnedLabel = DOM_BY_ID['guide-earned-label'];
+    if (earnedLabel) {
+      earnedLabel.textContent = trophy.grade === 'platinum'
+        ? (earned ? 'Platinum earned' : 'Platinum locked')
+        : (earned ? 'Unmark earned' : 'Mark earned');
+    }
+    DOM_BY_ID['detail-prev'].disabled = this.cursor <= 0;
+    DOM_BY_ID['detail-next'].disabled = this.cursor >= this.order.length - 1;
+    markSelectedChecklistRow();
   },
-};function checkGroup(stage, rows) {
-  const all = (stage.trophies || []).map((name) => guide.byName.get(name)).filter(Boolean);
-  const done = all.filter(earnedHas).length;
-  const section = make('section', 'check-group');
-  const head = make('div', 'check-group-head');
-  head.append(make('h3', 'check-group-title', stage.title), make('span', 'check-group-count', done + '/' + all.length));
-  const list = make('ul', 'check-rows');
-  for (const trophy of rows) list.append(checklistRow(trophy));
+};function renderChecklistStageGroup(stage, rows) {
+  const all = (stage.trophies || []).map((name) => TROPHY_REGISTER.byName.get(name)).filter(Boolean);
+  const done = all.filter(isTrophyEarned).length;
+  const section = createNode('section', 'check-group');
+  const headingId = 'checklist-stage-' + String(stage.title || 'group').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  section.id = headingId;
+  section.setAttribute('aria-label', 'checklist stage, ' + stage.title);
+  const head = createNode('div', 'check-group-head');
+  const heading = createNode('h3', 'check-group-title', stage.title);
+  heading.id = headingId + '-heading';
+  section.setAttribute('aria-labelledby', heading.id);
+  head.append(heading, createNode('span', 'check-group-count', done + '/' + all.length));
+  const list = createNode('ul', 'check-rows');
+  for (const trophy of rows) list.append(renderChecklistTrophyRow(trophy));
   section.append(head, list);
   return section;
 }
 
-function checklistRow(trophy) {
-  const masked = concealed(trophy);
-  const shownName = masked ? MASK_NAME : trophy.name;
-  const row = make('li', 'trophy');
+function renderChecklistTrophyRow(trophy) {
+  const masked = isStorySpoilerConcealed(trophy);
+  const shownName = masked ? SPOILER_MASK_NAME : trophy.name;
+  const row = createNode('li', 'trophy');
   row.dataset.id = String(trophy.id);
   row.dataset.grade = trophy.grade;
-  row.dataset.earned = String(earnedHas(trophy));
+  row.dataset.earned = String(isTrophyEarned(trophy));
   row.dataset.missable = String(trophy.missable === true);
   if (masked) row.dataset.locked = 'true';
 
-  const tickWrap = make('label', 'check-wrap');
-  const tick = make('input', 'earn');
+  const tickWrap = createNode('label', 'check-wrap');
+  const tick = createNode('input', 'earn');
   tick.type = 'checkbox';
-  tick.checked = earnedHas(trophy);
+  tick.checked = isTrophyEarned(trophy);
   tick.setAttribute('aria-label', 'Mark "' + shownName + '" as earned');
   if (trophy.grade === 'platinum') {
-    tick.disabled = gateShut();
-    tick.title = gateHint();
+    tick.disabled = platinumGateIsShut();
+    tick.title = platinumGateHint();
   }
-  tick.addEventListener('change', () => markTrophy(trophy.id, tick.checked));
-  const tickArt = make('span', 'check-box');
-  tickArt.append(fromTemplate('tpl-icon-check'));
+  tick.addEventListener('change', () => toggleTrophyEarned(trophy.id, tick.checked));
+  const tickArt = createNode('span', 'check-box');
+  tickArt.append(cloneTemplateIcon('tpl-icon-check'));
   tickWrap.append(tick, tickArt);
 
-  const body = make('button', 'trophy-main');
+  const body = createNode('button', 'trophy-main');
   body.type = 'button';
   body.setAttribute('aria-haspopup', 'false');
   body.setAttribute('aria-label', 'Open guide for ' + shownName);
-  const headline = make('span', 'trophy-top');
-  headline.append(gradeBadge(trophy.grade), make('span', 'trophy-name', shownName));
+  const headline = createNode('span', 'trophy-top');
+  headline.append(createGradeBadge(trophy.grade), createNode('span', 'trophy-name', shownName));
   if (trophy.missable) {
-    const dot = make('span', 'row-missable');
+    const dot = createNode('span', 'row-missable');
     dot.title = 'Missable window';
     headline.append(dot);
   }
-  const blurb = make('span', 'trophy-desc', masked ? MASK_DESC : trophy.description);
-  const meta = make('span', 'trophy-meta');
-  const idChip = make('span', 'chip chip--id sr-only', slotLabel(trophy));
-  const kindChip = make('span', 'chip chip--kind sr-only', kindName(trophy.kind));
+  const blurb = createNode('span', 'trophy-desc', masked ? SPOILER_MASK_DESCRIPTION : trophy.description);
+  const meta = createNode('span', 'trophy-meta');
+  const idChip = createNode('span', 'chip chip--id sr-only', trophySlotLabel(trophy));
+  const kindChip = createNode('span', 'chip chip--kind sr-only', trophyKindLabel(trophy.kind));
   const sourceCount = Array.isArray(trophy.sources) ? trophy.sources.length : 0;
-  const srcChip = make('span', 'chip chip--src', sourceCount + ' src');
+  const srcChip = createNode('span', 'chip chip--src', sourceCount + ' src');
   srcChip.title = sourceCount + (sourceCount === 1 ? ' source' : ' sources') + ' cited';
   meta.append(idChip, kindChip, srcChip);
   body.append(headline, blurb, meta);
   row.append(tickWrap, body);
   row.addEventListener('click', (event) => {
     if (event.target.closest('.check-wrap')) return;
-    detail.openAt(trophy.id, { revealPane: true });
+    GUIDE_PANE.openTrophy(trophy.id, { revealPane: true });
   });
   return row;
 }
 
 function paintChecklist() {
-  const visible = visibleTrophies();
+  const visible = filteredTrophies();
   const visibleSet = new Set(visible.map((trophy) => Number(trophy.id)));
-  const scroller = dom['list-scroll'];
+  const scroller = DOM_BY_ID['list-scroll'];
   const top = scroller ? scroller.scrollTop : 0;
   const fragment = document.createDocumentFragment();
   const grouped = new Set();
-  for (const stage of guide.stages) {
+  for (const stage of TROPHY_REGISTER.stages) {
     const rows = (stage.trophies || [])
-      .map((name) => guide.byName.get(name))
+      .map((name) => TROPHY_REGISTER.byName.get(name))
       .filter((trophy) => trophy && visibleSet.has(Number(trophy.id)));
     if (!rows.length) continue;
     for (const trophy of rows) grouped.add(Number(trophy.id));
-    fragment.append(checkGroup(stage, rows));
+    fragment.append(renderChecklistStageGroup(stage, rows));
   }
   const leftovers = visible.filter((trophy) => !grouped.has(Number(trophy.id)));
   if (leftovers.length) {
-    fragment.append(checkGroup({ title: 'Other trophies', trophies: leftovers.map((trophy) => trophy.name) }, leftovers));
+    fragment.append(renderChecklistStageGroup({ title: 'Other trophies', trophies: leftovers.map((trophy) => trophy.name) }, leftovers));
   }
-  dom['trophy-list'].replaceChildren(fragment);
+  DOM_BY_ID['trophy-list'].replaceChildren(fragment);
   if (scroller) scroller.scrollTop = top;
-  const earnedHere = visible.filter(earnedHas).length;
-  dom['visible-count'].textContent = 'Showing ' + visible.length + ' of ' + guide.trophies.length + ' · ' + earnedHere + ' earned here';
-  const notes = activeFilterNotes();
-  dom['clear-filters'].hidden = notes.length === 0;
-  dom['empty-state'].hidden = visible.length !== 0;
+  const earnedHere = visible.filter(isTrophyEarned).length;
+  DOM_BY_ID['visible-count'].textContent = 'Showing ' + visible.length + ' of ' + TROPHY_REGISTER.trophies.length + ' · ' + earnedHere + ' earned here';
+  const notes = describeActiveFilters();
+  DOM_BY_ID['clear-filters'].hidden = notes.length === 0;
+  DOM_BY_ID['empty-state'].hidden = visible.length !== 0;
   if (!visible.length) {
-    dom['empty-text'].textContent = notes.length
+    DOM_BY_ID['empty-text'].textContent = notes.length
       ? 'No trophies match ' + notes.join(', ') + '. Try a shorter search or clear the filters.'
       : 'No trophies match these filters.';
   }
-  markSelectedRow();
+  markSelectedChecklistRow();
 }
 
-function markTrophy(id, earned) {
-  const trophy = guide.byId.get(Number(id));
+function toggleTrophyEarned(id, earned) {
+  const trophy = TROPHY_REGISTER.byId.get(Number(id));
   if (!trophy) return;
   if (trophy.grade === 'platinum') {
     paintChecklist();
-    detail.paint();
+    GUIDE_PANE.render();
     return;
   }
-  if (earned) session.earned.add(Number(id));
-  else session.earned.delete(Number(id));
-  enforcePlatinumGate();
-  persist();
-  paintSummary();
-  paintGradeChips();
+  if (earned) TRACKER_STATE.earned.add(Number(id));
+  else TRACKER_STATE.earned.delete(Number(id));
+  syncPlatinumLock();
+  saveProgress();
+  paintProgressCard();
+  paintGradeCounters();
   paintChecklist();
-  paintRoadmap();
-  paintNextUp();
-  detail.paint();
-  if (earned && session.earned.size === guide.trophies.length) toast('Platinum earned. Leonida legend!');
-}function paintNextUp() {
-  const list = dom['next-up-list'];
+  renderRoadmapStages();
+  renderNextUpQueue();
+  GUIDE_PANE.render();
+  if (earned && TRACKER_STATE.earned.size === TROPHY_REGISTER.trophies.length) showToast('Platinum earned. Leonida legend!');
+}
+
+function renderNextUpQueue() {
+  const list = DOM_BY_ID['next-up-list'];
   if (!list) return;
-  const unearned = guide.roadmapOrder.filter((trophy) => !earnedHas(trophy)).slice(0, 5);
-  const tag = dom['next-up-section'].querySelector('.side-tag');
+  const unearned = TROPHY_REGISTER.roadmapOrder.filter((trophy) => !isTrophyEarned(trophy)).slice(0, 5);
+  const tag = DOM_BY_ID['next-up-section'].querySelector('.side-tag');
   if (tag) tag.textContent = unearned.length + ' unearned';
   list.replaceChildren();
   if (!unearned.length) {
-    list.append(make('li', 'side-note', 'All trophies earned. The platinum is in the checklist.'));
+    list.append(createNode('li', 'side-note', 'All trophies earned. The platinum is in the checklist.'));
     return;
   }
   unearned.forEach((trophy, index) => {
-    const masked = concealed(trophy);
-    const item = make('li');
-    const button = make('button', 'next-item');
+    const masked = isStorySpoilerConcealed(trophy);
+    const item = createNode('li');
+    const button = createNode('button', 'next-item');
     button.type = 'button';
     button.dataset.id = String(trophy.id);
-    button.setAttribute('aria-label', 'Open ' + (masked ? MASK_NAME : trophy.name));
-    const rank = make('span', 'next-rank', String(index + 1));
-    const body = make('span', 'next-body');
+    button.setAttribute('aria-label', 'Open ' + (masked ? SPOILER_MASK_NAME : trophy.name));
+    const rank = createNode('span', 'next-rank', String(index + 1));
+    const body = createNode('span', 'next-body');
     body.append(
-      make('strong', 'next-name', masked ? MASK_NAME : trophy.name),
-      make('span', 'next-stage', stageFor(trophy).title)
+      createNode('strong', 'next-name', masked ? SPOILER_MASK_NAME : trophy.name),
+      createNode('span', 'next-stage', stageForTrophy(trophy).title)
     );
-    button.append(rank, body, make('span', 'next-grade', trophy.grade));
-    button.addEventListener('click', () => detail.openAt(trophy.id, { revealPane: true }));
+    button.append(rank, body, createNode('span', 'next-grade', trophy.grade));
+    button.addEventListener('click', () => GUIDE_PANE.openTrophy(trophy.id, { revealPane: true }));
     item.append(button);
     list.append(item);
   });
 }
 
-function roadmapChip(trophy) {
-  const masked = concealed(trophy);
-  const chip = make('button', 'tchip');
+function renderRoadmapTrophyChip(trophy) {
+  const masked = isStorySpoilerConcealed(trophy);
+  const chip = createNode('button', 'tchip');
   chip.type = 'button';
   chip.dataset.grade = trophy.grade;
-  chip.dataset.earned = String(earnedHas(trophy));
+  chip.dataset.earned = String(isTrophyEarned(trophy));
   chip.dataset.missable = String(trophy.missable === true);
   chip.dataset.hidden = String(masked);
-  chip.setAttribute('aria-label', 'Open guide for ' + (masked ? MASK_NAME : trophy.name) + (earnedHas(trophy) ? ' (earned)' : ''));
+  chip.setAttribute('aria-label', 'Open guide for ' + (masked ? SPOILER_MASK_NAME : trophy.name) + (isTrophyEarned(trophy) ? ' (earned)' : ''));
   chip.append(
-    make('span', 'dot'),
-    fromTemplate('tpl-icon-check', 'check'),
-    fromTemplate('tpl-icon-lock', 'chip-lock'),
-    make('span', '', masked ? MASK_CHIP : trophy.name)
+    createNode('span', 'dot'),
+    cloneTemplateIcon('tpl-icon-check', 'check'),
+    cloneTemplateIcon('tpl-icon-lock', 'chip-lock'),
+    createNode('span', '', masked ? SPOILER_MASK_CHIP : trophy.name)
   );
   chip.addEventListener('click', () => {
-    setView('checklist');
-    detail.openAt(trophy.id, { revealPane: true });
+    selectView('checklist');
+    GUIDE_PANE.openTrophy(trophy.id, { revealPane: true });
   });
   return chip;
 }
 
-function summaryPill(value, label) {
-  const pill = make('span', 'summary-pill');
-  pill.append(make('strong', '', String(value)), document.createTextNode(' ' + label));
+function renderSummaryPill(value, label) {
+  const pill = createNode('span', 'summary-pill');
+  pill.append(createNode('strong', '', String(value)), document.createTextNode(' ' + label));
   return pill;
 }
 
-function stageCard(stage, position) {
+function renderRoadmapStage(stage, position) {
   const names = stage.trophies || [];
-  const matched = names.map((name) => guide.byName.get(name)).filter(Boolean);
-  const done = matched.filter(earnedHas).length;
-  const card = make('li', 'stage');
+  const matched = names.map((name) => TROPHY_REGISTER.byName.get(name)).filter(Boolean);
+  const done = matched.filter(isTrophyEarned).length;
+  const card = createNode('li', 'stage');
   if (matched.length && done === matched.length) card.classList.add('is-complete');
-  const head = make('div', 'stage-head');
-  head.append(make('span', 'stage-num', 'Stage ' + position));
-  const titleWrap = make('div');
-  titleWrap.append(make('h3', 'stage-title', stage.title));
+  const head = createNode('div', 'stage-head');
+  head.append(createNode('span', 'stage-num', 'Stage ' + position));
+  const titleWrap = createNode('div');
+  titleWrap.append(createNode('h3', 'stage-title', stage.title));
   head.append(titleWrap);
-  const tally = make('span', 'stage-progress');
+  const tally = createNode('span', 'stage-progress');
   tally.append(document.createTextNode(done + ' / ' + matched.length));
-  const mini = make('span', 'mini-bar');
-  const fill = make('span');
+  const mini = createNode('span', 'mini-bar');
+  const fill = createNode('span');
   fill.style.width = matched.length ? Math.round((done / matched.length) * 100) + '%' : '0%';
   mini.append(fill);
   tally.append(mini);
   head.append(tally);
-  card.append(head, make('p', 'stage-why', stage.why));
-  const chips = make('div', 'chips');
+  card.append(head, createNode('p', 'stage-why', stage.why));
+  const chips = createNode('div', 'chips');
   for (const name of names) {
-    const trophy = guide.byName.get(name);
-    chips.append(trophy ? roadmapChip(trophy) : make('span', 'chip', name));
+    const trophy = TROPHY_REGISTER.byName.get(name);
+    chips.append(trophy ? renderRoadmapTrophyChip(trophy) : createNode('span', 'chip', name));
   }
   card.append(chips);
   return card;
 }
 
-function paintRoadmap() {
-  const root = dom['roadmap-root'];
+function renderRoadmapStages() {
+  const root = DOM_BY_ID['roadmap-stages-to-platinum'];
   if (!root) return;
   root.replaceChildren();
-  const plan = guide.roadmap;
+  const plan = TROPHY_REGISTER.roadmap;
   if (!plan) return;
-  const head = make('div', 'roadmap-head');
-  const intro = make('div');
+  const head = createNode('div', 'roadmap-head');
+  const intro = createNode('div');
   intro.append(
-    make('h2', 'roadmap-title', 'The road to the platinum'),
-    make('p', 'roadmap-sub', 'Work top to bottom through ' + guide.stages.length + ' stages, from the first mission to "' + (plan.platinum || 'the platinum') + '". Ticks here and in the checklist share one save.')
+    createNode('h2', 'roadmap-title', 'The road to the platinum'),
+    createNode('p', 'roadmap-sub', 'Work top to bottom through ' + TROPHY_REGISTER.stages.length + ' stages, from the first mission to "' + (plan.platinum || 'the platinum') + '". Ticks here and in the checklist share one save.')
   );
-  const summary = make('div', 'roadmap-summary');
+  const summary = createNode('div', 'roadmap-summary');
   summary.append(
-    summaryPill(guide.trophies.length, 'trophies'),
-    summaryPill(session.earned.size, 'earned'),
-    summaryPill((plan.missables || []).length, 'missables'),
-    summaryPill(guide.stages.length, 'stages')
+    renderSummaryPill(TROPHY_REGISTER.trophies.length, 'trophies'),
+    renderSummaryPill(TRACKER_STATE.earned.size, 'earned'),
+    renderSummaryPill((plan.missables || []).length, 'missables'),
+    renderSummaryPill(TROPHY_REGISTER.stages.length, 'stages')
   );
   head.append(intro, summary);
   root.append(head);
-  const stages = make('ol', 'stages');
-  guide.stages.forEach((stage, index) => stages.append(stageCard(stage, index + 1)));
+  const stages = createNode('ol', 'stages');
+  TROPHY_REGISTER.stages.forEach((stage, index) => stages.append(renderRoadmapStage(stage, index + 1)));
   root.append(stages);
-  const missables = make('section', 'info-card info-card--warn');
-  const missablesTitle = make('h3');
-  missablesTitle.append(fromTemplate('tpl-icon-warning'), document.createTextNode('Missable trophies'));
-  missables.append(missablesTitle, make('p', '', 'These can be lost for good if their story window closes. Keep a manual save before each one and do not overwrite it until the trophy has popped.'));
-  const missableChips = make('div', 'chips');
+  const missables = DOM_BY_ID['roadmap-missables-list'] || createNode('section', 'info-card info-card--warn');
+  missables.className = 'info-card info-card--warn';
+  missables.id = 'roadmap-missables-list';
+  missables.hidden = false;
+  missables.setAttribute('aria-label', 'missables list, trophies with a closing story window');
+  missables.replaceChildren();
+  const missablesTitle = createNode('h3');
+  missablesTitle.append(cloneTemplateIcon('tpl-icon-warning'), document.createTextNode('Missable trophies'));
+  const missableWarning = createNode('p', '', 'These can be lost for good if their story window closes. Keep a manual save before each one and do not overwrite it until the trophy has popped.');
+  missableWarning.id = 'roadmap-missable-window-warning';
+  missableWarning.setAttribute('aria-label', 'missable window warning, keep a manual save before each one');
+  missables.append(missablesTitle, missableWarning);
+  const missableChips = createNode('div', 'chips');
+  missableChips.id = 'roadmap-missable-trophies';
   for (const name of plan.missables || []) {
-    const trophy = guide.byName.get(name);
-    if (trophy) missableChips.append(roadmapChip(trophy));
+    const trophy = TROPHY_REGISTER.byName.get(name);
+    if (trophy) missableChips.append(renderRoadmapTrophyChip(trophy));
   }
   missables.append(missableChips);
   root.append(missables);
-  const notes = make('section', 'info-card');
-  const notesTitle = make('h3');
-  notesTitle.append(sprite('i-info'), document.createTextNode('Route notes'));
-  const notesList = make('ul', 'notes-list');
-  for (const note of plan.notes || []) notesList.append(make('li', '', note));
+  const notes = createNode('section', 'info-card');
+  const notesTitle = createNode('h3');
+  notesTitle.append(createSpriteIcon('i-info'), document.createTextNode('Route notes'));
+  const notesList = createNode('ul', 'notes-list');
+  for (const note of plan.notes || []) notesList.append(createNode('li', '', note));
   notes.append(notesTitle, notesList);
   root.append(notes);
-  root.append(make('p', 'roadmap-foot', 'Every chip opens the full guide. Progress lives in this browser; export a JSON backup before clearing site data.'));
-}function paintSources() {
-  const list = dom['sources-list'];
+  root.append(createNode('p', 'roadmap-foot', 'Every chip opens the full guide. Progress lives in this browser; export a JSON backup before clearing site data.'));
+}
+
+function renderSourceRegister() {
+  const list = DOM_BY_ID['sources-read-with-dates'];
   if (!list) return;
   list.replaceChildren();
-  const total = guide.trophies.length;
-  for (const source of guide.sources) {
-    const cited = guide.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.map(Number).includes(Number(source.id))).length;
-    const row = make('li', 'source-row');
-    const top = make('div', 'source-row-top');
-    top.append(make('span', 'chip chip--id', '[' + source.id + ']'), make('strong', '', source.title));
-    const link = make('a', '', source.url);
+  const total = TROPHY_REGISTER.trophies.length;
+  for (const source of SOURCE_REGISTER.sources) {
+    const cited = TROPHY_REGISTER.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.map(Number).includes(Number(source.id))).length;
+    const row = createNode('li', 'source-row');
+    const top = createNode('div', 'source-row-top');
+    top.append(createNode('span', 'chip chip--id', '[' + source.id + ']'), createNode('strong', '', source.title));
+    const link = createNode('a', '', source.url);
     link.href = source.url;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
-    const meta = make('div', 'source-meta', source.kind + ' · read ' + formatReadDate(source.read) + ' · cited by ' + cited + '/' + total + ' guides');
+    const meta = createNode('div', 'source-meta', source.kind + ' · read ' + formatSourceReadDate(source.read) + ' · cited by ' + cited + '/' + total + ' guides');
     row.append(top, link, meta);
     list.append(row);
   }
-  const summary = dom['sources-summary'];
+  const summary = DOM_BY_ID['sources-summary'];
   if (summary) {
     summary.replaceChildren(
-      summaryPill(guide.sources.length, 'sources'),
-      summaryPill(total, 'trophies'),
-      summaryPill(guide.trophies.reduce((sum, trophy) => sum + (trophy.steps || []).length, 0), 'steps'),
-      summaryPill(guide.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.length > 0).length, 'guides with sources')
+      renderSummaryPill(SOURCE_REGISTER.sources.length, 'sources'),
+      renderSummaryPill(total, 'trophies'),
+      renderSummaryPill(TROPHY_REGISTER.trophies.reduce((sum, trophy) => sum + (trophy.steps || []).length, 0), 'steps'),
+      renderSummaryPill(TROPHY_REGISTER.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.length > 0).length, 'guides with sources')
     );
   }
 }
 
-function paintAudit() {
-  const total = guide.trophies.length;
-  const official = guide.trophies.filter((trophy) => trophy.name && trophy.description && trophy.grade).length;
-  const counts = Object.fromEntries(GRADE_ORDER.map((grade) => [grade, guide.trophies.filter((trophy) => trophy.grade === grade).length]));
-  const hidden = guide.trophies.filter((trophy) => trophy.hidden === true).length;
+const AUDIT_FACTS = [
+  { id: 'audit-official-list-coverage', legacyId: 'audit-official', title: 'Trophies with an official name, description and grade.' },
+  { id: 'audit-grade-and-psn-hidden-counts', legacyId: 'audit-grades', title: 'Platinum, gold, silver and bronze counts, plus PSN-hidden flags.' },
+  { id: 'audit-cited-step-coverage', legacyId: 'audit-steps', title: 'Steps whose src names an id in the source register.' },
+  { id: 'audit-sourced-guide-coverage', legacyId: 'audit-guides', title: 'Trophies with a non-empty guide and at least one valid cited source.' },
+  { id: 'audit-source-register-read-dates', legacyId: 'audit-sources', title: 'Rows in the source register and the date it was read.' },
+  { id: 'audit-roadmap-missable-coverage', legacyId: 'audit-missables', title: 'Trophies in the roadmap missable list.' },
+  { id: 'audit-trophy-missable-flags', legacyId: 'audit-flags', title: 'Trophies flagged missable in the trophy list.' },
+];
+
+function paintAuditRibbon() {
+  const total = TROPHY_REGISTER.trophies.length;
+  const official = TROPHY_REGISTER.trophies.filter((trophy) => trophy.name && trophy.description && trophy.grade).length;
+  const counts = Object.fromEntries(TROPHY_GRADES.map((grade) => [grade, TROPHY_REGISTER.trophies.filter((trophy) => trophy.grade === grade).length]));
+  const hidden = TROPHY_REGISTER.trophies.filter((trophy) => trophy.hidden === true).length;
   let steps = 0;
   let cited = 0;
-  for (const trophy of guide.trophies) {
+  for (const trophy of TROPHY_REGISTER.trophies) {
     for (const step of trophy.steps || []) {
       steps += 1;
-      if (step && guide.sourceIds.has(Number(step.src))) cited += 1;
+      if (step && SOURCE_REGISTER.ids.has(Number(step.src))) cited += 1;
     }
   }
-  const guidesCited = guide.trophies.filter((trophy) => {
+  const guidesCited = TROPHY_REGISTER.trophies.filter((trophy) => {
     const sources = Array.isArray(trophy.sources) ? trophy.sources : [];
-    return sources.length > 0 && sources.every((id) => guide.sourceIds.has(Number(id))) && typeof trophy.guide === 'string' && trophy.guide.trim() !== '';
+    return sources.length > 0 && sources.every((id) => SOURCE_REGISTER.ids.has(Number(id))) && typeof trophy.guide === 'string' && trophy.guide.trim() !== '';
   }).length;
-  const possibleMissables = guide.roadmap && Array.isArray(guide.roadmap.missables) ? guide.roadmap.missables.length : 0;
-  const missableFlags = guide.trophies.filter((trophy) => trophy.missable === true).length;
-  const facts = {
-    'audit-official': official + '/' + total + ' official fields',
-    'audit-grades': counts.platinum + 'P · ' + counts.gold + 'G · ' + counts.silver + 'S · ' + counts.bronze + 'B · ' + hidden + ' PSN-hidden',
-    'audit-steps': cited + '/' + steps + ' steps cited',
-    'audit-guides': guidesCited + '/' + total + ' guides sourced',
-    'audit-sources': guide.sources.length + ' sources · read ' + formatReadDate(guide.readDate),
-    'audit-missables': possibleMissables + ' possible missables',
-    'audit-flags': missableFlags + ' missable flags',
+  const possibleMissables = TROPHY_REGISTER.roadmap && Array.isArray(TROPHY_REGISTER.roadmap.missables) ? TROPHY_REGISTER.roadmap.missables.length : 0;
+  const missableFlags = TROPHY_REGISTER.trophies.filter((trophy) => trophy.missable === true).length;
+  const values = {
+    'audit-official-list-coverage': official + '/' + total + ' official fields',
+    'audit-grade-and-psn-hidden-counts': counts.platinum + 'P · ' + counts.gold + 'G · ' + counts.silver + 'S · ' + counts.bronze + 'B · ' + hidden + ' PSN-hidden',
+    'audit-cited-step-coverage': cited + '/' + steps + ' steps cited',
+    'audit-sourced-guide-coverage': guidesCited + '/' + total + ' guides sourced',
+    'audit-source-register-read-dates': SOURCE_REGISTER.sources.length + ' sources · read ' + formatSourceReadDate(SOURCE_REGISTER.readDate),
+    'audit-roadmap-missable-coverage': possibleMissables + ' possible missables',
+    'audit-trophy-missable-flags': missableFlags + ' missable flags',
   };
-  const titles = {
-    'audit-official': 'Trophies with an official name, description and grade.',
-    'audit-grades': 'Platinum, gold, silver and bronze counts, plus PSN-hidden flags.',
-    'audit-steps': 'Steps whose src names an id in the source register.',
-    'audit-guides': 'Trophies with a non-empty guide and at least one valid cited source.',
-    'audit-sources': 'Rows in the source register and the date it was read.',
-    'audit-missables': 'Trophies in the roadmap missable list.',
-    'audit-flags': 'Trophies flagged missable in the trophy list.',
-  };
-  for (const [id, text] of Object.entries(facts)) {
-    if (!dom[id]) continue;
-    dom[id].textContent = text;
-    dom[id].title = titles[id] || '';
+  for (const fact of AUDIT_FACTS) {
+    const node = DOM_BY_ID[fact.legacyId];
+    if (!node) continue;
+    node.textContent = values[fact.id];
+    node.title = fact.title;
   }
-  if (dom['brand-sub']) dom['brand-sub'].textContent = total + ' trophies \u00b7 ' + cited + ' cited steps \u00b7 ' + missableFlags + ' missables';
-  dom['audit-strip'].dataset.ready = 'true';
-}let searchTimer = 0;
-let toastTimer = 0;
+  if (DOM_BY_ID['brand-sub']) DOM_BY_ID['brand-sub'].textContent = total + ' trophies \u00b7 ' + cited + ' cited steps \u00b7 ' + missableFlags + ' missables';
+  DOM_BY_ID['audit-strip'].dataset.ready = 'true';
+}
 
-function toast(message) {
-  const node = dom['toast'];
+let searchDebounceTimer = 0;
+let toastHideTimer = 0;
+
+function showToast(message) {
+  const node = DOM_BY_ID['toast'];
   node.textContent = message;
   node.classList.add('is-visible');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => node.classList.remove('is-visible'), TOAST_LINGER_MS);
+  clearTimeout(toastHideTimer);
+  toastHideTimer = setTimeout(() => node.classList.remove('is-visible'), TOAST_VISIBLE_MILLISECONDS);
 }
 
-function setView(view) {
-  if (!VIEW_NAMES.includes(view)) view = 'checklist';
-  session.view = view;
-  persist();
-  for (const name of VIEW_NAMES) {
+function selectView(view) {
+  if (!DASHBOARD_VIEWS.includes(view)) view = 'checklist';
+  TRACKER_STATE.view = view;
+  saveProgress();
+  for (const name of DASHBOARD_VIEWS) {
     const selected = name === view;
-    const tab = dom['tab-' + name];
+    const tab = DOM_BY_ID['tab-' + name];
     tab.setAttribute('aria-selected', String(selected));
     tab.tabIndex = selected ? 0 : -1;
-    dom['panel-' + name].hidden = !selected;
+    DOM_BY_ID['panel-' + name].hidden = !selected;
   }
 }
 
-function setSpoiler(on) {
-  session.spoiler = on;
-  detail.revealed.clear();
-  persist();
+function concealSpoilers(on) {
+  TRACKER_STATE.spoiler = on;
+  GUIDE_PANE.revealed.clear();
+  saveProgress();
   syncFilterControls();
   paintChecklist();
-  paintRoadmap();
-  paintNextUp();
-  detail.paint();
+  renderRoadmapStages();
+  renderNextUpQueue();
+  GUIDE_PANE.render();
 }
 
 function resetFilters() {
-  clearTimeout(searchTimer);
-  session.filters = blankFilters();
-  persist();
+  clearTimeout(searchDebounceTimer);
+  TRACKER_STATE.filters = emptyFilterState();
+  saveProgress();
   syncFilterControls();
-  paintGradeChips();
+  paintGradeCounters();
   paintChecklist();
-  toast('Filters cleared');
+  showToast('Filters cleared');
 }
 
 function exportProgress() {
@@ -763,11 +832,11 @@ function exportProgress() {
     app: 'gta6-trophy-guide',
     version: 1,
     exportedAt: new Date().toISOString(),
-    total: guide.trophies.length,
-    earned: sortedEarned(),
-    spoiler: session.spoiler,
-    filters: session.filters,
-    tab: session.view,
+    total: TROPHY_REGISTER.trophies.length,
+    earned: sortedEarnedIds(),
+    spoiler: TRACKER_STATE.spoiler,
+    filters: TRACKER_STATE.filters,
+    tab: TRACKER_STATE.view,
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -778,10 +847,10 @@ function exportProgress() {
   anchor.click();
   anchor.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
-  toast('Progress exported');
+  showToast('Progress exported');
 }
 
-function decodeImport(text) {
+function parseProgressImport(text) {
   const raw = JSON.parse(text);
   const payload = Array.isArray(raw) ? { earned: raw } : raw;
   if (!payload || typeof payload !== 'object' || !Array.isArray(payload.earned)) {
@@ -789,160 +858,164 @@ function decodeImport(text) {
   }
   const earned = new Set();
   for (const entry of payload.earned) {
-    const id = coerceId(entry);
-    if (!Number.isInteger(id) || !guide.knownIds.has(id)) throw new Error('unknown trophy id ' + JSON.stringify(entry));
+    const id = coerceTrophyId(entry);
+    if (!Number.isInteger(id) || !TROPHY_REGISTER.knownIds.has(id)) throw new Error('unknown trophy id ' + JSON.stringify(entry));
     earned.add(id);
   }
   return {
     earned,
     spoiler: payload.spoiler === true,
-    filters: cleanFilters(payload.filters),
-    view: VIEW_NAMES.includes(payload.tab) ? payload.tab : session.view,
+    filters: sanitiseFilters(payload.filters),
+    view: DASHBOARD_VIEWS.includes(payload.tab) ? payload.tab : TRACKER_STATE.view,
   };
 }
 
 async function importProgress(file) {
   try {
-    const parsed = decodeImport(await file.text());
-    session.earned = parsed.earned;
-    enforcePlatinumGate();
-    session.spoiler = parsed.spoiler;
-    session.filters = parsed.filters;
-    session.view = parsed.view;
-    detail.revealed.clear();
-    persist();
+    const parsed = parseProgressImport(await file.text());
+    TRACKER_STATE.earned = parsed.earned;
+    syncPlatinumLock();
+    TRACKER_STATE.spoiler = parsed.spoiler;
+    TRACKER_STATE.filters = parsed.filters;
+    TRACKER_STATE.view = parsed.view;
+    GUIDE_PANE.revealed.clear();
+    saveProgress();
     syncFilterControls();
-    paintSummary();
-    paintGradeChips();
+    paintProgressCard();
+    paintGradeCounters();
     paintChecklist();
-    paintRoadmap();
-    paintNextUp();
-    detail.paint();
-    setView(parsed.view);
-    toast('Imported ' + session.earned.size + ' earned trophies');
+    renderRoadmapStages();
+    renderNextUpQueue();
+    GUIDE_PANE.render();
+    selectView(parsed.view);
+    showToast('Imported ' + TRACKER_STATE.earned.size + ' earned trophies');
   } catch (error) {
-    toast('Import failed: ' + (error && error.message ? error.message : 'invalid file'));
+    showToast('Import failed: ' + (error && error.message ? error.message : 'invalid file'));
   }
 }
 
 function resetProgress() {
-  session.earned = new Set();
-  detail.revealed.clear();
-  persist();
-  dom['reset-dialog'].close();
-  paintSummary();
-  paintGradeChips();
+  TRACKER_STATE.earned = new Set();
+  GUIDE_PANE.revealed.clear();
+  saveProgress();
+  DOM_BY_ID['reset-dialog'].close();
+  paintProgressCard();
+  paintGradeCounters();
   paintChecklist();
-  paintRoadmap();
-  paintNextUp();
-  detail.paint();
-  toast('Progress reset');
-}function wireEvents() {
-  for (const name of VIEW_NAMES) {
-    const tab = dom['tab-' + name];
-    if (tab) tab.addEventListener('click', () => setView(name));
+  renderRoadmapStages();
+  renderNextUpQueue();
+  GUIDE_PANE.render();
+  showToast('Progress reset');
+}
+
+function wireDashboardEvents() {
+  for (const name of DASHBOARD_VIEWS) {
+    const tab = DOM_BY_ID['tab-' + name];
+    if (tab) tab.addEventListener('click', () => selectView(name));
   }
-  dom['tabs'].addEventListener('keydown', (event) => {
+  DOM_BY_ID['tabs'].addEventListener('keydown', (event) => {
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
     event.preventDefault();
-    const index = VIEW_NAMES.indexOf(session.view);
+    const index = DASHBOARD_VIEWS.indexOf(TRACKER_STATE.view);
     const direction = event.key === 'ArrowRight' ? 1 : -1;
-    const next = VIEW_NAMES[(index + direction + VIEW_NAMES.length) % VIEW_NAMES.length];
-    setView(next);
-    dom['tab-' + next].focus();
+    const next = DASHBOARD_VIEWS[(index + direction + DASHBOARD_VIEWS.length) % DASHBOARD_VIEWS.length];
+    selectView(next);
+    DOM_BY_ID['tab-' + next].focus();
   });
 
-  dom['search'].addEventListener('input', (event) => {
+  DOM_BY_ID['search'].addEventListener('input', (event) => {
     const value = event.target.value;
-    dom['search-clear'].hidden = value.length === 0;
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => {
-      session.filters.query = value;
-      persist();
+    DOM_BY_ID['search-clear'].hidden = value.length === 0;
+    clearTimeout(searchDebounceTimer);
+    searchDebounceTimer = setTimeout(() => {
+      TRACKER_STATE.filters.query = value;
+      saveProgress();
       syncFilterControls();
       paintChecklist();
-    }, SEARCH_DEBOUNCE_MS);
+    }, SEARCH_DEBOUNCE_MILLISECONDS);
   });
-  dom['search-clear'].addEventListener('click', () => {
-    clearTimeout(searchTimer);
-    session.filters.query = '';
-    persist();
+  DOM_BY_ID['search-clear'].addEventListener('click', () => {
+    clearTimeout(searchDebounceTimer);
+    TRACKER_STATE.filters.query = '';
+    saveProgress();
     syncFilterControls();
     paintChecklist();
-    dom['search'].focus();
+    DOM_BY_ID['search'].focus();
   });
-  dom['grade-filter'].addEventListener('change', (event) => {
-    session.filters.grade = event.target.value;
-    persist();
+  DOM_BY_ID['grade-filter'].addEventListener('change', (event) => {
+    TRACKER_STATE.filters.grade = event.target.value;
+    saveProgress();
     syncFilterControls();
-    paintGradeChips();
+    paintGradeCounters();
     paintChecklist();
   });
-  dom['kind-filter'].addEventListener('change', (event) => {
-    session.filters.kind = event.target.value;
-    persist();
-    syncFilterControls();
-    paintChecklist();
-  });
-  dom['hide-completed'].addEventListener('change', (event) => {
-    session.filters.hideCompleted = event.target.checked;
-    persist();
+  DOM_BY_ID['kind-filter'].addEventListener('change', (event) => {
+    TRACKER_STATE.filters.kind = event.target.value;
+    saveProgress();
     syncFilterControls();
     paintChecklist();
   });
-  dom['missables-only'].addEventListener('change', (event) => {
-    session.filters.missablesOnly = event.target.checked;
-    persist();
+  DOM_BY_ID['hide-completed'].addEventListener('change', (event) => {
+    TRACKER_STATE.filters.hideCompleted = event.target.checked;
+    saveProgress();
     syncFilterControls();
     paintChecklist();
   });
-  dom['spoiler-toggle'].addEventListener('change', (event) => setSpoiler(event.target.checked));
-  dom['clear-filters'].addEventListener('click', resetFilters);
-  dom['empty-clear'].addEventListener('click', resetFilters);
+  DOM_BY_ID['missables-only'].addEventListener('change', (event) => {
+    TRACKER_STATE.filters.missablesOnly = event.target.checked;
+    saveProgress();
+    syncFilterControls();
+    paintChecklist();
+  });
+  DOM_BY_ID['spoiler-toggle'].addEventListener('change', (event) => concealSpoilers(event.target.checked));
+  DOM_BY_ID['clear-filters'].addEventListener('click', resetFilters);
+  DOM_BY_ID['empty-clear'].addEventListener('click', resetFilters);
 
-  dom['export-btn'].addEventListener('click', exportProgress);
-  dom['import-btn'].addEventListener('click', () => dom['import-file'].click());
-  dom['import-file'].addEventListener('change', (event) => {
+  DOM_BY_ID['export-progress-json-backup'].addEventListener('click', exportProgress);
+  DOM_BY_ID['import-progress-json-backup'].addEventListener('click', () => DOM_BY_ID['import-file'].click());
+  DOM_BY_ID['import-file'].addEventListener('change', (event) => {
     const file = event.target.files && event.target.files[0];
     event.target.value = '';
     if (file) importProgress(file);
   });
 
-  dom['reset-btn'].addEventListener('click', () => dom['reset-dialog'].showModal());
-  dom['reset-cancel'].addEventListener('click', () => dom['reset-dialog'].close());
-  dom['reset-confirm'].addEventListener('click', resetProgress);
-  dom['reset-dialog'].addEventListener('click', (event) => {
-    if (event.target === dom['reset-dialog']) dom['reset-dialog'].close();
+  DOM_BY_ID['reset-btn'].addEventListener('click', () => DOM_BY_ID['reset-dialog'].showModal());
+  DOM_BY_ID['reset-cancel'].addEventListener('click', () => DOM_BY_ID['reset-dialog'].close());
+  DOM_BY_ID['reset-confirm'].addEventListener('click', resetProgress);
+  DOM_BY_ID['reset-dialog'].addEventListener('click', (event) => {
+    if (event.target === DOM_BY_ID['reset-dialog']) DOM_BY_ID['reset-dialog'].close();
   });
 
-  dom['detail-prev'].addEventListener('click', () => detail.step(-1));
-  dom['detail-next'].addEventListener('click', () => detail.step(1));
-  dom['detail-reveal'].addEventListener('click', () => {
-    const id = detail.currentId();
+  DOM_BY_ID['detail-prev'].addEventListener('click', () => GUIDE_PANE.stepTrophy(-1));
+  DOM_BY_ID['detail-next'].addEventListener('click', () => GUIDE_PANE.stepTrophy(1));
+  DOM_BY_ID['detail-reveal'].addEventListener('click', () => {
+    const id = GUIDE_PANE.currentId();
     if (id === undefined) return;
-    detail.revealed.add(Number(id));
-    detail.paint();
+    GUIDE_PANE.revealed.add(Number(id));
+    GUIDE_PANE.render();
   });
-  dom['detail-close'].addEventListener('click', () => {
-    detail.revealed.clear();
-    detail.paint();
+  DOM_BY_ID['detail-close'].addEventListener('click', () => {
+    GUIDE_PANE.revealed.clear();
+    GUIDE_PANE.render();
   });
-  dom['detail-earned'].addEventListener('change', (event) => {
-    const id = detail.currentId();
-    if (id !== undefined) markTrophy(id, event.target.checked);
+  DOM_BY_ID['detail-earned'].addEventListener('change', (event) => {
+    const id = GUIDE_PANE.currentId();
+    if (id !== undefined) toggleTrophyEarned(id, event.target.checked);
   });
 
   document.addEventListener('keydown', (event) => {
     if (event.key !== '/' || event.metaKey || event.ctrlKey || event.altKey) return;
-    if (dom['reset-dialog'].open) return;
+    if (DOM_BY_ID['reset-dialog'].open) return;
     const target = event.target;
     if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT' || target.isContentEditable)) return;
     event.preventDefault();
-    setView('checklist');
-    dom['search'].focus();
-    dom['search'].select();
+    selectView('checklist');
+    DOM_BY_ID['search'].focus();
+    DOM_BY_ID['search'].select();
   });
-}async function loadGuideData() {
+}
+
+async function loadTrophyRegisters() {
   const [trophyResponse, roadmapResponse, sourceResponse] = await Promise.all([
     fetch('./data/trophies.json'),
     fetch('./data/roadmap.json'),
@@ -957,70 +1030,70 @@ function resetProgress() {
   if (!trophyDoc || !Array.isArray(trophyDoc.trophies) || trophyDoc.trophies.length === 0) {
     throw new Error('trophies.json has no trophy list');
   }
-  guide.trophies = trophyDoc.trophies.slice().sort((left, right) => Number(left.grade === 'platinum') - Number(right.grade === 'platinum') || Number(left.id) - Number(right.id));
-  guide.platinum = guide.trophies.find((trophy) => trophy.grade === 'platinum') || null;
-  guide.byId = new Map(guide.trophies.map((trophy) => [Number(trophy.id), trophy]));
-  guide.byName = new Map(guide.trophies.map((trophy) => [trophy.name, trophy]));
-  guide.knownIds = new Set(guide.byId.keys());
-  guide.positionById = new Map(guide.trophies.map((trophy, index) => [Number(trophy.id), index + 1]));
-  guide.roadmap = roadmapDoc && typeof roadmapDoc === 'object' ? roadmapDoc : null;
-  guide.stages = Array.isArray(roadmapDoc && roadmapDoc.stages) ? roadmapDoc.stages : [];
-  guide.roadmapOrder = [];
-  guide.stageById = new Map();
+  TROPHY_REGISTER.trophies = trophyDoc.trophies.slice().sort((left, right) => Number(left.grade === 'platinum') - Number(right.grade === 'platinum') || Number(left.id) - Number(right.id));
+  TROPHY_REGISTER.platinum = TROPHY_REGISTER.trophies.find((trophy) => trophy.grade === 'platinum') || null;
+  TROPHY_REGISTER.byId = new Map(TROPHY_REGISTER.trophies.map((trophy) => [Number(trophy.id), trophy]));
+  TROPHY_REGISTER.byName = new Map(TROPHY_REGISTER.trophies.map((trophy) => [trophy.name, trophy]));
+  TROPHY_REGISTER.knownIds = new Set(TROPHY_REGISTER.byId.keys());
+  TROPHY_REGISTER.positionById = new Map(TROPHY_REGISTER.trophies.map((trophy, index) => [Number(trophy.id), index + 1]));
+  TROPHY_REGISTER.roadmap = roadmapDoc && typeof roadmapDoc === 'object' ? roadmapDoc : null;
+  TROPHY_REGISTER.stages = Array.isArray(roadmapDoc && roadmapDoc.stages) ? roadmapDoc.stages : [];
+  TROPHY_REGISTER.roadmapOrder = [];
+  TROPHY_REGISTER.stageById = new Map();
   const seen = new Set();
-  for (const stage of guide.stages) {
+  for (const stage of TROPHY_REGISTER.stages) {
     for (const name of stage.trophies || []) {
-      const trophy = guide.byName.get(name);
+      const trophy = TROPHY_REGISTER.byName.get(name);
       if (!trophy) continue;
       const id = Number(trophy.id);
-      guide.stageById.set(id, stage);
+      TROPHY_REGISTER.stageById.set(id, stage);
       if (!seen.has(id)) {
         seen.add(id);
-        guide.roadmapOrder.push(trophy);
+        TROPHY_REGISTER.roadmapOrder.push(trophy);
       }
     }
   }
-  for (const trophy of guide.trophies) {
+  for (const trophy of TROPHY_REGISTER.trophies) {
     const id = Number(trophy.id);
     if (seen.has(id)) continue;
     seen.add(id);
-    guide.roadmapOrder.push(trophy);
+    TROPHY_REGISTER.roadmapOrder.push(trophy);
   }
   const sourceList = Array.isArray(sourceDoc) ? sourceDoc : Array.isArray(sourceDoc && sourceDoc.sources) ? sourceDoc.sources : [];
-  guide.sources = sourceList.slice().sort((left, right) => Number(left.id) - Number(right.id));
-  guide.sourceById = new Map(guide.sources.map((source) => [Number(source.id), source]));
-  guide.sourceIds = new Set(guide.sourceById.keys());
-  guide.readDate = (sourceDoc && typeof sourceDoc.read_date === 'string' ? sourceDoc.read_date : '') || (guide.sources[0] && guide.sources[0].read) || '';
+  SOURCE_REGISTER.sources = sourceList.slice().sort((left, right) => Number(left.id) - Number(right.id));
+  SOURCE_REGISTER.byId = new Map(SOURCE_REGISTER.sources.map((source) => [Number(source.id), source]));
+  SOURCE_REGISTER.ids = new Set(SOURCE_REGISTER.byId.keys());
+  SOURCE_REGISTER.readDate = (sourceDoc && typeof sourceDoc.read_date === 'string' ? sourceDoc.read_date : '') || (SOURCE_REGISTER.sources[0] && SOURCE_REGISTER.sources[0].read) || '';
 }
 
-function initialTrophy() {
-  const unearned = guide.roadmapOrder.filter((trophy) => !earnedHas(trophy));
-  return unearned.find((trophy) => trophy.missable === true) || unearned[0] || guide.platinum || guide.trophies[0] || null;
+function firstTrophyToOpen() {
+  const unearned = TROPHY_REGISTER.roadmapOrder.filter((trophy) => !isTrophyEarned(trophy));
+  return unearned.find((trophy) => trophy.missable === true) || unearned[0] || TROPHY_REGISTER.platinum || TROPHY_REGISTER.trophies[0] || null;
 }
 
-async function boot() {
+async function bootDashboard() {
   try {
-    await loadGuideData();
+    await loadTrophyRegisters();
   } catch (error) {
-    dom['boot'].hidden = true;
-    dom['boot-error'].hidden = false;
-    dom['boot-error-text'].textContent = 'Could not load the guide data: ' + (error && error.message ? error.message : 'unknown error') + '.';
+    DOM_BY_ID['boot'].hidden = true;
+    DOM_BY_ID['boot-error'].hidden = false;
+    DOM_BY_ID['boot-error-text'].textContent = 'Could not load the guide data: ' + (error && error.message ? error.message : 'unknown error') + '.';
     return;
   }
-  readSavedState();
-  wireEvents();
+  loadSavedProgress();
+  wireDashboardEvents();
   syncFilterControls();
-  paintSummary();
-  paintGradeChips();
+  paintProgressCard();
+  paintGradeCounters();
   paintChecklist();
-  paintRoadmap();
-  paintAudit();
-  paintSources();
-  const first = initialTrophy();
-  if (first) detail.openAt(first.id);
-  paintNextUp();
-  setView(session.view);
-  dom['boot'].hidden = true;
+  renderRoadmapStages();
+  paintAuditRibbon();
+  renderSourceRegister();
+  const first = firstTrophyToOpen();
+  if (first) GUIDE_PANE.openTrophy(first.id);
+  renderNextUpQueue();
+  selectView(TRACKER_STATE.view);
+  DOM_BY_ID['boot'].hidden = true;
 }
 
-boot();
+bootDashboard();
