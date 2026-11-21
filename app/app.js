@@ -295,22 +295,21 @@ function renderGuideSourceRow(value) {
   const id = Number(value);
   const source = SOURCE_REGISTER.byId.get(id) || null;
   const item = createNode('li', 'trophy-source');
-  const top = createNode('div', 'trophy-source-top');
-  top.append(createNode('span', 'chip chip--id', '[' + id + ']'));
   if (!source) {
-    top.append(createNode('strong', '', 'Source ' + id));
-    item.append(top);
+    item.title = 'Source ' + id;
+    item.append(createNode('span', 'chip chip--id', '[' + id + ']'), createNode('span', 'source-domain', 'Source ' + id));
     return item;
   }
-  const sourceTitle = createNode('strong', '', source.title);
-  sourceTitle.title = source.title;
-  top.append(sourceTitle);
+  item.title = '[' + id + '] ' + source.title + ' \u2014 ' + source.url;
+  item.append(createNode('span', 'chip chip--id', '[' + id + ']'), document.createTextNode(' '));
   const link = createNode('a', '', sourceDomainLabel(source.url));
   link.href = source.url;
-  link.title = source.url;
+  link.className = 'source-domain';
+  link.title = item.title;
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
-  item.append(top, link, createNode('span', 'source-meta', source.kind + ' · read ' + formatSourceReadDate(source.read)));
+  const sourceTitle = createNode('strong', 'source-title-ref', source.title);
+  item.append(link, document.createTextNode(' '), createNode('span', 'source-kind', source.kind), document.createTextNode(' '), sourceTitle);
   return item;
 }
 
@@ -349,7 +348,7 @@ function renderSourcesForGuide(trophy, masked) {
   const sourcesList = DOM_BY_ID['trophy-sources'];
   sourcesList.replaceChildren();
   if (masked) {
-    sourcesList.append(createNode('li', 'trophy-source muted', 'Source titles are concealed while spoiler mode is on.'));
+    sourcesList.append(createNode('li', 'trophy-source trophy-source--note muted', 'Source titles are concealed while spoiler mode is on.'));
   } else {
     for (const source of sources) sourcesList.append(renderGuideSourceRow(source));
   }
@@ -566,7 +565,7 @@ function toggleTrophyEarned(id, earned) {
 function renderNextUpQueue() {
   const list = DOM_BY_ID['next-up-list'];
   if (!list) return;
-  const unearned = TROPHY_REGISTER.roadmapOrder.filter((trophy) => !isTrophyEarned(trophy)).slice(0, 5);
+  const unearned = TROPHY_REGISTER.roadmapOrder.filter((trophy) => !isTrophyEarned(trophy)).slice(0, 4);
   const tag = DOM_BY_ID['next-up-section'].querySelector('.side-tag');
   if (tag) tag.textContent = unearned.length + ' unearned';
   list.replaceChildren();

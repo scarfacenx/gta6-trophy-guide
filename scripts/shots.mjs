@@ -20,7 +20,7 @@ const chromePath = "C:/Users/Administrator/AppData/Local/BrowserClaw/Application
 const debugPort = 9333;
 const WIDTH = 1024;
 const HEIGHT = 640;
-const JPEG_QUALITY = 82;
+const JPEG_QUALITY = 83;
 const MAX_BYTES = 262144;
 const MAX_LONG_SIDE = 1280;
 const MIN_SHORT_SIDE = 480;
@@ -316,6 +316,32 @@ async function scrollSideToSources(offset = 0) {
   return info;
 }
 
+async function readGuideSourceRows() {
+  return evaluate(`(() => {
+    const pane = document.getElementById("side-pane");
+    const paneBox = pane.getBoundingClientRect();
+    return [...document.querySelectorAll("#trophy-sources li")].map((li) => {
+      const link = li.querySelector("a.source-domain");
+      const kind = li.querySelector(".source-kind");
+      const box = li.getBoundingClientRect();
+      const linkStyle = link ? getComputedStyle(link) : null;
+      return {
+        text: li.textContent.trim().replace(/\\s+/g, " "),
+        shown: li.innerText.trim().replace(/\\s+/g, " "),
+        domain: link ? link.textContent.trim() : "",
+        domainFontSize: linkStyle ? linkStyle.fontSize : "",
+        domainColor: linkStyle ? linkStyle.color : "",
+        kind: kind ? kind.textContent.trim() : "",
+        kindTransform: kind ? getComputedStyle(kind).textTransform : "",
+        titleAttr: li.title,
+        top: Math.round(box.top),
+        bottom: Math.round(box.bottom),
+        visible: box.width > 0 && box.height > 0 && box.top >= paneBox.top - 1 && box.bottom <= paneBox.bottom + 1,
+      };
+    });
+  })()`);
+}
+
 async function showRoadmap() {
   await evaluate(`document.getElementById("tab-roadmap").click()`);
   await waitUntil(
@@ -440,6 +466,10 @@ async function main() {
     nextUp: document.querySelectorAll("#next-up-list li").length,
   }))()`);
   console.log("cover detail " + JSON.stringify({ ...cover, scrollTop: coverDetail.top }));
+  const coverRows = await readGuideSourceRows();
+  console.log("cover source rows " + JSON.stringify(coverRows));
+  if (coverRows.length !== 5 || coverRows.some((row) => !row.visible)) throw new Error("not all five cover source rows are visible");
+  if (cover.nextUp !== 4) throw new Error("expected 4 next-up rows, got " + cover.nextUp);
   await capture("1-checklist.jpg");
 
   // 2: PMA open, with its numbered cited steps and five source rows in focus.
@@ -471,7 +501,17 @@ async function main() {
   })()`);
   console.log("source row " + JSON.stringify(sourceRow));
   console.log("pma detail " + JSON.stringify({ ...pma, detailScroll: pmaDetail.top, sideScroll: pmaSide.top }));
+  const pmaRows = await readGuideSourceRows();
+  console.log("pma source rows " + JSON.stringify(pmaRows));
+  if (pmaRows.length !== 5 || pmaRows.some((row) => !row.visible)) throw new Error("not all five PMA source rows are visible");
   await capture("2-guide-sources.jpg");
+
+  await openTrophy(1, "Vice Got a Price!");
+  await evaluate(`document.getElementById("side-pane").scrollTop = 0`);
+  await sleep(200);
+  const threeSourceRows = await readGuideSourceRows();
+  console.log("three-source rows " + JSON.stringify(threeSourceRows));
+  if (threeSourceRows.length !== 3 || threeSourceRows.some((row) => !row.visible)) throw new Error("not all three source rows are visible");
 
   // 3: roadmap with the seeded 31/55 and all six stages.
   await showRoadmap();
