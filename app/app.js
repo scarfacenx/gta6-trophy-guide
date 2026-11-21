@@ -721,33 +721,40 @@ function renderSourceRegister() {
     if (!groups.has(site)) groups.set(site, []);
     groups.get(site).push(source);
   }
-  const ordered = [...groups.entries()].sort((left, right) => right[1].length - left[1].length || left[0].localeCompare(right[0]));
-  for (const [site, entries] of ordered) {
-    entries.sort((left, right) => Number(left.id) - Number(right.id));
-    const group = createNode('li', 'source-site-group');
-    const head = createNode('div', 'source-site-head');
-    const title = createNode('div', 'source-site-title');
-    title.append(createSpriteIcon('i-info'), createNode('h3', 'source-site-domain', site));
-    const dates = [...new Set(entries.map((entry) => formatSourceReadDate(entry.read)))].join(', ');
-    head.append(title, createNode('span', 'source-site-count', entries.length + ' page' + (entries.length === 1 ? '' : 's') + ' · read ' + dates));
-    const rows = createNode('ul', 'source-list source-site-list' + (entries.length === 1 ? ' source-site-list--single' : ''));
-    for (const source of entries) {
-      const cited = TROPHY_REGISTER.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.map(Number).includes(Number(source.id))).length;
-      const row = createNode('li', 'source-row source-row--dense');
-      const top = createNode('div', 'source-row-top');
-      top.append(createNode('strong', '', source.title));
-      const link = createNode('a', '', site);
-      link.href = source.url;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.title = source.url;
-      const meta = createNode('div', 'source-meta');
-      meta.append(createNode('span', 'chip chip--id', '[' + source.id + ']'), document.createTextNode(' '), link, document.createTextNode(' · ' + source.kind + ' · read ' + formatSourceReadDate(source.read) + ' · cited by ' + cited + '/' + total));
-      row.append(top, meta);
-      rows.append(row);
-    }
-    group.append(head, rows);
-    list.append(group);
+  const readDates = [...new Set(SOURCE_REGISTER.sources.map((source) => String(source.read || '').trim()).filter(Boolean))];
+  const sharedReadDate = readDates.length === 1
+    ? formatSourceReadDate(readDates[0])
+    : SOURCE_REGISTER.readDate
+      ? formatSourceReadDate(SOURCE_REGISTER.readDate)
+      : readDates.map(formatSourceReadDate).join(' / ');
+  const breadth = DOM_BY_ID['sources-breadth'];
+  if (breadth) {
+    const stats = [
+      { value: SOURCE_REGISTER.sources.length, label: 'Pages cited in this register' },
+      { value: groups.size, label: 'Distinct sites backing the guide' },
+      { value: sharedReadDate, label: 'Shared read date for every page' },
+    ];
+    breadth.replaceChildren(...stats.map(({ value, label }) => {
+      const block = createNode('div', 'sources-stat');
+      block.append(createNode('span', 'sources-stat-value', value), createNode('span', 'sources-stat-label', label));
+      return block;
+    }));
+  }
+  for (const source of SOURCE_REGISTER.sources) {
+    const site = sourceDomainLabel(source.url);
+    const row = createNode('li', 'source-row source-row--register');
+    row.title = '[' + source.id + '] ' + source.title + ' \u2014 ' + source.url;
+    const top = createNode('div', 'source-row-top');
+    top.append(createNode('span', 'chip chip--id', '[' + source.id + ']'), createNode('strong', 'source-register-title', source.title));
+    const link = createNode('a', '', site);
+    link.href = source.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.title = source.url;
+    const meta = createNode('div', 'source-meta');
+    meta.append(link, document.createTextNode(' · read ' + formatSourceReadDate(source.read)));
+    row.append(top, meta);
+    list.append(row);
   }
   const summary = DOM_BY_ID['sources-summary'];
   if (summary) {

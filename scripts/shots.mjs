@@ -24,6 +24,7 @@ const JPEG_QUALITY = 82;
 const MAX_BYTES = 262144;
 const MAX_LONG_SIDE = 1280;
 const MIN_SHORT_SIDE = 480;
+const SOURCES_ONLY = process.argv.includes("--only-sources");
 
 const PROGRESS_KEY = "gta6-trophy-progress-v1";
 const PREFS_KEY = "gta6-trophy-guide-prefs-v1";
@@ -352,11 +353,65 @@ async function showRoadmap() {
 async function showSources() {
   await evaluate(`document.getElementById("tab-sources").click()`);
   await waitUntil(
-    () => evaluate(`!document.getElementById("panel-sources").hidden && document.querySelectorAll("#sources-read-with-dates > li.source-site-group").length > 0`),
-    "source register groups"
+    () => evaluate(`!document.getElementById("panel-sources").hidden && document.querySelectorAll("#sources-read-with-dates > li.source-row").length === 24`),
+    "source register rows"
   );
   await evaluate(`document.querySelector("#panel-sources .panel-scroll").scrollTop = 0`);
   await sleep(300);
+}
+
+async function readSourcesRegister() {
+  return evaluate(`(() => {
+    const list = document.getElementById("sources-read-with-dates");
+    const panel = document.querySelector("#panel-sources .panel-scroll");
+    const panelRect = panel.getBoundingClientRect();
+    const rows = [...list.querySelectorAll(":scope > li.source-row")];
+    const fullyInFrame = (node) => {
+      const rect = node.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0 && rect.top >= panelRect.top - 1 && rect.bottom <= panelRect.bottom + 1;
+    };
+    return {
+      earned: document.getElementById("earned-count").textContent.trim(),
+      percent: document.getElementById("percent").textContent.trim(),
+      stats: [...document.querySelectorAll("#sources-breadth .sources-stat")].map((node) => {
+        const value = node.querySelector(".sources-stat-value");
+        const label = node.querySelector(".sources-stat-label");
+        return {
+          text: node.innerText.trim().replace(/\\s+/g, " "),
+          value: value ? value.textContent.trim() : "",
+          label: label ? label.textContent.trim() : "",
+          valueFontSize: value ? parseFloat(getComputedStyle(value).fontSize) : 0,
+          labelFontSize: label ? parseFloat(getComputedStyle(label).fontSize) : 0,
+        };
+      }),
+      columns: getComputedStyle(list).gridTemplateColumns,
+      rows: rows.length,
+      rowsInFrame: rows.filter(fullyInFrame).length,
+      firstTwelveInFrame: rows.length >= 12 && rows.slice(0, 12).every(fullyInFrame),
+      rowsWithLinkAndTitle: rows.filter((row) => {
+        const link = row.querySelector(".source-meta a");
+        return Boolean(link && link.href && link.title);
+      }).length,
+      rowsWithDomainAndDate: rows.filter((row) => row.querySelector(".source-meta a") && /read \\d{2} [A-Z][a-z]{2} \\d{4}/.test(row.querySelector(".source-meta").textContent)).length,
+      titleFontSize: rows[0] ? parseFloat(getComputedStyle(rows[0].querySelector(".source-register-title")).fontSize) : 0,
+      panelScrollTop: Math.round(panel.scrollTop),
+      summary: document.getElementById("sources-summary").textContent.trim(),
+      auditSites: document.getElementById("audit-sites").textContent.trim(),
+      auditBacked: document.getElementById("audit-backed-steps").textContent.trim(),
+    };
+  })()`);
+}
+
+function assertSourcesRegister(state) {
+  if (state.stats.length !== 3) throw new Error("expected 3 breadth stats, got " + state.stats.length);
+  if (state.stats.some((stat) => stat.valueFontSize < 28)) throw new Error("breadth stat values must render at 28px or more");
+  if (state.stats.some((stat) => stat.labelFontSize < 12)) throw new Error("breadth stat labels must render at 12px or more");
+  if (state.rows !== 24) throw new Error("expected 24 register rows, got " + state.rows);
+  if (state.rowsWithLinkAndTitle !== 24) throw new Error("register rows are missing their link or title attribute");
+  if (state.rowsWithDomainAndDate !== 24) throw new Error("register rows are missing a domain or read date");
+  if (state.titleFontSize < 15) throw new Error("register titles must render at 15px or more");
+  if (state.panelScrollTop !== 0) throw new Error("sources panel must be scrolled to its top");
+  if (!state.firstTwelveInFrame) throw new Error("fewer than the first twelve register rows are in frame");
 }
 
 function jpegSize(buffer) {
@@ -414,9 +469,11 @@ async function main() {
   console.log("server ready (spawned by shots.mjs)");
 
   mkdirSync(shotsDir, { recursive: true });
-  for (const name of readdirSync(shotsDir)) {
-    if (name === ".gitkeep") continue;
-    rmSync(join(shotsDir, name), { force: true });
+  if (!SOURCES_ONLY) {
+    for (const name of readdirSync(shotsDir)) {
+      if (name === ".gitkeep") continue;
+      rmSync(join(shotsDir, name), { force: true });
+    }
   }
 
   profile = mkdtempSync(join(tmpdir(), "gta6-shots-"));
@@ -455,6 +512,17 @@ async function main() {
   await loaded;
   await sleep(700);
   await waitForRows();
+
+  if (SOURCES_ONLY) {
+    await seed(COVER_EARNED, { spoiler: false, tab: "sources" });
+    await showSources();
+    const sourcesRegister = await readSourcesRegister();
+    assertSourcesRegister(sourcesRegister);
+    console.log("sources register " + JSON.stringify(sourcesRegister));
+    await capture("3-sources-register.jpg");
+    console.log("sources register screenshot captured within caps");
+    return;
+  }
 
   // 1: the cover dashboard at 31/55, with a trophy open and its cited steps visible.
   await seed(COVER_EARNED, { spoiler: false, tab: "checklist" });
@@ -521,26 +589,11 @@ async function main() {
   console.log("three-source rows " + JSON.stringify(threeSourceRows));
   if (threeSourceRows.length !== 3 || threeSourceRows.some((row) => !row.visible)) throw new Error("not all three source rows are visible");
 
-  // 3: the Sources tab with the whole register grouped by site.
+  // 3: the Sources tab with the breadth header and the whole register.
   await showSources();
-  const sourcesRegister = await evaluate(`(() => ({
-    earned: document.getElementById("earned-count").textContent.trim(),
-    percent: document.getElementById("percent").textContent.trim(),
-    groups: [...document.querySelectorAll("#sources-read-with-dates > li.source-site-group")].map((group) => ({
-      site: group.querySelector(".source-site-domain").textContent.trim(),
-      count: group.querySelectorAll("li.source-row").length,
-      heading: group.querySelector(".source-site-count").textContent.trim(),
-    })),
-    rows: document.querySelectorAll("#sources-read-with-dates li.source-row").length,
-    rowsWithDomainAndDate: [...document.querySelectorAll("#sources-read-with-dates li.source-row")].filter((row) => row.querySelector(".source-meta a") && /read \\d{2} [A-Z][a-z]{2} \\d{4}/.test(row.querySelector(".source-meta").textContent)).length,
-    summary: document.getElementById("sources-summary").textContent.trim(),
-    auditSites: document.getElementById("audit-sites").textContent.trim(),
-    auditBacked: document.getElementById("audit-backed-steps").textContent.trim(),
-  }))()`);
+  const sourcesRegister = await readSourcesRegister();
   if (sourcesRegister.earned !== "31") throw new Error("sources tab lost seeded progress: " + sourcesRegister.earned);
-  if (sourcesRegister.groups.length !== 3) throw new Error("expected 3 site groups, got " + sourcesRegister.groups.length);
-  if (sourcesRegister.rows !== 24) throw new Error("expected 24 register rows, got " + sourcesRegister.rows);
-  if (sourcesRegister.rowsWithDomainAndDate !== 24) throw new Error("register rows are missing a domain or read date");
+  assertSourcesRegister(sourcesRegister);
   console.log("sources register " + JSON.stringify(sourcesRegister));
   await capture("3-sources-register.jpg");
 
