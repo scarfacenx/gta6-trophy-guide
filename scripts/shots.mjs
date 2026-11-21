@@ -564,7 +564,7 @@ async function main() {
     targetVisible: /18\\s+meditations/i.test(document.body.textContent),
   }))()`);
   if (pma.title !== "Positive Mental Attitude") throw new Error("PMA did not open");
-  if (pma.steps !== 4) throw new Error("expected 4 PMA steps, got " + pma.steps);
+  if (pma.steps !== 9) throw new Error("expected 9 PMA steps, got " + pma.steps);
   if (pma.sources.length !== 6) throw new Error("expected 6 PMA source rows, got " + pma.sources.length);
   const sourceRow = await evaluate(`(() => {
     const row = document.querySelector("#trophy-sources li");

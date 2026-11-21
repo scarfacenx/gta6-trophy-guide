@@ -36,6 +36,26 @@
         {
           "text": "Claim the platinum after the other 54 have popped.",
           "src": 2
+        },
+        {
+          "text": "The official list has 55 offline trophies: 1 platinum, 2 gold, 6 silver and 46 bronze, with no online trophies.",
+          "src": 2
+        },
+        {
+          "text": "The roadmap rates the platinum 4/10 and about 200 hours.",
+          "src": 2
+        },
+        {
+          "text": "There is no mission replay, so keep manual saves; the game allows 15 manual slots plus one autosave.",
+          "src": 2
+        },
+        {
+          "text": "Cheats disable trophies and saving, so leave them off for the platinum run.",
+          "src": 2
+        },
+        {
+          "text": "The story takes 60-80 hours; the 100% checklist is unlocked afterward under Progress > Stats.",
+          "src": 2
         }
       ],
       "hidden": true
@@ -75,6 +95,26 @@
         {
           "text": "The end-of-mission screen lists Jason's House in Key Lento as the reward, and finishing that screen is what pops the trophy.",
           "src": 18
+        },
+        {
+          "text": "Gone Fishing is the 2nd main mission, set in Mariana County and given by Cal.",
+          "src": 18
+        },
+        {
+          "text": "Gone Fishing starts immediately after the Prologue and is played as Jason.",
+          "src": 18
+        },
+        {
+          "text": "Jason rescues Donnie from the Kingfishers gang in Pelican Valley, then flies the sea plane back to Brian's Marina.",
+          "src": 18
+        },
+        {
+          "text": "The mission's only reward line is Jason's House in Key Lento; no cash or vehicle is listed.",
+          "src": 18
+        },
+        {
+          "text": "Donnie is held in a shack inside the Kingfishers' camp, which you can clear without raising the alarm.",
+          "src": 18
         }
       ],
       "hidden": false
@@ -110,6 +150,22 @@
         {
           "text": "Finish that mission to let the Chapter 1 trophy register.",
           "src": 2
+        },
+        {
+          "text": "Chapter 1 opens with Gone Fishing and closes with Discharge Time.",
+          "src": 3
+        },
+        {
+          "text": "Chapter 2 opens with What's in the Bag?; that mission is the actual unlock trigger.",
+          "src": 3
+        },
+        {
+          "text": "Chapter 1 also contains the named missions Down to Earth, Island Dreams and Feng Shui.",
+          "src": 3
+        },
+        {
+          "text": "The Prologue is the 1st main mission and hands straight into Gone Fishing.",
+          "src": 22
         }
       ],
       "hidden": false
@@ -144,6 +200,22 @@
         {
           "text": "Confirm the trophy after that mission; it cannot be missed.",
           "src": 2
+        },
+        {
+          "text": "Chapter 2 opens with What's in the Bag? and runs through Moses, Daily Driver, Breakfast Run and Coffee Break.",
+          "src": 3
+        },
+        {
+          "text": "Chapter 2 ends with Checking Out (Move to Vice City); the trophy does not pop at that boundary.",
+          "src": 3
+        },
+        {
+          "text": "The unlock trigger is Welcome to Vice City, the first Chapter 3 main mission.",
+          "src": 3
+        },
+        {
+          "text": "Breakfast Run is the 39th main mission, starts at Starlet Motel in Kelly County and rewards the Trust trophy.",
+          "src": 19
         }
       ],
       "hidden": false
@@ -178,6 +250,22 @@
         {
           "text": "Complete Another Life to trigger the Chapter 3 trophy.",
           "src": 2
+        },
+        {
+          "text": "Chapter 3 opens with Welcome to Vice City and includes The Cartel Heist, Here, Kitty Kitty and Yasmani's Jewelry Jobs.",
+          "src": 3
+        },
+        {
+          "text": "The Cartel Heist is the 74th main mission, starts in Vice City's Stockyard and pays $120,000.",
+          "src": 20
+        },
+        {
+          "text": "Chapter 4 opens with Ocean Beach and then Another Life; the second of those triggers this trophy.",
+          "src": 3
+        },
+        {
+          "text": "Chapter 3 also contains Clonin' Keys, Makin' GS and Credit Check, which unlock later robbery content.",
+          "src": 3
         }
       ],
       "hidden": false
@@ -211,6 +299,22 @@
         {
           "text": "Wait for the mission-complete screen; the trophy is automatic.",
           "src": 2
+        },
+        {
+          "text": "Chapter 4 opens with Ocean Beach and Another Life and includes Child's Play, Headliners and VCIA Takedown.",
+          "src": 3
+        },
+        {
+          "text": "VCIA Takedown is the airport heist strand, starting with Making Gainz and ending with the titled mission.",
+          "src": 3
+        },
+        {
+          "text": "Starting From Zero is the final Chapter 4 mission and the unlock point for this trophy.",
+          "src": 3
+        },
+        {
+          "text": "The chapter also holds the optional That's Where The Money Is..., which unlocks large bank vaults.",
+          "src": 3
         }
       ],
       "hidden": false
@@ -243,6 +347,22 @@
         },
         {
           "text": "Let the ending play out and the trophy register.",
+          "src": 2
+        },
+        {
+          "text": "The final mission is Starting From Zero, the same Chapter 4 finale that unlocks Top Of The World, Ma.",
+          "src": 2
+        },
+        {
+          "text": "Chapter 4 runs from Ocean Beach through VCIA Takedown, Headliners and Starting From Zero.",
+          "src": 3
+        },
+        {
+          "text": "Chapter 5 opens afterward with Bird in the Hand, so the story continues past this trophy.",
+          "src": 3
+        },
+        {
+          "text": "The trophy is story-bound and has no optional objective or difficulty requirement.",
           "src": 2
         }
       ],
@@ -282,6 +402,26 @@
         {
           "text": "The end-of-mission screen confirms the Trust trophy along with personal vehicles for Jason and Lucia, which is the moment it pops.",
           "src": 19
+        },
+        {
+          "text": "Breakfast Run is the 39th main mission, starts at Starlet Motel in Kelly County and is played as Lucia.",
+          "src": 19
+        },
+        {
+          "text": "It requires Slam Dunk and a call from Jason; the motel icon turns pink when it is ready.",
+          "src": 19
+        },
+        {
+          "text": "The robbery route is Hank's Waffles diner, then a liquor store, then a thrift store.",
+          "src": 19
+        },
+        {
+          "text": "The escape ends with a 2-star wanted level and the reward line gives Jason and Lucia personal vehicles.",
+          "src": 19
+        },
+        {
+          "text": "Hank's Waffles is the first robbery, and each store gives a 1-minute timer.",
+          "src": 19
         }
       ],
       "hidden": false
@@ -320,6 +460,26 @@
         {
           "text": "The end-of-mission screen shows the $120,000 payout and the Break the Bank trophy, confirming the trophy has popped.",
           "src": 20
+        },
+        {
+          "text": "The Cartel Heist is the 74th main mission, starts in Vice City's Stockyard and is given by Raul.",
+          "src": 20
+        },
+        {
+          "text": "It requires Hidden Charges and the rest of Chapter 3's main missions before Raul calls.",
+          "src": 20
+        },
+        {
+          "text": "The target is Sinfrontera National Bank; destroying all 3 cell towers leaves just under 11 minutes.",
+          "src": 20
+        },
+        {
+          "text": "The reward line lists $120,000 and the Break the Bank trophy, so the payout and trophy pop together.",
+          "src": 20
+        },
+        {
+          "text": "Karim's signal starts the bank move, and the crew secures the backup terminal before opening the vault.",
+          "src": 20
         }
       ],
       "hidden": false
@@ -353,6 +513,22 @@
         {
           "text": "Confirm the trophy after the mission ends.",
           "src": 2
+        },
+        {
+          "text": "Child's Play is the Chapter 4 mission that rescues Rafa from kidnappers.",
+          "src": 3
+        },
+        {
+          "text": "It follows Fresh Evidence (Meet Dre'Quan) in the Chapter 4 mission order.",
+          "src": 3
+        },
+        {
+          "text": "Rafa's Kidnapping and Adventures in Babysitting precede the rescue.",
+          "src": 3
+        },
+        {
+          "text": "Child's Play sits between the VCIA Takedown preparation missions in Chapter 4.",
+          "src": 3
         }
       ],
       "hidden": false
@@ -386,6 +562,22 @@
         {
           "text": "Let the mission-complete screen trigger the trophy.",
           "src": 2
+        },
+        {
+          "text": "Headliners is the Chapter 4 mission described as Help With The Launch Party.",
+          "src": 3
+        },
+        {
+          "text": "It comes after VCIA Takedown's Delivery Method and Team Building in the mission list.",
+          "src": 3
+        },
+        {
+          "text": "Tie Up Loose Ends follows Headliners, before the optional bank mission and Sunset.",
+          "src": 3
+        },
+        {
+          "text": "The Chapter 4 route ends with Starting From Zero after Headliners.",
+          "src": 3
         }
       ],
       "hidden": false
@@ -419,6 +611,22 @@
         {
           "text": "Confirm the trophy when the mission ends.",
           "src": 2
+        },
+        {
+          "text": "VCIA Takedown is the airport heist strand in Chapter 4.",
+          "src": 3
+        },
+        {
+          "text": "The strand starts with Making Gainz (Meet Raul) and Blood Sweat and Gear.",
+          "src": 3
+        },
+        {
+          "text": "It includes Too Much Baggage (Scope Out the Airport) and Close Surveillance.",
+          "src": 3
+        },
+        {
+          "text": "The titled VCIA Takedown mission starts the airport heist, followed by Tie Up Loose Ends.",
+          "src": 3
         }
       ],
       "hidden": false
@@ -452,6 +660,22 @@
         {
           "text": "Let the mission end and the trophy register.",
           "src": 2
+        },
+        {
+          "text": "Operation Savage Glory is a Chapter 5 main mission.",
+          "src": 3
+        },
+        {
+          "text": "Chapter 5 opens with Bird in the Hand and Taking Liberties before Operation Savage Glory.",
+          "src": 3
+        },
+        {
+          "text": "Doggie Bag (Meet Vinny) and VC Baby (Talk to Mattia) come earlier in Chapter 5.",
+          "src": 3
+        },
+        {
+          "text": "Honest Abe, Unfinished Business and The End of the Road follow the trophy mission.",
+          "src": 3
         }
       ],
       "hidden": false
@@ -497,6 +721,26 @@
         {
           "text": "Finish all 100 optional missions; one playthrough is enough.",
           "src": 4
+        },
+        {
+          "text": "The checklist wants 100 optional tasks, 39 of 39 gang operations and 22 of 22 bank jobs.",
+          "src": 4
+        },
+        {
+          "text": "It also wants 34 of 35 Smash 'N' Grabs, 50 of 91 Stick Ups and 8 of 8 vaults.",
+          "src": 4
+        },
+        {
+          "text": "Exploration targets include 30 of 40 races, 42 of 42 shooting medals and 42 of 42 drone races.",
+          "src": 4
+        },
+        {
+          "text": "The story has 5 chapters and the platinum takes about 200 hours, with 100% closer to 60% true completion.",
+          "src": 23
+        },
+        {
+          "text": "The five counties are Mariana, Vice-Dale, Leonard, Kelly and Lummox.",
+          "src": 4
         }
       ],
       "hidden": false
@@ -540,6 +784,26 @@
         {
           "text": "Mix Stunt Jumps, Under the Bridges, Knife Flights and Base Jumps.",
           "src": 2
+        },
+        {
+          "text": "The 397 stunts split into 130 Stunt Jumps, 202 Under the Bridges, 40 Knife Flights and 25 Base Jumps.",
+          "src": 4
+        },
+        {
+          "text": "Stunt Jumps include Mile Zero Air Station Southeast, Saltrock Bridge West and Key Lento Bridge East.",
+          "src": 16
+        },
+        {
+          "text": "Kelly County holds 29 Stunt Jumps, including the Gellhorn International Raceway and Starlet Motel Construction.",
+          "src": 16
+        },
+        {
+          "text": "Trophy progress can be tracked by region under Progress > Activities > Stunts.",
+          "src": 2
+        },
+        {
+          "text": "Map > Exploration > Stunt Spots lists found and completed stunts by their unique names.",
+          "src": 2
         }
       ],
       "hidden": false
@@ -576,6 +840,26 @@
         },
         {
           "text": "Check the tracker again after unfogging new areas.",
+          "src": 2
+        },
+        {
+          "text": "The nine types are fishing, hunting, golf, shooting ranges, pool, basketball, video games, racing and stunts.",
+          "src": 2
+        },
+        {
+          "text": "Most types are introduced by the main story; the rest appear when you unfog the map.",
+          "src": 2
+        },
+        {
+          "text": "The map's blue dumbbell filter marks the activity locations.",
+          "src": 2
+        },
+        {
+          "text": "A single attempt at each type is enough; no gold medal or win threshold is required.",
+          "src": 2
+        },
+        {
+          "text": "Basketball, pool and golf are easy one-attempt fills on the same activity list.",
           "src": 2
         }
       ],
@@ -620,6 +904,26 @@
         {
           "text": "Finish every range for the 100% checklist as well.",
           "src": 4
+        },
+        {
+          "text": "There are 2 ranges: Griffin in north-west Vice City and Rodgers Ranch in north-east Port Gellhorn.",
+          "src": 9
+        },
+        {
+          "text": "Griffin has 6 courses with 3 gold medals each, for 18 of the 42.",
+          "src": 9
+        },
+        {
+          "text": "Rodgers Ranch has 6 courses with 4 gold medals each, for the other 24.",
+          "src": 9
+        },
+        {
+          "text": "Buy a $5 Waiver Pass from each clerk to mark the challenges; rented weapons cost $10.",
+          "src": 9
+        },
+        {
+          "text": "Griffin's courses are 3-Point, Hook, Loop, Maze, Compound and Villa; Rodgers has Market, Zombie, Hunting, Saloon, Cops & Robbers and Alien.",
+          "src": 9
         }
       ],
       "hidden": false
@@ -664,6 +968,26 @@
         {
           "text": "Use the 42 races to cover all 14 locations.",
           "src": 4
+        },
+        {
+          "text": "Each of the 14 locations has 3 time trials, making 42 races.",
+          "src": 10
+        },
+        {
+          "text": "You must beat par on the first 2 races at a location to unlock its third.",
+          "src": 10
+        },
+        {
+          "text": "The locations include Hamlet, Watson Bay, Capri, Buckskin Swamp, Balsero and Downtown.",
+          "src": 10
+        },
+        {
+          "text": "Dalton Island is only reachable by boat or aircraft, unlike the other locations.",
+          "src": 10
+        },
+        {
+          "text": "The remaining locations are Vice Beach, Waning Sands, Ambrosia, Port Gellhorn, Draper Island, Moreau Sawmill and Millport.",
+          "src": 10
         }
       ],
       "hidden": true
@@ -703,6 +1027,26 @@
         {
           "text": "Pick from the 40 unique race locations; repeats do not count.",
           "src": 2
+        },
+        {
+          "text": "There are 40 unique race locations, so winning 20 leaves 20 optional.",
+          "src": 8
+        },
+        {
+          "text": "Hit 'N Run VC supplies 9 races: Salton 3, La Perle 2, Ocean Beach 2 and Gloriana Key 2.",
+          "src": 8
+        },
+        {
+          "text": "Animal Crackers adds 8 races across Grayson, Redshaw's, Ranchers and Big Pine.",
+          "src": 8
+        },
+        {
+          "text": "Gellhorn International Raceway adds 11 races after the Gellhorn Raceway Introduction.",
+          "src": 8
+        },
+        {
+          "text": "Boone Speedway adds 2 races in Hamlet, Ambrosia Raceway 2, and Thrillbilly Mud Club 8.",
+          "src": 8
         }
       ],
       "hidden": true
@@ -736,6 +1080,26 @@
         },
         {
           "text": "Go to the purple icon and beat Cal in the fishing challenge.",
+          "src": 2
+        },
+        {
+          "text": "Feng Shui (Meet Cal) is a Chapter 1 main mission.",
+          "src": 3
+        },
+        {
+          "text": "Cal's challenge is a purple side-task icon on the map, not a main-story marker.",
+          "src": 2
+        },
+        {
+          "text": "The fishing spot is west of Key Lento.",
+          "src": 2
+        },
+        {
+          "text": "Cal's Chapter 1 strand is listed as Catch a Bigger Fish but does not count as a Strangers & Freaks strand.",
+          "src": 3
+        },
+        {
+          "text": "Cal's text arrives some time after Feng Shui, not during the mission.",
           "src": 2
         }
       ],
@@ -780,6 +1144,26 @@
         {
           "text": "If the TV is locked by a story section, come back later.",
           "src": 2
+        },
+        {
+          "text": "The 4 games are Tenebrae Lux, Street Trash III, Time Jackers Rewind and Bang For Your Buck.",
+          "src": 17
+        },
+        {
+          "text": "The first 3 play on the JoySystem console at the TV in your home.",
+          "src": 17
+        },
+        {
+          "text": "Bang For Your Buck is only on arcade machines, such as outside Bargain World in Port Gellhorn.",
+          "src": 17
+        },
+        {
+          "text": "Reach the end of one game; beating every challenge is not required.",
+          "src": 2
+        },
+        {
+          "text": "All 4 games count toward the 100% checklist, but only one needs to be finished for the trophy.",
+          "src": 17
         }
       ],
       "hidden": true
@@ -817,6 +1201,22 @@
         },
         {
           "text": "Come back after the story if you missed the chain.",
+          "src": 2
+        },
+        {
+          "text": "Andy's chain is Lucia-only and marked in Belville during Chapter 3.",
+          "src": 2
+        },
+        {
+          "text": "The five jobs are Climbing the Cellerichain (Parts 1-3), Pay the Cellerica Fee, Peach!, Read the Label and Puff Puff Pass.",
+          "src": 2
+        },
+        {
+          "text": "Puff Puff Pass (Meet at the Warehouse) is the final mission that awards the trophy.",
+          "src": 2
+        },
+        {
+          "text": "The chain remains available after the story, so it is not missable.",
           "src": 2
         }
       ],
@@ -856,6 +1256,22 @@
         {
           "text": "Return after the story if the chain is still open.",
           "src": 2
+        },
+        {
+          "text": "Kenton's chain is marked after Island Dreams by a green KR icon in Key Lento.",
+          "src": 2
+        },
+        {
+          "text": "He wants 7 shipwrecks cleared for his questline.",
+          "src": 2
+        },
+        {
+          "text": "Track the chain under Progress > Characters > Kenton Rees and Progress > Collections > Kenton's Treasures.",
+          "src": 2
+        },
+        {
+          "text": "After Chapter 1 Kenton becomes temporarily unavailable, then returns during Chapters 2-3.",
+          "src": 2
         }
       ],
       "hidden": true
@@ -894,6 +1310,22 @@
         {
           "text": "Return after the story if you have not finished the chain.",
           "src": 2
+        },
+        {
+          "text": "Billy's chain is marked at Thrillbilly Mudclub in Kelly County after Coffee Break.",
+          "src": 2
+        },
+        {
+          "text": "The five jobs are Thrillbillies, Twist Wrist Smash Grab, Mall Rats, The Impaler and Hometown Heroes.",
+          "src": 2
+        },
+        {
+          "text": "Hometown Heroes (Join Billy on a Job) is the final mission that awards the trophy.",
+          "src": 2
+        },
+        {
+          "text": "Mall Rats is marked solo-only in the walkthrough, while the chain stays available after the story.",
+          "src": 3
         }
       ],
       "hidden": true
@@ -930,6 +1362,26 @@
         },
         {
           "text": "Avoid the permanent Irredeemable criminal profile while doing them.",
+          "src": 2
+        },
+        {
+          "text": "Only certain strands count; Kirk, Kyle, Yago and Pilot Pete are confirmed.",
+          "src": 2
+        },
+        {
+          "text": "Kirk's strand is Search for the Skunk Ape, Search for Tree Effigies and Help Kirk Find Mr. Mangrove.",
+          "src": 2
+        },
+        {
+          "text": "Kyle's strand is Check Out McKittrick Farm, Collect Chemicals for Kyle and Buddy?.",
+          "src": 2
+        },
+        {
+          "text": "Yago's strand includes Join a Street Race and Bumper to Bumper; Pilot Pete's starts with The Last Mile.",
+          "src": 2
+        },
+        {
+          "text": "Pilot Pete's strand is The Last Mile: Passing the Torch, Backseat Pilot and Pete's Deliveries.",
           "src": 2
         }
       ],
@@ -968,6 +1420,26 @@
         },
         {
           "text": "Finish the final delivery to close the chain.",
+          "src": 2
+        },
+        {
+          "text": "Randy's green RK icon is in the west of Vice City, and the list lives under Map > Robberies > Randy's Wish List.",
+          "src": 2
+        },
+        {
+          "text": "Clonin' Keys, Makin' GS also unlocks the Key Cloner used for later car thefts.",
+          "src": 2
+        },
+        {
+          "text": "Scan high-end sports cars with WAiNK to check the wishlist, then deliver them in good condition for more pay.",
+          "src": 2
+        },
+        {
+          "text": "The 16 cars include the Pegassi Vitello, Pegassi Infernus, Grotti Itali RSX and Bravado Banshee.",
+          "src": 2
+        },
+        {
+          "text": "Randy marks some wishlist cars automatically, and delivering those reveals new locations.",
           "src": 2
         }
       ],
@@ -1009,6 +1481,26 @@
         {
           "text": "Finish the final Tyrone mission after the story if needed.",
           "src": 2
+        },
+        {
+          "text": "There are 14 Kitty Litter labs, and destroying one pays $2,000 or $2,500 via BuckMe.",
+          "src": 11
+        },
+        {
+          "text": "The story lab is a trailer with pink smoke and yellow tubes; other labs sit in garages and buildings.",
+          "src": 11
+        },
+        {
+          "text": "After enough labs, Tyrone starts Spin on This (Shut Down the Labs), the final mission.",
+          "src": 2
+        },
+        {
+          "text": "Labs are not missable and can still be destroyed in free-roam after the story.",
+          "src": 11
+        },
+        {
+          "text": "Tyrone's labs are purple search areas; the pink gas marks the building to destroy.",
+          "src": 11
         }
       ],
       "hidden": true
@@ -1054,6 +1546,26 @@
         {
           "text": "Sweep the map region by region after the story.",
           "src": 4
+        },
+        {
+          "text": "There are 18 meditations across 10 spots; doing one with both Jason and Lucia counts +2.",
+          "src": 6
+        },
+        {
+          "text": "The Chapter 1 spot is Jason's house balcony, available in the morning after Down to Earth.",
+          "src": 21
+        },
+        {
+          "text": "Named spots include Smooth Sand off Capri, Swamp in Buckskin Swamp and Worn Stone at Camp Moonflower.",
+          "src": 6
+        },
+        {
+          "text": "The final Ascent Mountain meditation appears at Mount Kalaga only after the other spots are done.",
+          "src": 6
+        },
+        {
+          "text": "Meditation progress is under Progress > Collections > Exploration > Meditations and the map filter Meditate Around Leonida.",
+          "src": 6
         }
       ],
       "hidden": false
@@ -1099,6 +1611,22 @@
         {
           "text": "Finish all 15 Bret hunts for the 100% checklist.",
           "src": 4
+        },
+        {
+          "text": "Bret is Jason-only; his text arrives after Chapter 2's Coffee Break.",
+          "src": 2
+        },
+        {
+          "text": "Veteran Hunted (Meet Bret) gives the Killtelligence SM-69 hunting rifle, retrievable from Ammu-Nations lockers.",
+          "src": 2
+        },
+        {
+          "text": "A clean one-shot kill leaves the animal pristine and pays more, but is not required.",
+          "src": 2
+        },
+        {
+          "text": "There are 15 Target Decks, and all 15 are required for the 100% checklist.",
+          "src": 4
         }
       ],
       "hidden": true
@@ -1138,6 +1666,26 @@
         {
           "text": "Confirm the decks are done; 100% completion requires them too.",
           "src": 4
+        },
+        {
+          "text": "There are 18 Collectible Card Sets holding 480 unique cards.",
+          "src": 12
+        },
+        {
+          "text": "The trophy needs 3 complete sets; the 100% checklist needs 15.",
+          "src": 12
+        },
+        {
+          "text": "Named sets include Vice City Flamingos (24 cards), Vice City Narcos (24) and Vice City Manatees (24).",
+          "src": 12
+        },
+        {
+          "text": "Completing 15 sets needs at least 372 of the 480 cards, because set sizes differ.",
+          "src": 12
+        },
+        {
+          "text": "Cards can be sold at any pawn shop but stay in Collections, so selling does not break set progress.",
+          "src": 12
         }
       ],
       "hidden": false
@@ -1181,6 +1729,26 @@
         {
           "text": "Add No Flusher tags to reach the 100 total.",
           "src": 2
+        },
+        {
+          "text": "The scans come in 5 sets: 31 Landmarks, 35 Curiosities, 23 Sculptures and No Flusher Tags.",
+          "src": 7
+        },
+        {
+          "text": "No Flusher Tags are spray-paint markings on the ground in city areas.",
+          "src": 7
+        },
+        {
+          "text": "AHOL Street Art and 1010 Murals use the same scan but do not count toward the 100.",
+          "src": 7
+        },
+        {
+          "text": "A nearby scan gives a controller vibration and a bottom-right prompt before you hold the scan app.",
+          "src": 7
+        },
+        {
+          "text": "The five sets are Landmarks, Curiosities, Sculptures, an unknown set and No Flusher Tags.",
+          "src": 7
         }
       ],
       "hidden": false
@@ -1225,6 +1793,26 @@
         {
           "text": "Use the Completed checkmark to track each one.",
           "src": 2
+        },
+        {
+          "text": "The 80 challenges are split into 8 categories of 10.",
+          "src": 13
+        },
+        {
+          "text": "Combat challenges include Speed Kills (3 enemies in 30 seconds) and Headshots (4 in one Combat Focus).",
+          "src": 13
+        },
+        {
+          "text": "Exploration challenges include Skyscrapers (5 tallest towers) and Collectible Cards in all 5 counties.",
+          "src": 13
+        },
+        {
+          "text": "The 100% checklist needs 70 of 80, leaving 10 skippable challenges.",
+          "src": 4
+        },
+        {
+          "text": "Criminal challenges include Mugging (5 pedestrians) and Cop Car Theft (5 minutes in a stolen cruiser).",
+          "src": 13
         }
       ],
       "hidden": false
@@ -1263,6 +1851,26 @@
         },
         {
           "text": "Escape the police while your partner is with you.",
+          "src": 2
+        },
+        {
+          "text": "The 4-star escape is easiest through the train tunnel north of Ambrosia in Kelly County.",
+          "src": 2
+        },
+        {
+          "text": "The trophy pops when you leave the red heat zone, not when you clear the blue/red search circle.",
+          "src": 2
+        },
+        {
+          "text": "Large bank vault robberies always trigger a 4-star level, so That's Where The Money Is... can unlock it automatically.",
+          "src": 2
+        },
+        {
+          "text": "Call your partner by holding the interaction button; partner free-roam opens after Coffee Break.",
+          "src": 2
+        },
+        {
+          "text": "If a helicopter chases you, shoot it down; a fast sports motorcycle is the recommended escape vehicle.",
           "src": 2
         }
       ],
@@ -1309,6 +1917,26 @@
         {
           "text": "Use an armored vest and sticky bombs to survive the run.",
           "src": 2
+        },
+        {
+          "text": "The trophy pops about half a minute after leaving the third shop.",
+          "src": 2
+        },
+        {
+          "text": "The 3 Jewelry Stores in north Vice City are available after Chapter 3's Yasmani's Jewelry Jobs.",
+          "src": 2
+        },
+        {
+          "text": "Keep the blue/red flashing wanted level, not the red heat level, across all three robberies.",
+          "src": 2
+        },
+        {
+          "text": "Rob a few items and break the back-room safe in each store so the robbery counts.",
+          "src": 2
+        },
+        {
+          "text": "If the trophy does not pop after the third shop, rob a fourth and keep the chase alive.",
+          "src": 2
         }
       ],
       "hidden": true
@@ -1346,6 +1974,22 @@
         {
           "text": "Reach 200 of the 277 base vehicles for the 100% checklist.",
           "src": 4
+        },
+        {
+          "text": "GTA VI ships with 557 vehicles, including cars, bikes, boats, helicopters and planes.",
+          "src": 2
+        },
+        {
+          "text": "Scanning is enough; you do not need to drive the vehicle to discover it.",
+          "src": 2
+        },
+        {
+          "text": "Different regions spawn different models: supercars at Ocean Beach hotels, trucks in Port Gellhorn, basic cars in Key Lento.",
+          "src": 4
+        },
+        {
+          "text": "Check Progress > Vehicles to see category totals.",
+          "src": 2
         }
       ],
       "hidden": false
@@ -1382,6 +2026,26 @@
         },
         {
           "text": "Take down five enemies before the Focus bar empties.",
+          "src": 2
+        },
+        {
+          "text": "Combat Focus slows time and highlights enemy weak spots, and drains the purple bar.",
+          "src": 2
+        },
+        {
+          "text": "The bar only lasts a few seconds, so Adrenaline can extend the window.",
+          "src": 2
+        },
+        {
+          "text": "Criminals at Gang Operations count; soldiers, police and civilians do not.",
+          "src": 2
+        },
+        {
+          "text": "The Duke 556 assault rifle and body armor from Ammu-Nations make the 5-kill run safer.",
+          "src": 2
+        },
+        {
+          "text": "Focus has 4 levels, shown under Touchpad > Jason & Lucia; shooting ranges, golf, pool, fishing and headshots raise it.",
           "src": 2
         }
       ],
@@ -1420,6 +2084,26 @@
         {
           "text": "Take off to trigger the unscheduled departure.",
           "src": 2
+        },
+        {
+          "text": "The target plane is docked at departure terminal E3/E4 at VCIA.",
+          "src": 2
+        },
+        {
+          "text": "Passenger planes parked on the airfield do not work; it must be attached to a boarding bridge.",
+          "src": 2
+        },
+        {
+          "text": "Fly 1 km (0.6 miles) from the airport before the delayed trophy pops.",
+          "src": 2
+        },
+        {
+          "text": "Enter through the fence and boarding-bridge stairs, or on foot through the terminal.",
+          "src": 2
+        },
+        {
+          "text": "Going over the airfield fence is faster than walking through the terminal.",
+          "src": 2
         }
       ],
       "hidden": true
@@ -1456,6 +2140,22 @@
         },
         {
           "text": "Shoot enemies until the trophy appears.",
+          "src": 2
+        },
+        {
+          "text": "Mile Zero Air Station sits on an island at the south-west edge of Mariana County.",
+          "src": 2
+        },
+        {
+          "text": "The tanks are parked in the south of the air base.",
+          "src": 2
+        },
+        {
+          "text": "You can drive through the gate or use the stunt jump by the south-east entrance.",
+          "src": 2
+        },
+        {
+          "text": "Shoot enemies after taking the tank; the trophy is not tied to a mission.",
           "src": 2
         }
       ],
@@ -1494,6 +2194,26 @@
         },
         {
           "text": "Finish the robbery without being detected.",
+          "src": 2
+        },
+        {
+          "text": "Yasmani's Jewelry Jobs unlocks the Snap Gun for silently opening alarmed doors.",
+          "src": 2
+        },
+        {
+          "text": "The back room holds a note with the safe code; use it to open the safe.",
+          "src": 2
+        },
+        {
+          "text": "Destroy the security footage and disable the alarm before leaving.",
+          "src": 2
+        },
+        {
+          "text": "Richardson Jewelry & Diamonds in Vice City is a good target, and the trophy pops shortly after you exit.",
+          "src": 2
+        },
+        {
+          "text": "The Snap Gun stays in inventory permanently after Yasmani's Jewelry Jobs, so no equip step is needed.",
           "src": 2
         }
       ],
@@ -1539,6 +2259,26 @@
         {
           "text": "Repeat until you have robbed five bank vaults and escaped.",
           "src": 2
+        },
+        {
+          "text": "There are 8 large bank vaults; the trophy needs any 5, while the 100% checklist needs all 8.",
+          "src": 14
+        },
+        {
+          "text": "After the intro mission, pay Yasmani $10,000 for security-van tips if his earlier jobs are done.",
+          "src": 2
+        },
+        {
+          "text": "Bring your partner and hand off a bag when you cannot carry more.",
+          "src": 2
+        },
+        {
+          "text": "Each vault pays up to $205,000 and triggers a 4-star wanted level.",
+          "src": 2
+        },
+        {
+          "text": "Yasmani's security-van tips mark the vans with a purple icon.",
+          "src": 2
         }
       ],
       "hidden": false
@@ -1576,6 +2316,26 @@
         {
           "text": "Escape; a large bank-vault robbery also counts.",
           "src": 2
+        },
+        {
+          "text": "The intro mission is That's Where The Money Is... (Wait at the Cafe) at the end of Chapter 4.",
+          "src": 2
+        },
+        {
+          "text": "A large-bank vault robbery also counts as robbing an armored truck.",
+          "src": 2
+        },
+        {
+          "text": "Escape the red heat radius or use a Pay 'n' Spray to finish the robbery.",
+          "src": 2
+        },
+        {
+          "text": "An earlier method is to sticky-bomb an armored truck's rear door; Yasmani's shop stocks the bombs.",
+          "src": 2
+        },
+        {
+          "text": "Large-bank robberies also give 4-star wanted levels, so plan the escape before entering.",
+          "src": 2
         }
       ],
       "hidden": false
@@ -1607,6 +2367,10 @@
         },
         {
           "text": "Check the map for any remaining dark patch.",
+          "src": 2
+        },
+        {
+          "text": "The game has no mission replay, so unfogging after the story is the safe cleanup route.",
           "src": 2
         }
       ],
@@ -1646,6 +2410,26 @@
         {
           "text": "Clear all 39 operations if you are finishing the 100% checklist.",
           "src": 4
+        },
+        {
+          "text": "There are 9 gangs and 39 Illegal Gang Operations in total.",
+          "src": 2
+        },
+        {
+          "text": "One operation per gang is enough for the trophy; the 100% checklist needs all 39.",
+          "src": 2
+        },
+        {
+          "text": "19 of the 39 operations are revealed automatically by story progress.",
+          "src": 4
+        },
+        {
+          "text": "Track the count per gang under Progress > Gangs; the bottom right shows operations robbed.",
+          "src": 2
+        },
+        {
+          "text": "Many gang operations are marked automatically from story progress; the rest appear near their location.",
+          "src": 2
         }
       ],
       "hidden": true
@@ -1717,6 +2501,22 @@
         {
           "text": "Drive it through the showroom window.",
           "src": 2
+        },
+        {
+          "text": "The target is the blue Banshee in the showroom in south Vice City.",
+          "src": 2
+        },
+        {
+          "text": "Only that specific blue Banshee counts; other cars do not trigger the trophy.",
+          "src": 2
+        },
+        {
+          "text": "The Key Cloner from Clonin' Keys, Makin' GS is required to hack the car.",
+          "src": 2
+        },
+        {
+          "text": "The trophy pops after you drive farther down the street; it is a GTA III easter egg.",
+          "src": 2
         }
       ],
       "hidden": true
@@ -1754,6 +2554,26 @@
         },
         {
           "text": "Use the Sticky Bombs to destroy the safe and finish the job.",
+          "src": 2
+        },
+        {
+          "text": "Kingpin Bowling is a gang operation in Port Gellhorn, marked in Chapter 2.",
+          "src": 2
+        },
+        {
+          "text": "The three valuables are the luxury watch in the south-east office, the Gutterball Moreland 850 on the north-east table and the safe in the north-east hallway.",
+          "src": 2
+        },
+        {
+          "text": "The trophy pops after you escape the police, not when you pick up the third item.",
+          "src": 2
+        },
+        {
+          "text": "If you miss an item during Hit Kingpin Bowling, the robbery respawns later; you can split the three across visits.",
+          "src": 2
+        },
+        {
+          "text": "The trophy only checks the 3 valuables and the police escape; killing the bowling-alley enemies is optional.",
           "src": 2
         }
       ],
@@ -1793,6 +2613,26 @@
         {
           "text": "Check Touchpad > Jason & Lucia > Strength for both.",
           "src": 2
+        },
+        {
+          "text": "Both Jason and Lucia must be at maximum Strength at the same time.",
+          "src": 2
+        },
+        {
+          "text": "Buy a fitness-club membership and call your partner so both train together.",
+          "src": 2
+        },
+        {
+          "text": "The partner completes their training automatically while you work out, doubling progress.",
+          "src": 2
+        },
+        {
+          "text": "After the story you can also work out at home, and the map's dumbbell filter finds fitness clubs.",
+          "src": 2
+        },
+        {
+          "text": "Strength is the heart icon under Touchpad > Jason & Lucia; max it for both characters.",
+          "src": 2
         }
       ],
       "hidden": true
@@ -1830,6 +2670,26 @@
         {
           "text": "Keep going until all 500 actions are counted.",
           "src": 2
+        },
+        {
+          "text": "The five profile bands are Professional, Hardened, Violent, Psycho and Irredeemable.",
+          "src": 2
+        },
+        {
+          "text": "Stealth and clean robberies build Professional; limb shots build Hardened; kills build Violent.",
+          "src": 2
+        },
+        {
+          "text": "Irredeemable is permanent and makes police more aggressive, so avoid it if you want quieter cleanup.",
+          "src": 2
+        },
+        {
+          "text": "Every robbery and enemy encounter counts, and running over civilians or cops is a fast farm.",
+          "src": 2
+        },
+        {
+          "text": "The demon face appears on the HUD's right side whenever one of the 500 profile actions registers.",
+          "src": 2
         }
       ],
       "hidden": false
@@ -1866,6 +2726,10 @@
         },
         {
           "text": "The exact trigger is unknown, so treat this as a lead.",
+          "src": 2
+        },
+        {
+          "text": "The trophy's reward line is 'Second time's the charm.'",
           "src": 2
         }
       ],
@@ -1908,6 +2772,26 @@
         {
           "text": "Trigger the UFO when the blinking car appears.",
           "src": 2
+        },
+        {
+          "text": "The spot is on the road north-west of Starlet Motel in Kelly County.",
+          "src": 2
+        },
+        {
+          "text": "You must arrive solo at night after 2AM; the spawn is random, not guaranteed.",
+          "src": 2
+        },
+        {
+          "text": "Follow the path into the woods, approach the UFO and talk to the woman it drops.",
+          "src": 2
+        },
+        {
+          "text": "Walk her back to the car at the roadside to end the easter egg.",
+          "src": 2
+        },
+        {
+          "text": "The UFO is a bright blue light in the sky, and the woman asks you to return to her car.",
+          "src": 2
         }
       ],
       "hidden": true
@@ -1939,6 +2823,26 @@
         },
         {
           "text": "Try Vice City or Ocean Beach for dense crowds.",
+          "src": 2
+        },
+        {
+          "text": "The count is 10 pedestrians, and the window is 60 seconds.",
+          "src": 2
+        },
+        {
+          "text": "Any bike works; the kick is a melee drive-by attack.",
+          "src": 2
+        },
+        {
+          "text": "Vice City and Ocean Beach have the dense crowds you need.",
+          "src": 2
+        },
+        {
+          "text": "The description 'Bowl 'em over with a melee drive-by' confirms the kick, not a vehicle collision, is what counts.",
+          "src": 2
+        },
+        {
+          "text": "The 60-second clock makes a dense district better than a quiet road.",
           "src": 2
         }
       ],
@@ -1978,6 +2882,26 @@
         {
           "text": "Use Yasmani in Vice City for the best payout.",
           "src": 2
+        },
+        {
+          "text": "Credit Check (Meet Raul's Crew) unlocks the Dye Pack Jammer for laundering Marked Bills.",
+          "src": 2
+        },
+        {
+          "text": "The $250,000 counts across all robberies, so you do not need to deliver it at once.",
+          "src": 2
+        },
+        {
+          "text": "Yasmani in Vice City pays the most for the bills.",
+          "src": 2
+        },
+        {
+          "text": "Large bank vaults can give up to $205,000 in one robbery once That's Where The Money Is... is done.",
+          "src": 2
+        },
+        {
+          "text": "A single large bank can supply up to $205,000 once That's Where The Money Is... unlocks vaults.",
+          "src": 2
         }
       ],
       "hidden": true
@@ -2014,6 +2938,26 @@
         },
         {
           "text": "Add clothing, footwear, salons and electronics if needed.",
+          "src": 2
+        },
+        {
+          "text": "The fast spend is guns, car mods and tattoos, the most expensive shop types.",
+          "src": 2
+        },
+        {
+          "text": "There are 67 clothing stores, 24 Ammu-Nations and 19 Pay 'n' Sprays in Leonida.",
+          "src": 2
+        },
+        {
+          "text": "The other counts are 14 mod shops, 17 footwear stores, 18 hair and beauty salons, 11 tattoo studios and 15 electronics stores.",
+          "src": 2
+        },
+        {
+          "text": "The $100,000 is cumulative across all shop types, not a single purchase.",
+          "src": 2
+        },
+        {
+          "text": "A mix of mods, guns and tattoos is fine; each purchase adds to the same $100,000 total.",
           "src": 2
         }
       ],
@@ -2053,6 +2997,26 @@
         {
           "text": "Budget $160,000; the four story garages do not count.",
           "src": 2
+        },
+        {
+          "text": "There are 12 garages total: 8 purchasable and 4 story-related.",
+          "src": 2
+        },
+        {
+          "text": "Only the 8 purchasable garages count, and they cost $160,000 combined.",
+          "src": 2
+        },
+        {
+          "text": "Daily Driver (Steal the Crawler for Moses) installs Vice City Real Estate on the phone.",
+          "src": 2
+        },
+        {
+          "text": "Robberies in Chapters 3-4 are the quickest way to fund the $160,000.",
+          "src": 2
+        },
+        {
+          "text": "The four story garages are free progression rewards and do not count toward the eight purchases.",
+          "src": 2
         }
       ],
       "hidden": true
@@ -2091,6 +3055,26 @@
         },
         {
           "text": "Reach 10 registered vehicles.",
+          "src": 2
+        },
+        {
+          "text": "Moses (Take A Vehicle to Moses) installs Scooter Bros on the phone.",
+          "src": 2
+        },
+        {
+          "text": "Drive stolen cars to Moses's garage in Port Gellhorn and choose Respray, then Register.",
+          "src": 2
+        },
+        {
+          "text": "Each garage adds one or more parking spots, so Little Boxes comes first.",
+          "src": 2
+        },
+        {
+          "text": "Chapter 3 adds Standard Tracker cars and lets you register at any Pay 'n' Spray.",
+          "src": 2
+        },
+        {
+          "text": "Each registration costs money, so register 10 cheap cars or bikes rather than supercars.",
           "src": 2
         }
       ],
