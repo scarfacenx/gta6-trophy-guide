@@ -23,6 +23,14 @@ function log(message) {
   process.stdout.write(`[preflight] ${message}\n`);
 }
 
+function sourceSite(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return String(url);
+  }
+}
+
 function fail(message) {
   writeSync(2, `[preflight] FAIL: ${message}\n`);
   process.exit(1);
@@ -103,8 +111,9 @@ function loadSources() {
     }
   });
   if (broken.length > 0) fail(`source register is invalid: ${describeNames(broken)}`);
-  log(`sources: ${list.length} entries in the register (ids ${[...ids].sort((a, b) => a - b).join(', ')})`);
-  return { ids, list };
+  const sites = new Set(list.map((source) => sourceSite(source.url)));
+  log(`sources: ${list.length} entries from ${sites.size} sites in the register (ids ${[...ids].sort((a, b) => a - b).join(', ')})`);
+  return { ids, list, sites };
 }
 
 function checkCitations(trophies, register) {
@@ -113,6 +122,7 @@ function checkCitations(trophies, register) {
   let cited = 0;
   let withSources = 0;
   let twoPlus = 0;
+  let multiSourceSteps = 0;
   for (const trophy of trophies) {
     const label = typeof trophy?.name === 'string' ? trophy.name.trim() : 'untitled trophy';
     const list = Array.isArray(trophy?.steps) ? trophy.steps : [];
@@ -130,13 +140,16 @@ function checkCitations(trophies, register) {
       withSources += 1;
       const unknown = sources.filter((id) => !register.ids.has(Number(id)));
       if (unknown.length > 0) problems.push(`${label}: unregistered source ids ${unknown.join(', ')}`);
-      if (new Set(sources.map(Number)).size >= 2) twoPlus += 1;
+      if (new Set(sources.map(Number)).size >= 2) {
+        twoPlus += 1;
+        multiSourceSteps += list.length;
+      }
     }
   }
   if (twoPlus < 50) problems.push(`only ${twoPlus}/${trophies.length} trophies cite two or more sources (need at least 50)`);
   if (problems.length > 0) fail(`citation audit failed: ${describeNames(problems, 10)}`);
-  log(`citations: ${trophies.length}/${trophies.length} trophies have steps; ${cited}/${steps} steps cite a registered source; ${withSources}/${trophies.length} trophies cite a registered source; ${twoPlus}/${trophies.length} cite two or more`);
-  return { steps, cited, withSources, twoPlus };
+  log(`citations: ${trophies.length}/${trophies.length} trophies have steps; ${cited}/${steps} steps cite a registered source; ${multiSourceSteps}/${steps} steps sit in guides backed by two or more sources; ${withSources}/${trophies.length} trophies cite a registered source; ${twoPlus}/${trophies.length} cite two or more`);
+  return { steps, cited, withSources, twoPlus, multiSourceSteps };
 }
 
 const TARGET_STOPWORDS = new Set(['a', 'an', 'and', 'at', 'for', 'in', 'of', 'on', 'the', 'to', 'with']);
@@ -302,7 +315,7 @@ function main() {
   const dossier = buildDossier(out, { text_max_bytes: 163840, screenshots: { max: 4, max_bytes: 262144 }, app_max_files: 993, app_max_bytes: 50331648 });
   writeFileSync(join(out, 'dossier.json'), dossier);
   const dossierBytes = statSync(join(out, 'dossier.json')).size;
-  log(`wrote ${out}: ${trophies.length} trophies, ${citations.steps} steps (${citations.cited} cited), ${citations.twoPlus} trophies with 2+ sources, ${targets} trophies with a target, ${shots.length} screenshots, ${appFiles} app files, ${dossierBytes}-byte dossier.json`);
+  log(`wrote ${out}: ${trophies.length} trophies, ${register.list.length} sources from ${register.sites.size} sites, ${citations.steps} steps (${citations.cited} cited, ${citations.multiSourceSteps} backed by 2+ sources), ${citations.twoPlus} trophies with 2+ sources, ${targets} trophies with a target, ${shots.length} screenshots, ${appFiles} app files, ${dossierBytes}-byte dossier.json`);
 }
 
 main();

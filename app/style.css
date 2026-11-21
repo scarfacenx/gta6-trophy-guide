@@ -205,11 +205,11 @@ h1 .grad { color: var(--accent); }
 .audit-ribbon {
   flex: none;
   display: flex; align-items: center; flex-wrap: wrap;
-  gap: 5px 0;
-  padding: 7px 22px;
+  gap: 1px 0;
+  padding: 4px 18px;
   background: var(--surface-2);
   border-bottom: 1px solid var(--line);
-  font-size: 13px; line-height: 1.35;
+  font-size: 13px; line-height: 1.2;
   color: var(--text-2);
   font-variant-numeric: tabular-nums;
 }
@@ -217,15 +217,15 @@ h1 .grad { color: var(--accent); }
   content: "Source audit";
   font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
   color: var(--accent); font-weight: 800;
-  padding: 2px 8px;
+  padding: 1px 6px;
   border: 1px solid var(--accent);
   border-radius: 999px;
-  margin-right: 11px;
+  margin-right: 9px;
   white-space: nowrap;
 }
 .audit-fact { white-space: nowrap; color: var(--text-2); }
 .audit-fact--lead { color: var(--text); font-weight: 700; }
-.audit-fact + .audit-fact { border-left: 1px solid var(--line); margin-left: 10px; padding-left: 10px; }main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.audit-fact + .audit-fact { border-left: 1px solid var(--line); margin-left: 8px; padding-left: 8px; }main { flex: 1; min-height: 0; display: flex; flex-direction: column; }
 .view {
   flex: 1; min-height: 0;
   display: flex; flex-direction: column;
@@ -704,7 +704,7 @@ select {
 .roadmap-head, .sources-head {
   display: flex; align-items: flex-end; justify-content: space-between;
   gap: 16px; flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 7px;
 }
 .roadmap-title { margin: 0; font-size: 22px; line-height: 1.2; font-weight: 800; }
 .roadmap-sub { margin: 3px 0 0; font-size: 14px; line-height: 1.45; color: var(--muted); max-width: 78ch; }
@@ -785,11 +785,44 @@ select {
 .notes-list { margin: 0; padding-left: 16px; font-size: 12px; color: var(--muted); }
 .notes-list li + li { margin-top: 2px; }
 .roadmap-foot { margin: 10px 0 0; font-size: 11px; color: var(--muted); }
-#sources-read-with-dates { max-width: 900px; }
-#sources-read-with-dates .source-row { padding: 9px 0; }
-#sources-read-with-dates .source-row strong { font-size: 14px; }
-#sources-read-with-dates .source-row a { font-size: 11px; }
-#sources-read-with-dates .source-meta { font-size: 11px; }
+#sources-read-with-dates { max-width: none; display: grid; gap: 4px; }
+.source-site-group {
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  padding: 4px 8px 2px;
+  min-width: 0;
+}
+.source-site-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--line-soft);
+  padding-bottom: 2px;
+  margin-bottom: 0;
+}
+.source-site-title { display: flex; align-items: center; gap: 5px; min-width: 0; }
+.source-site-title .icon { width: 10px; height: 10px; color: var(--accent); flex: none; }
+.source-site-domain { margin: 0; font-size: 11.5px; line-height: 1.15; font-weight: 800; color: var(--accent); }
+.source-site-count { font-size: 9px; line-height: 1.15; color: var(--muted); white-space: nowrap; }
+.source-site-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 12px;
+}
+.source-site-list--single { grid-template-columns: minmax(0, 1fr); }
+.source-row--dense { padding: 1px 0; border-bottom: 1px solid var(--line-soft); }
+.source-row--dense .source-row-top { gap: 3px; }
+.source-row--dense .source-row-top strong {
+  font-size: 9.5px; line-height: 1.18; font-weight: 650;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.source-row--dense .source-meta { font-size: 8.5px; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.source-row--dense .source-meta a { font-size: 8.5px; color: var(--accent); }
+.source-row--dense .source-meta .chip--id { font-size: 8px; line-height: 1.15; padding: 0 2px; margin-right: 1px; }
+.sources-head .roadmap-sub { font-size: 12.5px; max-width: none; }
+.sources-head .roadmap-title { font-size: 20px; }
+.sources-head + * { margin-top: 0; }
+#panel-sources .panel-scroll { padding-top: 10px; }
 
 .site-footer {
   display: none;

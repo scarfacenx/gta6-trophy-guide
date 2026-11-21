@@ -20,7 +20,7 @@ const chromePath = "C:/Users/Administrator/AppData/Local/BrowserClaw/Application
 const debugPort = 9333;
 const WIDTH = 1024;
 const HEIGHT = 640;
-const JPEG_QUALITY = 83;
+const JPEG_QUALITY = 82;
 const MAX_BYTES = 262144;
 const MAX_LONG_SIDE = 1280;
 const MIN_SHORT_SIDE = 480;
@@ -37,8 +37,6 @@ const COVER_EARNED = [
   29, 30, 31, 32, 35, 36, 42, 48,
 ];
 
-// 12/55 for spoiler mode: only non-story trophies, so every story row stays concealed.
-const SPOILER_EARNED = [15, 16, 18, 19, 20, 21, 22, 23, 25, 26, 30, 35];
 const blankFilters = { grade: "all", kind: "all", query: "", hideCompleted: false, missablesOnly: false };
 const sleep = (ms) => new Promise((done) => setTimeout(done, ms));
 
@@ -351,6 +349,16 @@ async function showRoadmap() {
   await sleep(300);
 }
 
+async function showSources() {
+  await evaluate(`document.getElementById("tab-sources").click()`);
+  await waitUntil(
+    () => evaluate(`!document.getElementById("panel-sources").hidden && document.querySelectorAll("#sources-read-with-dates > li.source-site-group").length > 0`),
+    "source register groups"
+  );
+  await evaluate(`document.querySelector("#panel-sources .panel-scroll").scrollTop = 0`);
+  await sleep(300);
+}
+
 function jpegSize(buffer) {
   if (buffer.length < 4 || buffer[0] !== 0xff || buffer[1] !== 0xd8) throw new Error("not a JPEG");
   let offset = 2;
@@ -468,11 +476,11 @@ async function main() {
   console.log("cover detail " + JSON.stringify({ ...cover, scrollTop: coverDetail.top }));
   const coverRows = await readGuideSourceRows();
   console.log("cover source rows " + JSON.stringify(coverRows));
-  if (coverRows.length !== 5 || coverRows.some((row) => !row.visible)) throw new Error("not all five cover source rows are visible");
+  if (coverRows.length !== 6 || coverRows.some((row) => !row.visible)) throw new Error("not all six cover source rows are visible");
   if (cover.nextUp !== 4) throw new Error("expected 4 next-up rows, got " + cover.nextUp);
   await capture("1-checklist.jpg");
 
-  // 2: PMA open, with its numbered cited steps and five source rows in focus.
+  // 2: PMA open, with its numbered cited steps and six source rows in focus.
   await openTrophy(28, "Positive Mental Attitude");
   await alignChecklistRow(28);
   const pmaDetail = await scrollDetailToSteps(0);
@@ -489,7 +497,7 @@ async function main() {
   }))()`);
   if (pma.title !== "Positive Mental Attitude") throw new Error("PMA did not open");
   if (pma.steps !== 4) throw new Error("expected 4 PMA steps, got " + pma.steps);
-  if (pma.sources.length !== 5) throw new Error("expected 5 PMA source rows, got " + pma.sources.length);
+  if (pma.sources.length !== 6) throw new Error("expected 6 PMA source rows, got " + pma.sources.length);
   const sourceRow = await evaluate(`(() => {
     const row = document.querySelector("#trophy-sources li");
     const link = row && row.querySelector("a");
@@ -503,7 +511,7 @@ async function main() {
   console.log("pma detail " + JSON.stringify({ ...pma, detailScroll: pmaDetail.top, sideScroll: pmaSide.top }));
   const pmaRows = await readGuideSourceRows();
   console.log("pma source rows " + JSON.stringify(pmaRows));
-  if (pmaRows.length !== 5 || pmaRows.some((row) => !row.visible)) throw new Error("not all five PMA source rows are visible");
+  if (pmaRows.length !== 6 || pmaRows.some((row) => !row.visible)) throw new Error("not all six PMA source rows are visible");
   await capture("2-guide-sources.jpg");
 
   await openTrophy(1, "Vice Got a Price!");
@@ -513,7 +521,30 @@ async function main() {
   console.log("three-source rows " + JSON.stringify(threeSourceRows));
   if (threeSourceRows.length !== 3 || threeSourceRows.some((row) => !row.visible)) throw new Error("not all three source rows are visible");
 
-  // 3: roadmap with the seeded 31/55 and all six stages.
+  // 3: the Sources tab with the whole register grouped by site.
+  await showSources();
+  const sourcesRegister = await evaluate(`(() => ({
+    earned: document.getElementById("earned-count").textContent.trim(),
+    percent: document.getElementById("percent").textContent.trim(),
+    groups: [...document.querySelectorAll("#sources-read-with-dates > li.source-site-group")].map((group) => ({
+      site: group.querySelector(".source-site-domain").textContent.trim(),
+      count: group.querySelectorAll("li.source-row").length,
+      heading: group.querySelector(".source-site-count").textContent.trim(),
+    })),
+    rows: document.querySelectorAll("#sources-read-with-dates li.source-row").length,
+    rowsWithDomainAndDate: [...document.querySelectorAll("#sources-read-with-dates li.source-row")].filter((row) => row.querySelector(".source-meta a") && /read \\d{2} [A-Z][a-z]{2} \\d{4}/.test(row.querySelector(".source-meta").textContent)).length,
+    summary: document.getElementById("sources-summary").textContent.trim(),
+    auditSites: document.getElementById("audit-sites").textContent.trim(),
+    auditBacked: document.getElementById("audit-backed-steps").textContent.trim(),
+  }))()`);
+  if (sourcesRegister.earned !== "31") throw new Error("sources tab lost seeded progress: " + sourcesRegister.earned);
+  if (sourcesRegister.groups.length !== 3) throw new Error("expected 3 site groups, got " + sourcesRegister.groups.length);
+  if (sourcesRegister.rows !== 24) throw new Error("expected 24 register rows, got " + sourcesRegister.rows);
+  if (sourcesRegister.rowsWithDomainAndDate !== 24) throw new Error("register rows are missing a domain or read date");
+  console.log("sources register " + JSON.stringify(sourcesRegister));
+  await capture("3-sources-register.jpg");
+
+  // 4: roadmap with the same 31/55 and all six stages.
   await showRoadmap();
   await evaluate(`document.getElementById("roadmap-stages-to-platinum").scrollTop = 0`);
   await sleep(300);
@@ -531,42 +562,7 @@ async function main() {
   if (road.stages.length !== 6) throw new Error("expected 6 roadmap stages, got " + road.stages.length);
   if (road.earned !== "31") throw new Error("roadmap lost seeded progress: " + road.earned);
   console.log("roadmap " + JSON.stringify(road));
-  await capture("3-roadmap.jpg");
-
-  // 4: spoiler mode with 12/55, concealed story rows, locked platinum and export/import.
-  await evaluate(`document.getElementById("tab-checklist").click()`);
-  await waitUntil(() => evaluate(`!document.getElementById("panel-checklist").hidden`), "checklist tab");
-  await seed(SPOILER_EARNED, { spoiler: true, tab: "checklist" });
-  const spoilerProgress = await readProgress();
-  assertProgress(spoilerProgress, 12);
-  await openTrophy(2);
-  await scrollChecklistTop();
-  await evaluate(`document.getElementById("side-pane").scrollTop = 0`);
-  await sleep(300);
-  const spoiler = await evaluate(`(() => {
-    const visibleBox = (node) => {
-      const rect = node.getBoundingClientRect();
-      return rect.width > 0 && rect.height > 0 && rect.top >= 0 && rect.bottom <= innerHeight + 1;
-    };
-    return {
-      spoilerOn: document.getElementById("spoiler-toggle").checked,
-      earned: document.getElementById("earned-count").textContent.trim(),
-      percent: document.getElementById("percent").textContent.trim(),
-      platinum: document.getElementById("platinum-text").textContent.trim(),
-      lockedRows: document.querySelectorAll('li.trophy[data-locked="true"]').length,
-      maskedTitle: document.getElementById("detail-title").textContent.trim(),
-      detailLocked: !document.getElementById("detail-locked").hidden,
-      exportVisible: visibleBox(document.getElementById("export-progress-json-backup")),
-      importVisible: visibleBox(document.getElementById("import-progress-json-backup")),
-      storyGroup: [...document.querySelectorAll(".check-group")].find((section) => section.querySelector(".check-group-title").textContent.trim() === "Main story").querySelector(".check-group-count").textContent.trim(),
-    };
-  })()`);
-  if (!spoiler.spoilerOn) throw new Error("spoiler mode is not on");
-  if (!spoiler.detailLocked) throw new Error("story detail was not concealed");
-  if (spoiler.lockedRows < 1) throw new Error("no concealed story rows");
-  if (!spoiler.exportVisible || !spoiler.importVisible) throw new Error("export/import controls are not visible");
-  console.log("spoiler " + JSON.stringify(spoiler));
-  await capture("4-spoiler-save.jpg");
+  await capture("4-roadmap.jpg");
 
   console.log("all four screenshots captured within caps");
 }

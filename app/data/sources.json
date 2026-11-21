@@ -136,6 +136,62 @@
       "kind": "activity guide",
       "covers": "the 4 playable arcade games",
       "read": "2026-11-20"
+    },
+    {
+      "id": 18,
+      "title": "PowerPyx — GTA 6 Gone Fishing Walkthrough",
+      "url": "https://www.powerpyx.com/gta-6-gone-fishing-walkthrough/",
+      "kind": "mission walkthrough",
+      "covers": "the first Chapter 1 mission, its beats and its end-of-mission reward line",
+      "read": "2026-11-20"
+    },
+    {
+      "id": 19,
+      "title": "PowerPyx — GTA 6 Breakfast Run (Check on Jason) Walkthrough",
+      "url": "https://www.powerpyx.com/gta-6-breakfast-run-check-on-jason-walkthrough/",
+      "kind": "mission walkthrough",
+      "covers": "the mission whose reward line names the Trust trophy",
+      "read": "2026-11-20"
+    },
+    {
+      "id": 20,
+      "title": "PowerPyx — GTA 6 The Cartel Heist Walkthrough",
+      "url": "https://www.powerpyx.com/gta-6-the-cartel-heist-walkthrough/",
+      "kind": "mission walkthrough",
+      "covers": "the Chapter 3 heist whose reward line names Break the Bank",
+      "read": "2026-11-20"
+    },
+    {
+      "id": 21,
+      "title": "PowerPyx — GTA 6 Down to Earth Walkthrough",
+      "url": "https://www.powerpyx.com/gta-6-down-to-earth-walkthrough/",
+      "kind": "mission walkthrough",
+      "covers": "the Chapter 1 mission that opens the meditation at Jason's house",
+      "read": "2026-11-20"
+    },
+    {
+      "id": 22,
+      "title": "PowerPyx — GTA 6 Prologue Walkthrough",
+      "url": "https://www.powerpyx.com/gta-6-prologue-walkthrough/",
+      "kind": "mission walkthrough",
+      "covers": "the opening mission and the state it leaves the world in",
+      "read": "2026-11-20"
+    },
+    {
+      "id": 23,
+      "title": "PowerPyx — GTA 6 Wiki & Strategy Guide",
+      "url": "https://www.powerpyx.com/gta-6-grand-theft-auto-vi-wiki-strategy-guide/",
+      "kind": "index",
+      "covers": "the hub page listing every collectible, activity and mission guide",
+      "read": "2026-11-20"
+    },
+    {
+      "id": 24,
+      "title": "PowerPyx — GTA 6 Collectible Progress Database",
+      "url": "https://www.powerpyx.com/gta-6-collectible-guide-progress-database/",
+      "kind": "tracker",
+      "covers": "the progress database for collectibles and activities",
+      "read": "2026-11-20"
     }
   ]
 }

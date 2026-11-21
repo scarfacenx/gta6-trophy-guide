@@ -2,21 +2,21 @@
   {
     "file": "1-checklist.jpg",
     "view": "checklist",
-    "caption": "Cover: the three-pane checklist proves official-list coverage (55/55 fields; 1 platinum, 2 gold, 6 silver, 46 bronze; 28 PSN-hidden) on the audit ribbon, with saved progress at 31/55 and a 56% bar. Search, grade/kind filters and the hide-done/missables switches sit above chapter-group counts (Main story 12/12, Missable-sensitive 2/2); Fair Game is open with numbered steps ending in their source numbers, while Next up and Sources in this guide fill the right pane and Export/Import sit in the header."
+    "caption": "Cover: the three-pane checklist proves official-list coverage (55/55 fields; 1 platinum, 2 gold, 6 silver, 46 bronze; 28 PSN-hidden) on the audit ribbon, together with the expanded source audit (24 sources on 3 sites; 208/208 cited steps backed by two or more sources), saved progress at 31/55 and a 56% bar. Search, grade/kind filters and the hide-done/missables switches sit above chapter-group counts (Main story 12/12, Missable-sensitive 2/2); Fair Game is open with five numbered steps ending in their source numbers and six source rows, while Next up and Sources in this guide fill the right pane and Export/Import sit in the header."
   },
   {
     "file": "2-guide-sources.jpg",
     "view": "guide-sources",
-    "caption": "The same saved 31/55 dashboard with the collectible Positive Mental Attitude open: Bronze and Collectible badges, its Leonida-wide meditation target, four numbered steps cited to sources [2] and [4], and all five source titles in Sources in this guide, including the All Meditation Spot Locations page. The Collectibles group shows 4/5."
+    "caption": "The same saved 31/55 dashboard with the collectible Positive Mental Attitude open: Bronze and Collectible badges, its Leonida-wide meditation target, four numbered steps each ending in a source number, and six source rows in Sources in this guide, including the meditation guide and the newly read Down to Earth mission walkthrough. The Collectibles group shows 4/5."
   },
   {
-    "file": "3-roadmap.jpg",
+    "file": "3-sources-register.jpg",
+    "view": "sources",
+    "caption": "The Sources tab proves register breadth at 31/55: all 24 register rows are grouped by site (powerpyx.com, exophase.com, psnprofiles.com), and every row shows its page title, domain and read date. Summary pills repeat the audit counts (24 sources, 3 sites, 208/208 steps backed by 2+ sources, 55/55 guides sourced, 2 possible missables), so a reader can see the five mission walkthroughs, the guide index, the progress database and the earlier activity/collectible guides in one view."
+  },
+  {
+    "file": "4-roadmap.jpg",
     "view": "roadmap",
     "caption": "Roadmap view at the same saved 31/55: all six stages in the register with counts (Main story 12/12, Missable-sensitive 2/2, Side content 10/26, Collectibles 4/5, Challenges 3/9, Platinum 0/1), the two missable trophies flagged on stage 2, and the 2-missable / 6-stage summary."
-  },
-  {
-    "file": "4-spoiler-save.jpg",
-    "view": "spoiler-save",
-    "caption": "Spoiler mode on at a saved 12/55 (22%): the Main story group reads 0/12, every unearned story row and the opened story detail are concealed, Next up hides five story names, and the header keeps Platinum locked plus the Export and Import controls for the JSON save backup."
   }
 ]

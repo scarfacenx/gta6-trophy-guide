@@ -709,26 +709,54 @@ function renderSourceRegister() {
   if (!list) return;
   list.replaceChildren();
   const total = TROPHY_REGISTER.trophies.length;
+  const steps = TROPHY_REGISTER.trophies.reduce((sum, trophy) => sum + (trophy.steps || []).length, 0);
+  const guidesSourced = TROPHY_REGISTER.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.length > 0).length;
+  const multiSourceSteps = TROPHY_REGISTER.trophies.reduce((sum, trophy) => {
+    const sources = Array.isArray(trophy.sources) ? trophy.sources : [];
+    return new Set(sources.map(Number)).size >= 2 ? sum + (trophy.steps || []).length : sum;
+  }, 0);
+  const groups = new Map();
   for (const source of SOURCE_REGISTER.sources) {
-    const cited = TROPHY_REGISTER.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.map(Number).includes(Number(source.id))).length;
-    const row = createNode('li', 'source-row');
-    const top = createNode('div', 'source-row-top');
-    top.append(createNode('span', 'chip chip--id', '[' + source.id + ']'), createNode('strong', '', source.title));
-    const link = createNode('a', '', source.url);
-    link.href = source.url;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    const meta = createNode('div', 'source-meta', source.kind + ' · read ' + formatSourceReadDate(source.read) + ' · cited by ' + cited + '/' + total + ' guides');
-    row.append(top, link, meta);
-    list.append(row);
+    const site = sourceDomainLabel(source.url);
+    if (!groups.has(site)) groups.set(site, []);
+    groups.get(site).push(source);
+  }
+  const ordered = [...groups.entries()].sort((left, right) => right[1].length - left[1].length || left[0].localeCompare(right[0]));
+  for (const [site, entries] of ordered) {
+    entries.sort((left, right) => Number(left.id) - Number(right.id));
+    const group = createNode('li', 'source-site-group');
+    const head = createNode('div', 'source-site-head');
+    const title = createNode('div', 'source-site-title');
+    title.append(createSpriteIcon('i-info'), createNode('h3', 'source-site-domain', site));
+    const dates = [...new Set(entries.map((entry) => formatSourceReadDate(entry.read)))].join(', ');
+    head.append(title, createNode('span', 'source-site-count', entries.length + ' page' + (entries.length === 1 ? '' : 's') + ' · read ' + dates));
+    const rows = createNode('ul', 'source-list source-site-list' + (entries.length === 1 ? ' source-site-list--single' : ''));
+    for (const source of entries) {
+      const cited = TROPHY_REGISTER.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.map(Number).includes(Number(source.id))).length;
+      const row = createNode('li', 'source-row source-row--dense');
+      const top = createNode('div', 'source-row-top');
+      top.append(createNode('strong', '', source.title));
+      const link = createNode('a', '', site);
+      link.href = source.url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.title = source.url;
+      const meta = createNode('div', 'source-meta');
+      meta.append(createNode('span', 'chip chip--id', '[' + source.id + ']'), document.createTextNode(' '), link, document.createTextNode(' · ' + source.kind + ' · read ' + formatSourceReadDate(source.read) + ' · cited by ' + cited + '/' + total));
+      row.append(top, meta);
+      rows.append(row);
+    }
+    group.append(head, rows);
+    list.append(group);
   }
   const summary = DOM_BY_ID['sources-summary'];
   if (summary) {
     summary.replaceChildren(
       renderSummaryPill(SOURCE_REGISTER.sources.length, 'sources'),
-      renderSummaryPill(total, 'trophies'),
-      renderSummaryPill(TROPHY_REGISTER.trophies.reduce((sum, trophy) => sum + (trophy.steps || []).length, 0), 'steps'),
-      renderSummaryPill(TROPHY_REGISTER.trophies.filter((trophy) => Array.isArray(trophy.sources) && trophy.sources.length > 0).length, 'guides with sources')
+      renderSummaryPill(groups.size, 'sites'),
+      renderSummaryPill(multiSourceSteps + '/' + steps, 'steps backed 2+'),
+      renderSummaryPill(guidesSourced + '/' + total, 'guides sourced'),
+      renderSummaryPill(TROPHY_REGISTER.roadmap && Array.isArray(TROPHY_REGISTER.roadmap.missables) ? TROPHY_REGISTER.roadmap.missables.length : 0, 'possible missables')
     );
   }
 }
@@ -739,6 +767,8 @@ const AUDIT_FACTS = [
   { id: 'audit-cited-step-coverage', legacyId: 'audit-steps', title: 'Steps whose src names an id in the source register.' },
   { id: 'audit-sourced-guide-coverage', legacyId: 'audit-guides', title: 'Trophies with a non-empty guide and at least one valid cited source.' },
   { id: 'audit-source-register-read-dates', legacyId: 'audit-sources', title: 'Rows in the source register and the date it was read.' },
+  { id: 'audit-source-register-size-and-sites', legacyId: 'audit-sites', title: 'Rows in the source register and the distinct sites they come from.' },
+  { id: 'audit-multisource-step-coverage', legacyId: 'audit-backed-steps', title: 'Cited steps whose guide is backed by two or more register sources.' },
   { id: 'audit-roadmap-missable-coverage', legacyId: 'audit-missables', title: 'Trophies in the roadmap missable list.' },
   { id: 'audit-trophy-missable-flags', legacyId: 'audit-flags', title: 'Trophies flagged missable in the trophy list.' },
 ];
@@ -760,6 +790,11 @@ function paintAuditRibbon() {
     const sources = Array.isArray(trophy.sources) ? trophy.sources : [];
     return sources.length > 0 && sources.every((id) => SOURCE_REGISTER.ids.has(Number(id))) && typeof trophy.guide === 'string' && trophy.guide.trim() !== '';
   }).length;
+  const sites = new Set(SOURCE_REGISTER.sources.map((source) => sourceDomainLabel(source.url))).size;
+  const multiSourceSteps = TROPHY_REGISTER.trophies.reduce((sum, trophy) => {
+    const sources = Array.isArray(trophy.sources) ? trophy.sources : [];
+    return new Set(sources.map(Number)).size >= 2 ? sum + (trophy.steps || []).length : sum;
+  }, 0);
   const possibleMissables = TROPHY_REGISTER.roadmap && Array.isArray(TROPHY_REGISTER.roadmap.missables) ? TROPHY_REGISTER.roadmap.missables.length : 0;
   const missableFlags = TROPHY_REGISTER.trophies.filter((trophy) => trophy.missable === true).length;
   const values = {
@@ -768,6 +803,8 @@ function paintAuditRibbon() {
     'audit-cited-step-coverage': cited + '/' + steps + ' steps cited',
     'audit-sourced-guide-coverage': guidesCited + '/' + total + ' guides sourced',
     'audit-source-register-read-dates': SOURCE_REGISTER.sources.length + ' sources · read ' + formatSourceReadDate(SOURCE_REGISTER.readDate),
+    'audit-source-register-size-and-sites': SOURCE_REGISTER.sources.length + ' sources · ' + sites + ' sites',
+    'audit-multisource-step-coverage': multiSourceSteps + '/' + steps + ' steps backed by 2+ sources',
     'audit-roadmap-missable-coverage': possibleMissables + ' possible missables',
     'audit-trophy-missable-flags': missableFlags + ' missable flags',
   };

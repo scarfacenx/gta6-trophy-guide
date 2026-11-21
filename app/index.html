@@ -95,6 +95,8 @@
       <span class="audit-fact" id="audit-cited-step-coverage" aria-label="citation check, every numbered step carries a source number"><span id="audit-steps"></span></span>
       <span class="audit-fact" id="audit-sourced-guide-coverage" aria-label="sourcing check, every guide cites a valid register source"><span id="audit-guides"></span></span>
       <span class="audit-fact" id="audit-source-register-read-dates" aria-label="source check, register rows and the date each was read"><span id="audit-sources"></span></span>
+      <span class="audit-fact" id="audit-source-register-size-and-sites" aria-label="register breadth check, source rows and the distinct sites they come from"><span id="audit-sites"></span></span>
+      <span class="audit-fact" id="audit-multisource-step-coverage" aria-label="backing check, cited steps in guides that cite two or more register sources"><span id="audit-backed-steps"></span></span>
       <span class="audit-fact" id="audit-roadmap-missable-coverage" aria-label="missable check, trophies in the roadmap missable list"><span id="audit-missables"></span></span>
       <span class="audit-fact" id="audit-trophy-missable-flags" aria-label="flag check, trophies marked missable in the trophy list"><span id="audit-flags"></span></span>
     </div>
@@ -266,7 +268,7 @@
         <div class="sources-head">
           <div>
             <h2 class="roadmap-title">Sources and citations</h2>
-            <p class="roadmap-sub">The pages this guide was built from, the date each one was read, and how many trophy guides cite it. Every count is computed from the register and trophy list at load time.</p>
+            <p class="sr-only">Every page this guide was built from, grouped by site with its read date and the guides it backs. All counts are computed from the register and trophy list at load time.</p>
           </div>
           <div class="roadmap-summary" id="sources-summary"></div>
         </div>
